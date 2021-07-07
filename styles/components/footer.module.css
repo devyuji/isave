@@ -1,0 +1,21 @@
+.footer {
+  margin-top: auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer a,
+.footer p {
+  font-weight: var(--ft-semi-bold);
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@media (min-width: 600px) {
+  .footer a,
+  .footer p {
+    font-size: 1.12rem;
+  }
+}

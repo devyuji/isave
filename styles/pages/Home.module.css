@@ -1,0 +1,55 @@
+.main {
+  padding: 0 1rem;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading h1 {
+  font-weight: var(--ft-bold);
+  font-size: clamp(1.25rem, 5vw, 3rem);
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.form {
+  display: flex;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.form input {
+  width: 100%;
+  padding: 1rem;
+  font-family: var(--ft);
+  font-weight: var(--ft-medium);
+  outline: none;
+  border: none;
+  border: 2px solid black;
+}
+
+.form button {
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 0 1rem;
+  font-family: var(--ft);
+  cursor: pointer;
+}
+
+@media (min-width: 850px) {
+  .form {
+    width: 50rem;
+  }
+
+  .form button {
+    padding: 0 3rem;
+  }
+
+  .form input {
+    padding: 1.5rem;
+  }
+}

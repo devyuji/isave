@@ -1,0 +1,30 @@
+.cardContainer {
+  margin: 2rem 0;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.card {
+  position: relative;
+}
+
+.download {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.download button {
+  border: none;
+  background-color: transparent;
+  color: white;
+  text-transform: uppercase;
+  font-family: var(--ft);
+  font-size: 1.2rem;
+  cursor: pointer;
+}

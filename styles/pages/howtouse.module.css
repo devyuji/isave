@@ -1,0 +1,33 @@
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 80%;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: var(--ft-bold);
+}
+
+.container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title {
+  line-height: 1.6;
+  font-size: 1.12rem;
+  margin-bottom: 1rem;
+  font-weight: var(--ft-medium);
+}
+
+@media (min-width: 800px) {
+  .container {
+    width: 35rem;
+  }
+}
