@@ -2,11 +2,15 @@
 
 Instagram tool to download images, videos, reels in one place
 
+# SCREENSHOTS
+
 ![](/public/images/cover_image.png)
+![](/public/images/cover_image1.png)
 
 # DEMO
 
 [Web App](https://isave.cc/)
+[Check out the App](https://github.com/devyuji/isave-app)
 
 ## Installation
 

@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import styles from "../styles/components/navbar.module.css";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar: FC = () => {
   const [isOpen, setOpen] = useState(false);
@@ -15,7 +15,7 @@ const Navbar: FC = () => {
           </Link>
         </li>
         <li>
-          <a href="https://github.com/devyuji">github</a>
+          <a href="https://github.com/devyuji/isave-nextjs">github</a>
         </li>
         <li>
           <Link href="/how-to-use">
@@ -48,11 +48,19 @@ const Navbar: FC = () => {
         <NavLink />
       </ul>
 
-      {isOpen && (
-        <ul className={styles.nav_link_mobile}>
-          <NavLink />
-        </ul>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.ul
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: [1.2, 1] }}
+            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            className={styles.nav_link_mobile}
+          >
+            <NavLink />
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
