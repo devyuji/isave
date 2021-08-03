@@ -7,7 +7,6 @@ import axios from "axios";
 // components
 import Navbar from "../../components/navbar";
 import Card from "../../components/card";
-import ErrorCard from "../../components/errorCard";
 import Footer from "../../components/footer";
 
 // redux
