@@ -20,10 +20,9 @@ import { instagramUrlChecker } from "../../lib/instagramUrlCheck";
 
 interface PostProps {
   data: any;
-  error: boolean;
 }
 
-const Post: FC<PostProps> = ({ data, error }) => {
+const Post: FC<PostProps> = ({ data }) => {
   const value = useSelector((s: any) => s);
   const router = useRouter();
 
@@ -54,20 +53,14 @@ const Post: FC<PostProps> = ({ data, error }) => {
             />
             <button type="submit">Submit</button>
           </form>
-          {error ? (
-            <ErrorCard />
-          ) : (
-            <>
-              <Card data={data} />
-              <div className={styles.info}>
-                <p>
-                  Isave is not affiliated with Instagram™. We do not host any
-                  Instagram content. All rights belong to their respective
-                  owners.
-                </p>
-              </div>
-            </>
-          )}
+
+          <Card data={data} />
+          <div className={styles.info}>
+            <p>
+              Isave is not affiliated with Instagram™. We do not host any
+              Instagram content. All rights belong to their respective owners.
+            </p>
+          </div>
         </div>
       </main>
 
@@ -83,15 +76,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     return {
       props: {
         data,
-        error: false,
       },
     };
   } catch (err) {
-    console.error("error = ", err);
+    console.error("error");
     return {
-      props: {
-        data: null,
-        error: true,
+      props: {},
+      redirect: {
+        destination: "/post?error=true",
       },
     };
   }

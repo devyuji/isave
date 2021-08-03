@@ -1,0 +1,35 @@
+.main {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.container {
+  width: 50rem;
+  overflow: hidden;
+}
+
+.form {
+  display: flex;
+  width: 100%;
+}
+
+.form input {
+  border: none;
+  padding: 1rem;
+  font-family: var(--ft);
+  font-size: 0.8rem;
+  border: 2px solid black;
+  width: 100%;
+  outline: none;
+}
+
+.form button {
+  border: none;
+  padding: 1rem;
+  background-color: black;
+  color: white;
+  font-family: var(--ft);
+  cursor: pointer;
+}
