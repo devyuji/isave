@@ -1,8 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { FC } from "react";
-import { Provider } from "react-redux";
-import { useStore } from "../redux/store";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -10,8 +8,6 @@ import { AnimatePresence } from "framer-motion";
 import Loading from "../components/loading";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
-  const store = useStore(pageProps.initialReduxState);
-
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -53,9 +49,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AnimatePresence>{loading && <Loading />}</AnimatePresence>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
+      <Component {...pageProps} />
     </>
   );
 };

@@ -15,7 +15,13 @@ const Navbar: FC = () => {
           </Link>
         </li>
         <li>
-          <a href="https://github.com/devyuji/isave-nextjs">github</a>
+          <a
+            href="https://github.com/devyuji/isave"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github
+          </a>
         </li>
         <li>
           <Link href="/how-to-use">

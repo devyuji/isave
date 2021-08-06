@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styles from "../../styles/pages/post.module.css";
@@ -9,10 +9,6 @@ import Navbar from "../../components/navbar";
 import Card from "../../components/card";
 import Footer from "../../components/footer";
 
-// redux
-import { changeUrl } from "../../redux/action";
-import { useSelector, useDispatch } from "react-redux";
-
 // lib
 import { instagram_url_parser } from "../../lib/instagram_id";
 import { instagramUrlChecker } from "../../lib/instagramUrlCheck";
@@ -22,10 +18,8 @@ interface PostProps {
 }
 
 const Post: FC<PostProps> = ({ data }) => {
-  const value = useSelector((s: any) => s);
   const router = useRouter();
-
-  const dispatch = useDispatch();
+  const [value, setValue] = useState("");
 
   const submit = (e: any) => {
     e.preventDefault();
@@ -46,7 +40,7 @@ const Post: FC<PostProps> = ({ data }) => {
             <input
               type="url"
               placeholder="e.g. https://www.instagram.com/p/CNIKAmJAiLa/"
-              onChange={(text) => dispatch(changeUrl(text.target.value))}
+              onChange={(text) => setValue(text.target.value)}
               required={true}
               value={value}
             />

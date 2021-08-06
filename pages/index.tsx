@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "../styles/pages/Home.module.css";
 import { useRouter } from "next/router";
 
@@ -6,17 +6,12 @@ import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 
-// redux
-import { useDispatch, useSelector } from "react-redux";
-import { changeUrl } from "../redux/action";
-
 // lib
 import { instagram_url_parser } from "../lib/instagram_id";
 import { instagramUrlChecker } from "../lib/instagramUrlCheck";
 
 const Home: FC = () => {
-  const dispatch = useDispatch();
-  const value = useSelector((s: any) => s);
+  const [value, setValue] = useState("");
   const router = useRouter();
 
   const submit = async (e: any) => {
@@ -41,8 +36,9 @@ const Home: FC = () => {
           <input
             type="url"
             placeholder="e.g. https://www.instagram.com/p/CNIKAmJAiLa/"
-            onChange={(text) => dispatch(changeUrl(text.target.value))}
+            onChange={(text) => setValue(text.target.value)}
             required={true}
+            value={value}
           />
           <button>Submit</button>
         </form>
