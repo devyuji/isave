@@ -1,6 +1,7 @@
 .main {
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
 }
 
 .container {
@@ -8,6 +9,7 @@
 }
 
 .container h1 {
+  position: relative;
   text-align: center;
   margin-bottom: 2rem;
   font-weight: var(--ft-bold);
