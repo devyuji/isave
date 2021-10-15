@@ -45,9 +45,19 @@ const Navbar: FC = () => {
       </div>
 
       <div className={styles.hamburger_menu} onClick={() => setOpen(!isOpen)}>
-        <span style={{ marginBottom: "4px" }}></span>
-        <span style={{ marginBottom: "4px" }}></span>
-        <span></span>
+        <svg
+          viewBox="0 0 24 24"
+          className="icon"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
       </div>
 
       <ul className={styles.nav_link}>
@@ -57,10 +67,10 @@ const Navbar: FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.ul
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: [1.2, 1] }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
-            exit={{ opacity: 0, scale: 0.5 }}
+            exit={{ opacity: 0, scale: 0 }}
             className={styles.nav_link_mobile}
           >
             <NavLink />

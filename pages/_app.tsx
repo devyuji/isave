@@ -32,9 +32,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
 
   useEffect(() => {
     if (loading) {
-      (document as any).querySelector("body").style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     } else {
-      (document as any).querySelector("body").style.overflow = "visible";
+      document.body.style.overflow = "visible";
     }
   }, [loading]);
 
