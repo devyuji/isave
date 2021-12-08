@@ -1,0 +1,7 @@
+.container {
+  position: relative;
+  width: clamp(50%, 500px, 90%);
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+}

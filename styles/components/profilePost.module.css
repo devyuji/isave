@@ -1,0 +1,44 @@
+.container {
+  width: 50rem;
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 1rem;
+  overflow: hidden;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+.card button {
+  border: none;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  right: 2px;
+  border-radius: 100%;
+  padding: 0.5em;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card button svg {
+  color: #fbfdfb;
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (max-width: 850px) {
+  .container {
+    width: 100%;
+    grid-gap: 0.2rem;
+  }
+}

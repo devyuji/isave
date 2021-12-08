@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+  background-color: var(--primary-clr);
+  border-radius: 100%;
+}

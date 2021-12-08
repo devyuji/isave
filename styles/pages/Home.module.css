@@ -40,6 +40,12 @@
   cursor: pointer;
 }
 
+.highlight span {
+  font-weight: var(--ft-bold);
+  border-bottom: 2px solid black;
+  text-transform: capitalize;
+}
+
 @media (min-width: 850px) {
   .form {
     width: 50rem;

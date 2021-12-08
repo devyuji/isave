@@ -1,11 +1,12 @@
 import { FC } from "react";
 import styles from "../styles/components/card.module.css";
+import Image from "next/image";
 
 interface CardProps {
   data: any;
 }
 
-const download = (url: string) => {
+export const download = (url: string) => {
   window.location.href = `${url}&dl=1`;
 };
 
@@ -15,8 +16,13 @@ const Card: FC<CardProps> = ({ data }) => {
       <div className={styles.cardContainer}>
         {data.links.map((d: any, index: number) => (
           <div className={styles.card} key={index}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`data:image/png;base64,${d.image_src}`} alt="" />
+            <Image
+              src={`data:image/png;base64,${d.image_src}`}
+              alt=""
+              width="200"
+              height="200"
+              layout="responsive"
+            />
             <div className={styles.download}>
               <button
                 type="button"
@@ -24,6 +30,18 @@ const Card: FC<CardProps> = ({ data }) => {
                   d.type == "video" ? download(d.video) : download(d.image_url)
                 }
               >
+                <svg
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
                 download
               </button>
             </div>
@@ -35,8 +53,13 @@ const Card: FC<CardProps> = ({ data }) => {
     return (
       <div className={styles.cardContainer}>
         <div className={styles.card}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`data:image/png;base64,${data.image_src}`} alt="" />
+          <Image
+            src={`data:image/png;base64,${data.image_src}`}
+            alt=""
+            width="200"
+            height="200"
+            layout="responsive"
+          />
           <div className={styles.download}>
             <button
               type="button"
@@ -46,6 +69,18 @@ const Card: FC<CardProps> = ({ data }) => {
                   : download(data.image_url)
               }
             >
+              <svg
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
               download
             </button>
           </div>

@@ -1,7 +1,6 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, FormEventHandler, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import styles from "../../styles/pages/post.module.css";
 import axios from "axios";
 
 // components
@@ -13,6 +12,9 @@ import Footer from "../../components/footer";
 import { instagram_url_parser } from "../../lib/instagram_id";
 import { instagramUrlChecker } from "../../lib/instagramUrlCheck";
 
+// styles
+import styles from "../../styles/pages/post.module.css";
+
 interface PostProps {
   data: any;
 }
@@ -21,7 +23,7 @@ const Post: FC<PostProps> = ({ data }) => {
   const router = useRouter();
   const [value, setValue] = useState("");
 
-  const submit = (e: any) => {
+  const submit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const isInstagramUrl = instagramUrlChecker(value);
     if (isInstagramUrl) {
@@ -50,7 +52,7 @@ const Post: FC<PostProps> = ({ data }) => {
           <Card data={data} />
           <div className={styles.info}>
             <p>
-              Isave is not affiliated with Instagram™. We do not host any
+              isave is not affiliated with Instagram™. We do not host any
               Instagram content. All rights belong to their respective owners.
             </p>
           </div>
@@ -63,9 +65,11 @@ const Post: FC<PostProps> = ({ data }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id }: any = params;
+  const id = params!.id;
   try {
-    const { data } = await axios.post(process.env.API_URL!, { id });
+    const { data } = await axios.post(`${process.env.API_URL}/post`, {
+      id,
+    });
     return {
       props: {
         data,

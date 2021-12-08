@@ -1,6 +1,6 @@
-import { FC, useEffect, useRef, useState } from "react";
-import styles from "../styles/pages/Home.module.css";
+import { FC, FormEventHandler, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 // components
 import Navbar from "../components/navbar";
@@ -10,11 +10,14 @@ import Footer from "../components/footer";
 import { instagram_url_parser } from "../lib/instagram_id";
 import { instagramUrlChecker } from "../lib/instagramUrlCheck";
 
+// styles
+import styles from "../styles/pages/Home.module.css";
+
 const Home: FC = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
 
-  const submit = async (e: any) => {
+  const submit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const isInstagramUrl = instagramUrlChecker(value);
     if (isInstagramUrl) {
@@ -42,6 +45,16 @@ const Home: FC = () => {
           />
           <button>Submit</button>
         </form>
+
+        <p className={styles.highlight}>
+          <span>
+            <Link href="/preview">
+              <a>*preview</a>
+            </Link>
+            {"  "}
+          </span>
+          your instagram.
+        </p>
       </main>
 
       <Footer />

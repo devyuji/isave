@@ -37,3 +37,11 @@ img {
   width: 100%;
   height: 100%;
 }
+
+button {
+  font-family: var(--ft);
+}
+
+input {
+  font-family: var(--ft);
+}

@@ -1,0 +1,26 @@
+.title {
+  text-align: center;
+  border-bottom: 1px solid grey;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: var(--ft-medium);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+
+  min-height: 20rem;
+}
+
+.btn {
+  border: none;
+  background-color: #0095f6;
+  padding: 1em;
+  color: white;
+  border-radius: 4px;
+  font-weight: var(--ft-semi-bold);
+}

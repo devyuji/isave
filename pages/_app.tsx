@@ -5,7 +5,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import Loading from "../components/loading";
+
+// components
+import Loading from "../components/model/loading";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -30,14 +32,6 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     };
   }, [router.events]);
 
-  useEffect(() => {
-    if (loading) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "visible";
-    }
-  }, [loading]);
-
   return (
     <>
       <Head>
@@ -48,7 +42,10 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AnimatePresence>{loading && <Loading />}</AnimatePresence>
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
+        {loading && <Loading />}
+      </AnimatePresence>
+
       <Component {...pageProps} />
     </>
   );

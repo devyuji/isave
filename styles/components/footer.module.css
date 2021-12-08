@@ -9,13 +9,9 @@
 .footer a,
 .footer p {
   font-weight: var(--ft-semi-bold);
-  font-size: 0.8rem;
-  opacity: 0.8;
+  font-size: 1.12rem;
 }
 
-@media (min-width: 600px) {
-  .footer a,
-  .footer p {
-    font-size: 1.12rem;
-  }
+.footer a {
+  border-bottom: 3px solid black;
 }

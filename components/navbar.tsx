@@ -1,10 +1,13 @@
-import { FC, useState } from "react";
-import styles from "../styles/components/navbar.module.css";
+import { FC } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useCycle, Variants } from "framer-motion";
+import router from "next/router";
+
+// styles
+import styles from "../styles/components/navbar.module.css";
 
 const Navbar: FC = () => {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, toggleOpen] = useCycle(false, true);
 
   const NavLink: FC = () => {
     return (
@@ -14,6 +17,19 @@ const Navbar: FC = () => {
             <a>home</a>
           </Link>
         </li>
+
+        <li>
+          <Link href="/preview">
+            <a>preview(beta)</a>
+          </Link>
+        </li>
+
+        <li>
+          <Link href="/how-to-use">
+            <a>how-to-use</a>
+          </Link>
+        </li>
+
         <li>
           <a
             href="https://github.com/devyuji/isave"
@@ -23,28 +39,25 @@ const Navbar: FC = () => {
             github
           </a>
         </li>
-        <li>
-          <Link href="/how-to-use">
-            <a>how-to-use</a>
-          </Link>
-        </li>
       </>
     );
   };
 
-  const variants = {
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, x: "90%" },
+  const popup: Variants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+    },
   };
 
   return (
     <header className={styles.navbar}>
-      {/* title */}
-      <div>
+      <div onClick={() => router.push("/")}>
         <h1 className={styles.title}>isave</h1>
       </div>
 
-      <div className={styles.hamburger_menu} onClick={() => setOpen(!isOpen)}>
+      <div className={styles.hamburger_menu} onClick={() => toggleOpen()}>
         <svg
           viewBox="0 0 24 24"
           className="icon"
@@ -64,13 +77,13 @@ const Navbar: FC = () => {
         <NavLink />
       </ul>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
         {isOpen && (
           <motion.ul
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-            exit={{ opacity: 0, scale: 0 }}
+            variants={popup}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
             className={styles.nav_link_mobile}
           >
             <NavLink />
