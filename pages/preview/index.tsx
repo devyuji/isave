@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import { FC } from "react";
 import Head from "next/head";
 import { AnimatePresence, useCycle } from "framer-motion";
 
@@ -9,7 +10,6 @@ import styles from "../../styles/pages/preview.module.css";
 import Navbar from "../../components/navbar";
 import UsernameInput from "../../components/model/usernameInput";
 import Footer from "../../components/footer";
-import Image from "next/image";
 
 const Preview: FC = () => {
   const [isModelOpen, toggleOpen] = useCycle(false, true);
@@ -19,7 +19,7 @@ const Preview: FC = () => {
   return (
     <>
       <Head>
-        <title>isave - preview your profile</title>
+        <title>isave - plan out your instagram</title>
       </Head>
       <Navbar />
 

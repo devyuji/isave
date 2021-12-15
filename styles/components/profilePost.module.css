@@ -8,11 +8,20 @@
   overflow: hidden;
 }
 
+.no_post {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
 .card {
   position: relative;
   width: 100%;
   aspect-ratio: 1/1;
   overflow: hidden;
+}
+
+.card img {
+  object-fit: cover;
 }
 
 .card button {

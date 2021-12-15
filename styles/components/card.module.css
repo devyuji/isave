@@ -9,6 +9,10 @@
   position: relative;
 }
 
+.card img {
+  object-fit: cover;
+}
+
 .download {
   position: absolute;
   bottom: 0;

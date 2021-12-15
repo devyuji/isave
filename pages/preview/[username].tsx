@@ -34,7 +34,7 @@ const MainPreview: FC<MainPreviewProps> = ({ data, error }) => {
   return (
     <>
       <Head>
-        <title>isave - preview your profile</title>
+        <title>isave - plan out your instagram</title>
       </Head>
 
       <Navbar />

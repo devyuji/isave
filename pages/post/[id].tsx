@@ -9,8 +9,7 @@ import Card from "../../components/card";
 import Footer from "../../components/footer";
 
 // lib
-import { instagram_url_parser } from "../../lib/instagram_id";
-import { instagramUrlChecker } from "../../lib/instagramUrlCheck";
+import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
 
 // styles
 import styles from "../../styles/pages/post.module.css";
@@ -27,7 +26,7 @@ const Post: FC<PostProps> = ({ data }) => {
     e.preventDefault();
     const isInstagramUrl = instagramUrlChecker(value);
     if (isInstagramUrl) {
-      const id = instagram_url_parser(value);
+      const id = instagramUrlParser(value);
       router.replace(`/post/${id}`);
     }
   };

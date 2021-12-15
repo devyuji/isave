@@ -7,8 +7,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 
 // lib
-import { instagram_url_parser } from "../lib/instagram_id";
-import { instagramUrlChecker } from "../lib/instagramUrlCheck";
+import { instagramUrlParser, instagramUrlChecker } from "../lib/instagram";
 
 // styles
 import styles from "../styles/pages/Home.module.css";
@@ -17,11 +16,12 @@ const Home: FC = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
 
-  const submit: FormEventHandler<HTMLFormElement> = async (e) => {
+  const submit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const isInstagramUrl = instagramUrlChecker(value);
     if (isInstagramUrl) {
-      const id = instagram_url_parser(value);
+      const id = instagramUrlParser(value);
+
       router.push(`/post/${id}`);
     }
   };

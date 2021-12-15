@@ -15,6 +15,16 @@ const Backdrop: FC<BackdropProp> = ({ children, onClick }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => {
+      if (e.code === "Escape") {
+        onClick();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
+
   return (
     <motion.div
       className={styles.container}

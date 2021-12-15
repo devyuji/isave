@@ -9,17 +9,17 @@ interface ProfilePostProps {
 }
 
 const ProfilePost: FC<ProfilePostProps> = ({ data, setData }) => {
-  if (data.length === 0) {
-    return (
-      <div style={{ marginTop: "1rem" }}>
-        <h1>No Posts Yet | Private Account</h1>
-      </div>
-    );
-  }
-
   const remove = (index: number) => {
     setData((prev: any) => update(prev, { $splice: [[index, 1]] }));
   };
+
+  if (data.length === 0) {
+    return (
+      <div>
+        <h1 className={styles.no_post}>No Posts Yet | Private Account</h1>
+      </div>
+    );
+  }
 
   return (
     <section className={styles.container}>

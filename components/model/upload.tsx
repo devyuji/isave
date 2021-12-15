@@ -11,20 +11,19 @@ interface UploadProps {
 
 const Upload: FC<UploadProps> = ({ handleClose, setData }) => {
   const onDrop = useCallback((acceptedFiles) => {
-    const save = {
-      image: acceptedFiles[0],
-      type: "image",
-    };
+    acceptedFiles.forEach((element: any) => {
+      const save = { image: element, type: "image" };
 
-    setData((prev: any) => update(prev, { $unshift: [save] }));
+      setData((prev: any) => update(prev, { $unshift: [save] }));
+    });
+
     handleClose();
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: "image/jpeg, image/png",
-    maxFiles: 1,
-    multiple: false,
+    multiple: true,
   });
 
   return (

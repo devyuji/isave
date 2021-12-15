@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from "react";
+import { FC, FormEventHandler, useEffect, useRef, useState } from "react";
 import styles from "../../styles/components/model/usernameInput.module.css";
 import router from "next/router";
 import Model from ".";
@@ -9,8 +9,13 @@ interface UsernameInputProps {
 
 const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
   const [value, setValue] = useState("");
+  const inputFocus = useRef<HTMLInputElement>(null);
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    inputFocus.current?.focus();
+  }, []);
+
+  const submit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     router.push(`/preview/${value}`);
@@ -38,6 +43,7 @@ const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
       <form onSubmit={submit} className={styles.form}>
         <label htmlFor="username">Enter your instagram username</label>
         <input
+          ref={inputFocus}
           value={value}
           id="username"
           name="username"
@@ -46,7 +52,7 @@ const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
           autoComplete="off"
           required
         />
-        <p>Note : only public account</p>
+        <p>*Only public account</p>
         <button type="submit">submit</button>
       </form>
     </Model>

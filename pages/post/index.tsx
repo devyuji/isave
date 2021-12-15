@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from "react";
+import { FC, FormEventHandler, useState } from "react";
 import styles from "../../styles/pages/postHome.module.css";
 import { useRouter } from "next/router";
 
@@ -8,8 +8,7 @@ import Footer from "../../components/footer";
 import Error from "../../components/model/error";
 
 // lib
-import { instagramUrlChecker } from "../../lib/instagramUrlCheck";
-import { instagram_url_parser } from "../../lib/instagram_id";
+import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
 
 const PostHome: FC = () => {
   const router = useRouter();
@@ -17,11 +16,11 @@ const PostHome: FC = () => {
 
   const [value, setValue] = useState("");
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const isInstagramUrl = instagramUrlChecker(value);
     if (isInstagramUrl) {
-      const id = instagram_url_parser(value);
+      const id = instagramUrlParser(value);
       router.replace(`/post/${id}`);
     }
   };
