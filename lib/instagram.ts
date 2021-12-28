@@ -4,7 +4,7 @@ export const instagramUrlParser = (url: string) => {
 
   const last = urlSplit[length - 1];
 
-  if (last[0] === "?") return urlSplit[length - 2];
+  if (last[0] === "?" || last == "") return urlSplit[length - 2];
 
   return urlSplit[length - 1];
 };
