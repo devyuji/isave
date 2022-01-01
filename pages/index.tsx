@@ -1,6 +1,12 @@
-import { FC, FormEventHandler, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import {
+  ChangeEventHandler,
+  FC,
+  FormEventHandler,
+  useRef,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 // components
 import Navbar from "../components/navbar";
@@ -11,10 +17,14 @@ import { instagramUrlParser, instagramUrlChecker } from "../lib/instagram";
 
 // styles
 import styles from "../styles/pages/Home.module.css";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 const Home: FC = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
+  const scrollRef = useRef<HTMLSelectElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isReset, toggleReset] = useState<boolean>(false);
 
   const submit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -26,35 +36,100 @@ const Home: FC = () => {
     }
   };
 
+  const scroll = () => {
+    scrollRef.current?.scrollIntoView(true);
+    inputRef.current?.focus();
+  };
+
+  const change: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const text = e.target.value;
+    if (text.length > 0) {
+      toggleReset! && toggleReset(true);
+    } else {
+      toggleReset(false);
+    }
+    setValue(text);
+  };
+
+  const reset: FormEventHandler<HTMLFormElement> = () => {
+    setValue("");
+    toggleReset(false);
+    inputRef.current?.focus();
+  };
+
+  const slitePopup: Variants = {
+    end: {
+      y: 15,
+      opacity: 0,
+    },
+    start: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        ease: "linear",
+      },
+    },
+  };
+
   return (
     <>
       <Navbar />
 
       <main className={styles.main}>
-        <div className={styles.heading}>
-          <h1>Download instagram images, video, and reels in one place</h1>
-        </div>
+        <section className={styles.sections}>
+          <div className={styles.logo_container}>
+            <img src="images/logo.svg" alt="logo" />
+          </div>
+          <h1 className={styles.tagline}>Download all the things.</h1>
+          <p className={styles.tagline_description}>
+            A simple tool to download all media from instagram
+          </p>
+          <button type="button" className={styles.action_btn} onClick={scroll}>
+            Get Started.
+          </button>
+        </section>
 
-        <form onSubmit={submit} className={styles.form}>
-          <input
-            type="url"
-            placeholder="e.g. https://www.instagram.com/p/CNIKAmJAiLa/"
-            onChange={(text) => setValue(text.target.value)}
-            required={true}
-            value={value}
-          />
-          <button>Submit</button>
-        </form>
-
-        <p className={styles.highlight}>
-          <span>
-            <Link href="/preview">
-              <a>*preview</a>
-            </Link>
-            {"  "}
-          </span>
-          your instagram.
-        </p>
+        <section ref={scrollRef} className={styles.sections}>
+          <form className={styles.form} onReset={reset} onSubmit={submit}>
+            <label htmlFor="input">Paste instagram url</label>
+            <div className={styles.form_container}>
+              <input
+                ref={inputRef}
+                id="input"
+                value={value}
+                onChange={change}
+                type="url"
+                required={true}
+                placeholder="e.g. https://www.instagram.com/p/CNIKAmJAiLa/"
+              />
+              <AnimatePresence>
+                {isReset && (
+                  <motion.button
+                    variants={slitePopup}
+                    initial="end"
+                    animate="start"
+                    exit="end"
+                    type="reset"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </motion.button>
+                )}
+              </AnimatePresence>
+            </div>
+          </form>
+        </section>
       </main>
 
       <Footer />

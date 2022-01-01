@@ -20,6 +20,8 @@ html,
 body {
   font-family: var(--ft);
   color: var(--text-clr);
+  scroll-behavior: smooth;
+  background-color: white;
 }
 
 #__next {

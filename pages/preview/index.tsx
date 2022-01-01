@@ -23,19 +23,17 @@ const Preview: FC = () => {
       </Head>
       <Navbar />
 
-      <main className={styles.mainContainer}>
-        <section className={styles.container}>
-          <div>
-            <p>Plan out your instagram</p>
-            <button className={styles.action} onClick={toggleModel}>
-              click to get started
-            </button>
-          </div>
-
-          <div className={styles.image}>
-            <img src="/images/preview.png" alt="preview" />
-          </div>
-        </section>
+      <main className={styles.main}>
+        <div className={styles.image_container}>
+          <img src="images/logo.svg" alt="logo" />
+        </div>
+        <h1 className={styles.tagline}>Introducing Preview (beta).</h1>
+        <p className={styles.tagline_description}>
+          Plan your instagram profile before posting online.
+        </p>
+        <button className={styles.btn} onClick={toggleModel}>
+          Get Started.
+        </button>
 
         <AnimatePresence initial={false} exitBeforeEnter={true}>
           {isModelOpen && <UsernameInput handleClose={toggleModel} />}
