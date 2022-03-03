@@ -11,31 +11,58 @@
 }
 
 .form {
-  display: flex;
+  display: grid;
+  gap: 1rem;
+
   width: 100%;
+}
+
+.form label {
+  font-weight: var(--ft-bold);
+  font-size: 1.5rem;
+}
+
+.form div {
+  display: flex;
+  gap: 0.5rem;
+  background-color: #eceff1;
+  padding: 1em;
+  border-radius: 50px;
+  border: 3px solid transparent;
+
+  transition: border-radius 250ms, border 250ms;
+}
+
+.form div:focus-within {
+  border-radius: 20px;
+  border-color: black;
 }
 
 .form input {
   border: none;
-  padding: 1rem;
+  background-color: transparent;
+  height: 2rem;
   font-family: var(--ft);
   font-size: 0.8rem;
-  border: 2px solid black;
   width: 100%;
   outline: none;
 }
 
 .form button {
   border: none;
-  padding: 1rem;
-  background-color: black;
-  color: white;
-  font-family: var(--ft);
+  background-color: transparent;
   cursor: pointer;
+}
+
+.info {
+  background-color: #eceff1;
+  padding: 2rem;
+  border-radius: 20px;
 }
 
 .info p {
   letter-spacing: 0.5px;
   line-height: 1.6;
   opacity: 0.85;
+  font-weight: var(--ft-semi-bold);
 }

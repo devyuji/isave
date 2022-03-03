@@ -6,9 +6,9 @@ import {
   useRef,
   useState,
 } from "react";
-import styles from "../../styles/components/model/usernameInput.module.css";
+import styles from "../../styles/components/modal/usernameInput.module.css";
 import router from "next/router";
-import Model from ".";
+import Modal from ".";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
 interface UsernameInputProps {
@@ -63,7 +63,7 @@ const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
   };
 
   return (
-    <Model handleClose={handleClose}>
+    <Modal handleClose={handleClose}>
       <div className={styles.close_container}>
         <button className={styles.close} onClick={handleClose}>
           <svg
@@ -137,7 +137,7 @@ const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
           <p>only public account.</p>
         </div>
       </form>
-    </Model>
+    </Modal>
   );
 };
 

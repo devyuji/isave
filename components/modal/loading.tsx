@@ -1,6 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { FC } from "react";
-import styles from "../../styles/components/model/loading.module.css";
+import Modal from ".";
+import styles from "../../styles/components/modal/loading.module.css";
 import Backdrop from "./backdrop";
 
 const Loading: FC = () => {

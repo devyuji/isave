@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useCycle, Variants } from "framer-motion";
 import router from "next/router";
@@ -8,6 +8,21 @@ import styles from "../styles/components/navbar.module.css";
 
 const Navbar: FC = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
+  const [backgroundColor, setBackgroundColor] = useState("#ffffff");
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+
+    () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const onScroll = () => {
+    if (window.scrollY > 0) {
+      setBackgroundColor("#ECEFF1");
+    } else {
+      setBackgroundColor("#ffffff");
+    }
+  };
 
   const NavLink: FC = () => {
     return (
@@ -44,15 +59,18 @@ const Navbar: FC = () => {
   };
 
   const popup: Variants = {
-    hidden: { opacity: 0, scale: 0 },
+    hidden: { opacity: 0, x: "100%" },
     visible: {
       opacity: 1,
-      scale: 1,
+      x: 0,
+      transition: {
+        ease: "easeInOut",
+      },
     },
   };
 
   return (
-    <header className={styles.navbar}>
+    <header className={styles.navbar} style={{ backgroundColor }}>
       <div onClick={() => router.push("/")}>
         <h1 className={styles.title}>isave</h1>
       </div>

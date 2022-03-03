@@ -85,6 +85,19 @@ const Home: FC = () => {
             A simple tool to download all media from instagram
           </p>
           <button type="button" className={styles.action_btn} onClick={scroll}>
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="10 15 15 20 20 15"></polyline>
+              <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+            </svg>
             Get Started.
           </button>
         </section>
@@ -100,6 +113,7 @@ const Home: FC = () => {
                 onChange={change}
                 type="url"
                 required={true}
+                autoComplete="off"
                 placeholder="e.g. https://www.instagram.com/p/CNIKAmJAiLa/"
               />
               <AnimatePresence>

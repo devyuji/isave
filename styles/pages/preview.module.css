@@ -24,12 +24,15 @@
   text-align: center;
 }
 
-.btn {
+.action_btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 1rem;
   border: none;
-  background-color: black;
+  background-color: var(--primary-clr);
   color: white;
-  border-radius: 5px;
-  padding: 1em;
+  border-radius: 20px;
+  padding: 1.5em;
   cursor: pointer;
 }

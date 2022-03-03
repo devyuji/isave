@@ -14,6 +14,11 @@
   --ft-medium: 500;
   --ft-semi-bold: 600;
   --ft-bold: 700;
+
+  --primary-clr: #37474f;
+  --primary-clr-100: #cfd8dc;
+  --primary-clr-200: #b0bec5;
+  --primary-clr-light: #eceff1;
 }
 
 html,

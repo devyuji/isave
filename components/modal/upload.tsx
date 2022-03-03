@@ -1,6 +1,6 @@
 import { Dispatch, FC, useCallback } from "react";
-import styles from "../../styles/components/model/upload.module.css";
-import Model from ".";
+import styles from "../../styles/components/modal/upload.module.css";
+import Modal from ".";
 import { useDropzone } from "react-dropzone";
 import update from "immutability-helper";
 
@@ -27,7 +27,7 @@ const Upload: FC<UploadProps> = ({ handleClose, setData }) => {
   });
 
   return (
-    <Model handleClose={handleClose}>
+    <Modal handleClose={handleClose}>
       <h1 className={styles.title}>Add new post</h1>
 
       <div {...getRootProps()} className={styles.container}>
@@ -57,7 +57,7 @@ const Upload: FC<UploadProps> = ({ handleClose, setData }) => {
         <p>Drag and Drop image here</p>
         <button className={styles.btn}>Click to upload</button>
       </div>
-    </Model>
+    </Modal>
   );
 };
 

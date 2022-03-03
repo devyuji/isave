@@ -28,7 +28,7 @@ const HowToUse: FC = () => {
 
             <li>
               <p className={styles.title}>
-                Paste the url to isave and click on submit or press enter
+                Paste the url to input field and press enter
               </p>
               <Image src={image2} alt="" layout="responsive" />
             </li>

@@ -8,7 +8,7 @@ import styles from "../../styles/pages/preview.module.css";
 
 // components
 import Navbar from "../../components/navbar";
-import UsernameInput from "../../components/model/usernameInput";
+import UsernameInput from "../../components/modal/usernameInput";
 import Footer from "../../components/footer";
 
 const Preview: FC = () => {
@@ -31,7 +31,21 @@ const Preview: FC = () => {
         <p className={styles.tagline_description}>
           Plan your instagram profile before posting online.
         </p>
-        <button className={styles.btn} onClick={toggleModel}>
+        <button className={styles.action_btn} onClick={toggleModel}>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
           Get Started.
         </button>
 

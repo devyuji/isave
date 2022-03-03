@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FC, useEffect } from "react";
-import styles from "../../styles/components/model/backdrop.module.css";
+import styles from "../../styles/components/modal/backdrop.module.css";
 
 interface BackdropProp {
   onClick: () => void;

@@ -6,13 +6,13 @@ import Head from "next/head";
 
 // components
 import Header from "../../components/header";
-import UsernameInput from "../../components/model/usernameInput";
+import UsernameInput from "../../components/modal/usernameInput";
 import Navbar from "../../components/navbar";
 import ProfileInfo from "../../components/profileInfo";
 import ProfilePost from "../../components/profilePost";
 import Footer from "../../components/footer";
-import Error from "../../components/model/error";
-import Upload from "../../components/model/upload";
+import Error from "../../components/modal/error";
+import Upload from "../../components/modal/upload";
 
 interface MainPreviewProps {
   data: any;
@@ -26,7 +26,7 @@ const MainPreview: FC<MainPreviewProps> = ({ data, error }) => {
 
   useEffect(() => {
     if (!error) setDataPost(data.posts);
-  }, [data]);
+  }, [data, error]);
 
   const toggleModel = () => toggleOpen();
   const toggleImageModel = () => toggleImageModelOpen();

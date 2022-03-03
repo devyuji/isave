@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 // components
-import Loading from "../components/model/loading";
+import Loading from "../components/modal/loading";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();

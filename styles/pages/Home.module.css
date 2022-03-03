@@ -27,13 +27,17 @@
 }
 
 .action_btn {
-  padding: 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5em;
   border: none;
-  background-color: black;
+  background-color: var(--primary-clr);
   color: white;
-  border-radius: 5px;
+  border-radius: 20px;
   margin-top: 2rem;
   cursor: pointer;
+  font-weight: var(--ft-semi-bold);
 }
 
 .form {
@@ -45,7 +49,20 @@
 
 .form_container {
   display: flex;
-  border-bottom: 2px solid black;
+  gap: 0.5rem;
+  background-color: var(--primary-clr-light);
+  padding: 0 2rem;
+  border-radius: 50px;
+  height: 5rem;
+  border: 3px solid transparent;
+
+  transition: border-radius 250ms, border 250ms;
+}
+
+.form_container:focus-within {
+  border-radius: 20px;
+
+  border-color: black;
 }
 
 .form label {
@@ -55,10 +72,10 @@
 
 .form input {
   border: none;
+  height: 100%;
   width: 100%;
-  padding: 1em;
   outline: none;
-  background-color: none;
+  background-color: transparent;
 }
 
 .form button {

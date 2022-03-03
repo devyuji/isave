@@ -1,13 +1,13 @@
 import { motion, Variants } from "framer-motion";
 import { FC } from "react";
 import Backdrop from "./backdrop";
-import styles from "../../styles/components/model/index.module.css";
+import styles from "../../styles/components/modal/index.module.css";
 
-interface ModelProps {
+interface ModalProps {
   handleClose: () => void;
 }
 
-const Model: FC<ModelProps> = ({ handleClose, children }) => {
+const Modal: FC<ModalProps> = ({ handleClose, children }) => {
   const scaleUp: Variants = {
     hidden: {
       opacity: 0,
@@ -17,10 +17,6 @@ const Model: FC<ModelProps> = ({ handleClose, children }) => {
       opacity: 1,
       scale: 1,
     },
-    exit: {
-      opacity: 0,
-      scale: 0,
-    },
   };
 
   return (
@@ -29,7 +25,7 @@ const Model: FC<ModelProps> = ({ handleClose, children }) => {
         variants={scaleUp}
         initial="hidden"
         animate="visible"
-        exit="exit"
+        exit="hidden"
         onClick={(e) => e.stopPropagation()}
         className={styles.container}
       >
@@ -39,4 +35,4 @@ const Model: FC<ModelProps> = ({ handleClose, children }) => {
   );
 };
 
-export default Model;
+export default Modal;

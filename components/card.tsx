@@ -1,13 +1,41 @@
 import { FC } from "react";
 import styles from "../styles/components/card.module.css";
 import Image from "next/image";
+import axios from "axios";
 
 interface CardProps {
   data: any;
 }
 
-export const download = (url: string) => {
-  window.location.href = `${url}&dl=1`;
+const download = async (url: string) => {
+  let fileName = "";
+
+  try {
+    const { data } = await axios.get(url, { responseType: "blob" });
+
+    if (data.type == "image/jpeg") fileName = "isave-download.jpg";
+    else fileName = "isave-download.mp4";
+
+    const blobUrl = window.URL.createObjectURL(new Blob([data]));
+
+    const link = document.createElement("a");
+
+    link.href = blobUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+
+    link.dispatchEvent(
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      })
+    );
+
+    document.body.removeChild(link);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const Card: FC<CardProps> = ({ data }) => {
@@ -15,7 +43,7 @@ const Card: FC<CardProps> = ({ data }) => {
     return (
       <div className={styles.cardContainer}>
         {data.links.map((d: any, index: number) => (
-          <div className={styles.card} key={index}>
+          <div className={styles.card} key={index} tabIndex={index}>
             <Image
               src={`data:image/png;base64,${d.image_src}`}
               alt=""
@@ -42,7 +70,6 @@ const Card: FC<CardProps> = ({ data }) => {
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                download
               </button>
             </div>
           </div>
@@ -52,7 +79,7 @@ const Card: FC<CardProps> = ({ data }) => {
   } else {
     return (
       <div className={styles.cardContainer}>
-        <div className={styles.card}>
+        <div className={styles.card} tabIndex={0}>
           <Image
             src={`data:image/png;base64,${data.image_src}`}
             alt=""
@@ -81,7 +108,6 @@ const Card: FC<CardProps> = ({ data }) => {
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              download
             </button>
           </div>
         </div>
