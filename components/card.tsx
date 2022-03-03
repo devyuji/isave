@@ -7,7 +7,7 @@ interface CardProps {
   data: any;
 }
 
-const download = async (url: string) => {
+export const download = async (url: string) => {
   let fileName = "";
 
   try {
