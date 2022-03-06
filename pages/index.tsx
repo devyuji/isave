@@ -22,7 +22,6 @@ import { AnimatePresence, motion, Variants } from "framer-motion";
 const Home: FC = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
-  const scrollRef = useRef<HTMLSelectElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isReset, toggleReset] = useState<boolean>(false);
 
@@ -37,7 +36,6 @@ const Home: FC = () => {
   };
 
   const scroll = () => {
-    scrollRef.current?.scrollIntoView(true);
     inputRef.current?.focus();
   };
 
@@ -102,7 +100,7 @@ const Home: FC = () => {
           </button>
         </section>
 
-        <section ref={scrollRef} className={styles.sections}>
+        <section className={styles.sections}>
           <form className={styles.form} onReset={reset} onSubmit={submit}>
             <label htmlFor="input">Paste instagram url</label>
             <div className={styles.form_container}>

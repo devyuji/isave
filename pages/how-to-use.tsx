@@ -23,22 +23,37 @@ const HowToUse: FC = () => {
               <p className={styles.title}>
                 Open the Instagram and copy the url.
               </p>
-              <Image src={image1} alt="" layout="responsive" />
+              <Image
+                src={image1}
+                alt=""
+                layout="responsive"
+                className={styles.image}
+              />
             </li>
 
             <li>
               <p className={styles.title}>
                 Paste the url to input field and press enter
               </p>
-              <Image src={image2} alt="" layout="responsive" />
+              <Image
+                src={image2}
+                alt=""
+                layout="responsive"
+                className={styles.image}
+              />
             </li>
 
             <li>
               <p className={styles.title}>
-                Click the download button. The photo will immediately be saved
-                to the Downloads folder.
+                Click the download button. The photo will be saved to the
+                Downloads folder.
               </p>
-              <Image src={image3} alt="" layout="responsive" />
+              <Image
+                src={image3}
+                alt=""
+                layout="responsive"
+                className={styles.image}
+              />
             </li>
           </ul>
         </div>

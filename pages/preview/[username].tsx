@@ -31,45 +31,44 @@ const MainPreview: FC<MainPreviewProps> = ({ data, error }) => {
   const toggleModel = () => toggleOpen();
   const toggleImageModel = () => toggleImageModelOpen();
 
+  if (error) {
+    return <Error handleClose={() => null} redirectTo="/preview" />;
+  }
+
   return (
     <>
       <Head>
         <title>isave - plan out your instagram</title>
       </Head>
 
-      <Navbar />
+      <Navbar sticky={false} />
 
-      {error ? (
-        <Error handleClose={() => null} redirectTo="/preview" />
-      ) : (
-        <>
-          <main
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Header
-              handleOpenUsername={toggleModel}
-              handleOpenImage={toggleImageModel}
-            />
+      <main
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Header
+          handleOpenUsername={toggleModel}
+          handleOpenImage={toggleImageModel}
+        />
 
-            <ProfileInfo data={data.profile} />
-            <ProfilePost data={dataPost} setData={setDataPost} />
-          </main>
+        <ProfileInfo data={data.profile} />
+        <ProfilePost data={dataPost} setData={setDataPost} />
+      </main>
 
-          <AnimatePresence initial={false} exitBeforeEnter={true}>
-            {isUsernameModelOpen && <UsernameInput handleClose={toggleModel} />}
-          </AnimatePresence>
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
+        {isUsernameModelOpen && <UsernameInput handleClose={toggleModel} />}
+      </AnimatePresence>
 
-          <AnimatePresence initial={false} exitBeforeEnter={true}>
-            {isImageUploadModel && (
-              <Upload handleClose={toggleImageModel} setData={setDataPost} />
-            )}
-          </AnimatePresence>
-        </>
-      )}
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
+        {isImageUploadModel && (
+          <Upload handleClose={toggleImageModel} setData={setDataPost} />
+        )}
+      </AnimatePresence>
+
       <Footer />
     </>
   );

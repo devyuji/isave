@@ -2,7 +2,7 @@ import { FC } from "react";
 import styles from "../styles/components/profileInfo.module.css";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { download } from "./card";
+import download from "../lib/download";
 
 interface ProfileInfoProps {
   data: any;

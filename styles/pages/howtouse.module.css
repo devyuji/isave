@@ -21,6 +21,10 @@
   gap: 2rem;
 }
 
+.image {
+  border-radius: 30px;
+}
+
 .title {
   line-height: 1.6;
   font-size: 1.12rem;

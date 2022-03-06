@@ -13,6 +13,7 @@ import axios from "axios";
 import Navbar from "../../components/navbar";
 import Card from "../../components/card";
 import Footer from "../../components/footer";
+import Error from "../../components/modal/error";
 
 // lib
 import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
@@ -23,14 +24,14 @@ import { AnimatePresence, motion, Variants } from "framer-motion";
 
 interface PostProps {
   data: any;
+  error: boolean;
 }
 
-const Post: FC<PostProps> = ({ data }) => {
+const Post: FC<PostProps> = ({ data, error }) => {
   const router = useRouter();
   const [value, setValue] = useState("");
   const [isReset, toggleReset] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [borderRadius, setBorderRadius] = useState("64px");
 
   const submit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -77,6 +78,10 @@ const Post: FC<PostProps> = ({ data }) => {
     toggleReset(false);
     inputRef.current?.focus();
   };
+
+  if (error) {
+    return <Error handleClose={() => null} redirectTo="/" />;
+  }
 
   return (
     <>

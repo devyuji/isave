@@ -1,42 +1,11 @@
 import { FC } from "react";
 import styles from "../styles/components/card.module.css";
-import Image from "next/image";
-import axios from "axios";
+import download from "../lib/download";
+import ImageNext from "next/image";
 
 interface CardProps {
   data: any;
 }
-
-export const download = async (url: string) => {
-  let fileName = "";
-
-  try {
-    const { data } = await axios.get(url, { responseType: "blob" });
-
-    if (data.type == "image/jpeg") fileName = "isave-download.jpg";
-    else fileName = "isave-download.mp4";
-
-    const blobUrl = window.URL.createObjectURL(new Blob([data]));
-
-    const link = document.createElement("a");
-
-    link.href = blobUrl;
-    link.download = fileName;
-    document.body.appendChild(link);
-
-    link.dispatchEvent(
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true,
-        view: window,
-      })
-    );
-
-    document.body.removeChild(link);
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const Card: FC<CardProps> = ({ data }) => {
   if (data.type === "slide") {
@@ -44,7 +13,7 @@ const Card: FC<CardProps> = ({ data }) => {
       <div className={styles.cardContainer}>
         {data.links.map((d: any, index: number) => (
           <div className={styles.card} key={index} tabIndex={index}>
-            <Image
+            <ImageNext
               src={`data:image/png;base64,${d.image_src}`}
               alt=""
               width="200"
@@ -80,7 +49,7 @@ const Card: FC<CardProps> = ({ data }) => {
     return (
       <div className={styles.cardContainer}>
         <div className={styles.card} tabIndex={0}>
-          <Image
+          <ImageNext
             src={`data:image/png;base64,${data.image_src}`}
             alt=""
             width="200"

@@ -6,15 +6,21 @@ import router from "next/router";
 // styles
 import styles from "../styles/components/navbar.module.css";
 
-const Navbar: FC = () => {
+interface NavbarProps {
+  sticky?: boolean;
+}
+
+const Navbar: FC<NavbarProps> = ({ sticky = true }) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [backgroundColor, setBackgroundColor] = useState("#ffffff");
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    if (sticky) {
+      window.addEventListener("scroll", onScroll);
+    }
 
     () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [sticky]);
 
   const onScroll = () => {
     if (window.scrollY > 0) {
@@ -24,53 +30,26 @@ const Navbar: FC = () => {
     }
   };
 
-  const NavLink: FC = () => {
-    return (
-      <>
-        <li>
-          <Link href="/">
-            <a>home</a>
-          </Link>
-        </li>
-
-        <li>
-          <Link href="/preview">
-            <a>preview(beta)</a>
-          </Link>
-        </li>
-
-        <li>
-          <Link href="/how-to-use">
-            <a>how-to-use</a>
-          </Link>
-        </li>
-
-        <li>
-          <a
-            href="https://github.com/devyuji/isave"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            github
-          </a>
-        </li>
-      </>
-    );
-  };
-
   const popup: Variants = {
     hidden: { opacity: 0, x: "100%" },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
-        ease: "easeInOut",
+        ease: "backInOut",
       },
     },
   };
 
   return (
-    <header className={styles.navbar} style={{ backgroundColor }}>
+    <header
+      className={styles.navbar}
+      style={{
+        backgroundColor,
+        position: sticky ? "sticky" : "relative",
+        top: 0,
+      }}
+    >
       <div onClick={() => router.push("/")}>
         <h1 className={styles.title}>isave</h1>
       </div>
@@ -109,6 +88,40 @@ const Navbar: FC = () => {
         )}
       </AnimatePresence>
     </header>
+  );
+};
+
+const NavLink: FC = () => {
+  return (
+    <>
+      <li>
+        <Link href="/">
+          <a>home</a>
+        </Link>
+      </li>
+
+      <li>
+        <Link href="/preview">
+          <a>preview(beta)</a>
+        </Link>
+      </li>
+
+      <li>
+        <Link href="/how-to-use">
+          <a>how-to-use</a>
+        </Link>
+      </li>
+
+      <li>
+        <a
+          href="https://github.com/devyuji/isave"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          github
+        </a>
+      </li>
+    </>
   );
 };
 
