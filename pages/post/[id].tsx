@@ -1,13 +1,14 @@
 import {
   ChangeEventHandler,
-  FC,
   FormEventHandler,
+  useEffect,
   useRef,
   useState,
 } from "react";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 // components
 import Navbar from "../../components/navbar";
@@ -20,18 +21,31 @@ import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
 
 // styles
 import styles from "../../styles/pages/post.module.css";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+
+//redux
+import { DataProps, RESET, SET_DATA } from "../../redux/reducers/postData";
+import { useAppDispatch } from "../../redux/hooks";
 
 interface PostProps {
-  data: any;
+  data: DataProps[];
   error: boolean;
 }
 
-const Post: FC<PostProps> = ({ data, error }) => {
+const Post: NextPage<PostProps> = ({ data, error }) => {
   const router = useRouter();
   const [value, setValue] = useState("");
   const [isReset, toggleReset] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!error) dispatch(SET_DATA(data));
+
+    return () => {
+      dispatch(RESET());
+    };
+  }, [data, error, dispatch]);
 
   const submit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -130,7 +144,7 @@ const Post: FC<PostProps> = ({ data, error }) => {
             </div>
           </form>
 
-          <Card data={data} />
+          <Card />
 
           <div className={styles.info}>
             <p>
@@ -148,14 +162,46 @@ const Post: FC<PostProps> = ({ data, error }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params!.id;
+  const DATA: DataProps[] = [];
   try {
     const { data } = await axios.post(`${process.env.API_URL}/post`, {
       id,
     });
+
+    if (data.type === "slide") {
+      data.links.forEach((element: any) => {
+        if (element.type === "image") {
+          DATA.push({
+            downloadLink: element.image_url,
+            preview: element.image_src,
+            isDownloading: false,
+          });
+        } else {
+          DATA.push({
+            downloadLink: element.video,
+            preview: element.image_src,
+            isDownloading: false,
+          });
+        }
+      });
+    } else if (data.type === "image") {
+      DATA.push({
+        downloadLink: data.image_url,
+        preview: data.image_src,
+        isDownloading: false,
+      });
+    } else {
+      DATA.push({
+        downloadLink: data.video,
+        preview: data.image_src,
+        isDownloading: false,
+      });
+    }
+
     return {
       props: {
         error: false,
-        data,
+        data: DATA,
       },
     };
   } catch (err) {

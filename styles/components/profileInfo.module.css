@@ -49,6 +49,8 @@
 .bio {
   line-height: 1.6;
   margin-top: 1rem;
+
+  white-space: pre;
 }
 
 @media (max-width: 850px) {

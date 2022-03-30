@@ -6,6 +6,8 @@
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 1rem;
   overflow: hidden;
+
+  margin-bottom: 2rem;
 }
 
 .no_post {
@@ -37,6 +39,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  box-shadow: 0 2px 10px 5px rgba(255, 255, 255, 0.3);
 }
 
 .card button svg {

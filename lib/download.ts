@@ -1,6 +1,7 @@
 import axios from "axios";
+import { toastMessage } from "./toast";
 
-const download = async (url: string) => {
+export const downloadManager = async (url: string) => {
   let fileName = "";
 
   try {
@@ -8,8 +9,8 @@ const download = async (url: string) => {
       responseType: "blob",
     });
 
-    if (data.type == "image/jpeg") fileName = "isave-download.jpg";
-    else fileName = "isave-download.mp4";
+    if (data.type == "image/jpeg") fileName = `isave-${random()}.jpg`;
+    else fileName = `isave-${random()}.mp4`;
 
     const blobUrl = window.URL.createObjectURL(new Blob([data]));
 
@@ -29,7 +30,17 @@ const download = async (url: string) => {
     document.body.removeChild(link);
   } catch (err) {
     console.error(err);
+    toastMessage("Failed to download!");
   }
 };
 
-export default download;
+const random = () => {
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  let str = "";
+  for (let i = 0; i < 5; i++) {
+    str += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return str;
+};

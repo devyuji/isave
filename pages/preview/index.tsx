@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { FC } from "react";
+import { NextPage } from "next";
 import Head from "next/head";
 import { AnimatePresence, useCycle } from "framer-motion";
 
@@ -11,7 +11,7 @@ import Navbar from "../../components/navbar";
 import UsernameInput from "../../components/modal/usernameInput";
 import Footer from "../../components/footer";
 
-const Preview: FC = () => {
+const Preview: NextPage = () => {
   const [isModelOpen, toggleOpen] = useCycle(false, true);
 
   const toggleModel = () => toggleOpen();

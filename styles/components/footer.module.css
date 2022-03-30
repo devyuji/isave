@@ -1,17 +1,15 @@
 .footer {
-  margin-top: auto;
   padding: 2rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1.5rem;
-}
 
-.footer a,
-.footer p {
+  background-color: var(--primary-clr-light);
+  border-radius: 30px;
+  margin: auto 1rem 1rem;
+
   font-weight: var(--ft-semi-bold);
-  font-size: 1.12rem;
-}
-
-.footer a {
-  border-bottom: 3px solid black;
+  font-size: clamp(0.8rem, 4vw, 1.2rem);
 }

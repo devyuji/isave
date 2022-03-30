@@ -41,11 +41,13 @@
 .form input {
   border: none;
   background-color: transparent;
-  height: 2rem;
+
   font-family: var(--ft);
   font-size: 0.8rem;
   width: 100%;
   outline: none;
+
+  padding: 1em;
 }
 
 .form button {

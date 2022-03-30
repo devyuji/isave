@@ -1,5 +1,5 @@
-import { FC } from "react";
 import Image from "next/image";
+import { NextPage } from "next";
 import styles from "../styles/pages/howtouse.module.css";
 
 // components
@@ -11,7 +11,7 @@ import image1 from "../public/images/image1.png";
 import image2 from "../public/images/image2.png";
 import image3 from "../public/images/image3.png";
 
-const HowToUse: FC = () => {
+const HowToUse: NextPage = () => {
   return (
     <>
       <Navbar />

@@ -1,10 +1,15 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { FC } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
+import { store } from "../redux/store";
+
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
 
 // components
 import Loading from "../components/modal/loading";
@@ -46,7 +51,11 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         {loading && <Loading />}
       </AnimatePresence>
 
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+
+      <ToastContainer />
     </>
   );
 };

@@ -5,7 +5,10 @@
   align-items: center;
   justify-content: center;
   line-height: 1.6;
-  height: 80vh;
+  height: calc(100vh - 5rem);
+  gap: 0.5rem;
+
+  padding: 1em;
 }
 .image_container {
   width: 5rem;
@@ -13,12 +16,12 @@
 }
 
 .tagline {
-  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-size: clamp(1.25rem, 5vw, 2rem);
   font-weight: var(--ft-bold);
 }
 
 .tagline_description {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: var(--ft-bold);
   color: #b8c0be;
   text-align: center;

@@ -1,0 +1,11 @@
+.container {
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 1rem;
+
+  line-height: 1.6;
+}

@@ -1,30 +1,47 @@
-import { Dispatch, FC, useCallback } from "react";
-import styles from "../../styles/components/modal/upload.module.css";
+import { FC, useCallback } from "react";
 import Modal from ".";
 import { useDropzone } from "react-dropzone";
-import update from "immutability-helper";
+
+// css
+import styles from "../../styles/components/modal/upload.module.css";
+
+// redux
+import { useAppDispatch } from "../../redux/hooks";
+import { ADD } from "../../redux/reducers/previewData";
 
 interface UploadProps {
   handleClose: () => void;
-  setData: Dispatch<any>;
 }
 
-const Upload: FC<UploadProps> = ({ handleClose, setData }) => {
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((element: any) => {
-      const save = { image: element, type: "image" };
+const Upload: FC<UploadProps> = ({ handleClose }) => {
+  const dispatch = useAppDispatch();
 
-      setData((prev: any) => update(prev, { $unshift: [save] }));
-    });
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      acceptedFiles.forEach(async (element: any) => {
+        const res: any = await toBase64(element);
 
-    handleClose();
-  }, []);
+        const image = res.split(",")[1];
 
-  const { getRootProps, getInputProps } = useDropzone({
+        dispatch(ADD({ type: "image", image_url: image }));
+      });
+    },
+    [dispatch]
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: "image/jpeg, image/png",
     multiple: true,
   });
+
+  const toBase64 = (file: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
 
   return (
     <Modal handleClose={handleClose}>
@@ -54,8 +71,28 @@ const Upload: FC<UploadProps> = ({ handleClose, setData }) => {
             fill="currentColor"
           ></path>
         </svg>
-        <p>Drag and Drop image here</p>
-        <button className={styles.btn}>Click to upload</button>
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <p>Drag and Drop image here</p>
+        )}
+        <button className={styles.btn}>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Click to upload
+        </button>
       </div>
     </Modal>
   );

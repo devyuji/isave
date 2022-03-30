@@ -1,6 +1,6 @@
 import { AnimatePresence, useCycle } from "framer-motion";
-import { GetServerSideProps } from "next";
-import { FC, useEffect, useState } from "react";
+import { GetServerSideProps, NextPage } from "next";
+import { useEffect } from "react";
 import axios from "axios";
 import Head from "next/head";
 
@@ -13,20 +13,30 @@ import ProfilePost from "../../components/profilePost";
 import Footer from "../../components/footer";
 import Error from "../../components/modal/error";
 import Upload from "../../components/modal/upload";
+import FAB from "../../components/fab";
+
+//redux
+import { useAppDispatch } from "../../redux/hooks";
+import { RESET, SET_DATA } from "../../redux/reducers/previewData";
 
 interface MainPreviewProps {
   data: any;
   error: boolean;
 }
 
-const MainPreview: FC<MainPreviewProps> = ({ data, error }) => {
+const MainPreview: NextPage<MainPreviewProps> = ({ data, error }) => {
   const [isUsernameModelOpen, toggleOpen] = useCycle(false, true);
   const [isImageUploadModel, toggleImageModelOpen] = useCycle(false, true);
-  const [dataPost, setDataPost] = useState(error ? [] : data.posts);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!error) setDataPost(data.posts);
-  }, [data, error]);
+    if (!error) dispatch(SET_DATA(data));
+
+    return () => {
+      dispatch(RESET());
+    };
+  }, [data, error, dispatch]);
 
   const toggleModel = () => toggleOpen();
   const toggleImageModel = () => toggleImageModelOpen();
@@ -55,8 +65,8 @@ const MainPreview: FC<MainPreviewProps> = ({ data, error }) => {
           handleOpenImage={toggleImageModel}
         />
 
-        <ProfileInfo data={data.profile} />
-        <ProfilePost data={dataPost} setData={setDataPost} />
+        <ProfileInfo />
+        <ProfilePost />
       </main>
 
       <AnimatePresence initial={false} exitBeforeEnter={true}>
@@ -64,10 +74,10 @@ const MainPreview: FC<MainPreviewProps> = ({ data, error }) => {
       </AnimatePresence>
 
       <AnimatePresence initial={false} exitBeforeEnter={true}>
-        {isImageUploadModel && (
-          <Upload handleClose={toggleImageModel} setData={setDataPost} />
-        )}
+        {isImageUploadModel && <Upload handleClose={toggleImageModel} />}
       </AnimatePresence>
+
+      <FAB />
 
       <Footer />
     </>
@@ -89,7 +99,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       },
     };
   } catch (err) {
-    console.log("error = ", err);
+    console.log("error #preview");
     return {
       props: {
         error: true,

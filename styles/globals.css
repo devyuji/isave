@@ -47,6 +47,8 @@ img {
 
 button {
   font-family: var(--ft);
+
+  cursor: pointer;
 }
 
 input {

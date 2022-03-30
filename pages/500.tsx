@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { NextPage } from "next";
 
 import Error from "../components/modal/error";
 
-const Custom500: FC = () => {
+const Custom500: NextPage = () => {
   return <Error handleClose={() => null} redirectTo="/" />;
 };
 

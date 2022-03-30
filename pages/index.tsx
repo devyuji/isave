@@ -1,12 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  ChangeEventHandler,
-  FC,
-  FormEventHandler,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
 import { useRouter } from "next/router";
+import type { NextPage } from "next";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 // components
 import Navbar from "../components/navbar";
@@ -15,11 +11,10 @@ import Footer from "../components/footer";
 // lib
 import { instagramUrlParser, instagramUrlChecker } from "../lib/instagram";
 
-// styles
+// css
 import styles from "../styles/pages/Home.module.css";
-import { AnimatePresence, motion, Variants } from "framer-motion";
 
-const Home: FC = () => {
+const Home: NextPage = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
