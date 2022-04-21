@@ -70,9 +70,11 @@ const Navbar: FC<NavbarProps> = ({ sticky = true }) => {
         </svg>
       </div>
 
-      <ul className={styles.nav_link}>
-        <NavLink />
-      </ul>
+      <nav>
+        <ul className={styles.nav_link}>
+          <NavLink />
+        </ul>
+      </nav>
 
       <AnimatePresence initial={false} exitBeforeEnter={true}>
         {isOpen && (

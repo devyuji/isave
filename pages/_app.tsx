@@ -8,11 +8,14 @@ import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
 
+import { app } from "../firebase/index";
+
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
 
 // components
 import Loading from "../components/modal/loading";
+import { getAnalytics } from "firebase/analytics";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -20,6 +23,8 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const analyatics = getAnalytics(app);
+
     const handleRouteChange = () => {
       setLoading(true);
     };

@@ -151,7 +151,6 @@ const PrivacyPolicy: NextPage = () => {
             <a href="https://instagram.com/devyuji">(devyuji)</a>
           </span>
         </p>{" "}
-        <p>This privacy policy page was created at </p>
       </main>
     </>
   );
