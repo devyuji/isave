@@ -9,7 +9,8 @@ import {
 import styles from "../../styles/components/modal/usernameInput.module.css";
 import router from "next/router";
 import Modal from ".";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import { AnimatedComponent } from "../AnimatedComponent";
 
 interface UsernameInputProps {
   handleClose: () => void;
@@ -64,79 +65,81 @@ const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
 
   return (
     <Modal handleClose={handleClose}>
-      <div className={styles.close_container}>
-        <button className={styles.close} onClick={handleClose}>
-          <svg
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-      <form onSubmit={submit} className={styles.form} onReset={reset}>
-        <label htmlFor="username">Enter your instagram username</label>
-        <div className={styles.form_container}>
-          <input
-            ref={inputRef}
-            value={value}
-            id="username"
-            name="username"
-            type="text"
-            onChange={change}
-            autoComplete="off"
-            required
-            placeholder="e.g. devyuji"
-          />
-          <AnimatePresence>
-            {isReset && (
-              <motion.button
-                variants={slitePopup}
-                initial="end"
-                animate="start"
-                exit="end"
-                type="reset"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+      <>
+        <div className={styles.close_container}>
+          <button className={styles.close} onClick={handleClose}>
+            <svg
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <form onSubmit={submit} className={styles.form} onReset={reset}>
+          <label htmlFor="username">Enter your instagram username</label>
+          <div className={styles.form_container}>
+            <input
+              ref={inputRef}
+              value={value}
+              id="username"
+              name="username"
+              type="text"
+              onChange={change}
+              autoComplete="off"
+              required
+              placeholder="e.g. devyuji"
+            />
+            <AnimatedComponent>
+              {isReset && (
+                <motion.button
+                  variants={slitePopup}
+                  initial="end"
+                  animate="start"
+                  exit="end"
+                  type="reset"
                 >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </motion.button>
-            )}
-          </AnimatePresence>
-        </div>
-        <div className={styles.note}>
-          <svg
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-            <line x1="12" y1="9" x2="12" y2="13"></line>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          <p>only public account.</p>
-        </div>
-      </form>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </motion.button>
+              )}
+            </AnimatedComponent>
+          </div>
+          <div className={styles.note}>
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <p>only public account.</p>
+          </div>
+        </form>
+      </>
     </Modal>
   );
 };
