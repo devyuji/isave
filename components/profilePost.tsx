@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, Variant, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import { AnimatedComponent } from "./AnimatedComponent";
 
 // css
 import styles from "../styles/components/profilePost.module.css";
@@ -40,48 +41,56 @@ const ProfilePost: FC<Props> = () => {
 
   return (
     <section className={styles.container}>
-      {data.map((d: any, index: number) => (
-        <div className={styles.card} key={`${index}`}>
-          <Image
-            src={
-              d.type == "image "
-                ? d.image_url
-                : `data:image/png;base64,${d.image_url}`
-            }
-            alt=""
-            width="100"
-            height="100"
-            layout="responsive"
-            quality="100"
-          />
-          <AnimatePresence>
-            {isEdit && (
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                variants={fade}
-                initial="disappear"
-                animate="appear"
-                exit="disappear"
-                onClick={() => remove(index)}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+      <AnimatedComponent>
+        {data.map((d: any, index: number) => (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.card}
+            key={`${index}`}
+          >
+            <Image
+              src={
+                d.type == "image "
+                  ? d.image_url
+                  : `data:image/png;base64,${d.image_url}`
+              }
+              alt=""
+              width="100"
+              height="100"
+              layout="responsive"
+              quality="100"
+            />
+            <AnimatedComponent>
+              {isEdit && (
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  variants={fade}
+                  initial="disappear"
+                  animate="appear"
+                  exit="disappear"
+                  onClick={() => remove(index)}
                 >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </motion.button>
-            )}
-          </AnimatePresence>
-        </div>
-      ))}
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </motion.button>
+              )}
+            </AnimatedComponent>
+          </motion.div>
+        ))}
+      </AnimatedComponent>
     </section>
   );
 };

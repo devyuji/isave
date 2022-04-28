@@ -8,13 +8,14 @@ import {
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 // components
 import Navbar from "../../components/navbar";
 import Card from "../../components/card";
 import Footer from "../../components/footer";
 import Error from "../../components/modal/error";
+import { AnimatedComponent } from "../../components/AnimatedComponent";
 
 // lib
 import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
@@ -116,7 +117,7 @@ const Post: NextPage<PostProps> = ({ data, error }) => {
                 value={value}
                 autoComplete="off"
               />
-              <AnimatePresence>
+              <AnimatedComponent>
                 {isReset && (
                   <motion.button
                     variants={slitePopup}
@@ -140,7 +141,7 @@ const Post: NextPage<PostProps> = ({ data, error }) => {
                     </svg>
                   </motion.button>
                 )}
-              </AnimatePresence>
+              </AnimatedComponent>
             </div>
           </form>
 

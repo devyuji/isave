@@ -2,11 +2,12 @@
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import type { NextPage } from "next";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 // components
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import { AnimatedComponent } from "../components/AnimatedComponent";
 
 // lib
 import { instagramUrlParser, instagramUrlChecker } from "../lib/instagram";
@@ -109,7 +110,7 @@ const Home: NextPage = () => {
                 autoComplete="off"
                 placeholder="e.g. https://www.instagram.com/p/CNIKAmJAiLa/"
               />
-              <AnimatePresence>
+              <AnimatedComponent>
                 {isReset && (
                   <motion.button
                     variants={slitePopup}
@@ -133,7 +134,7 @@ const Home: NextPage = () => {
                     </svg>
                   </motion.button>
                 )}
-              </AnimatePresence>
+              </AnimatedComponent>
             </div>
           </form>
         </section>

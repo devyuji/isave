@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useCycle, Variants } from "framer-motion";
+import { motion, useCycle, Variants } from "framer-motion";
 import router from "next/router";
+import { AnimatedComponent } from "./AnimatedComponent";
 
 // styles
 import styles from "../styles/components/navbar.module.css";
@@ -70,13 +71,11 @@ const Navbar: FC<NavbarProps> = ({ sticky = true }) => {
         </svg>
       </div>
 
-      <nav>
-        <ul className={styles.nav_link}>
-          <NavLink />
-        </ul>
-      </nav>
+      <ul className={styles.nav_link}>
+        <NavLink />
+      </ul>
 
-      <AnimatePresence initial={false} exitBeforeEnter={true}>
+      <AnimatedComponent>
         {isOpen && (
           <motion.ul
             variants={popup}
@@ -88,7 +87,7 @@ const Navbar: FC<NavbarProps> = ({ sticky = true }) => {
             <NavLink />
           </motion.ul>
         )}
-      </AnimatePresence>
+      </AnimatedComponent>
     </header>
   );
 };

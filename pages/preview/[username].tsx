@@ -1,6 +1,6 @@
 import { AnimatePresence, useCycle } from "framer-motion";
 import { GetServerSideProps, NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Head from "next/head";
 
@@ -18,6 +18,7 @@ import FAB from "../../components/fab";
 //redux
 import { useAppDispatch } from "../../redux/hooks";
 import { RESET, SET_DATA } from "../../redux/reducers/previewData";
+import { AnimatedComponent } from "../../components/AnimatedComponent";
 
 interface MainPreviewProps {
   data: any;
@@ -27,11 +28,15 @@ interface MainPreviewProps {
 const MainPreview: NextPage<MainPreviewProps> = ({ data, error }) => {
   const [isUsernameModelOpen, toggleOpen] = useCycle(false, true);
   const [isImageUploadModel, toggleImageModelOpen] = useCycle(false, true);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!error) dispatch(SET_DATA(data));
+    if (!error) {
+      dispatch(SET_DATA(data));
+      setLoading(false);
+    }
 
     return () => {
       dispatch(RESET());
@@ -43,6 +48,10 @@ const MainPreview: NextPage<MainPreviewProps> = ({ data, error }) => {
 
   if (error) {
     return <Error handleClose={() => null} redirectTo="/preview" />;
+  }
+
+  if (loading) {
+    return null;
   }
 
   return (
@@ -69,13 +78,13 @@ const MainPreview: NextPage<MainPreviewProps> = ({ data, error }) => {
         <ProfilePost />
       </main>
 
-      <AnimatePresence initial={false} exitBeforeEnter={true}>
+      <AnimatedComponent>
         {isUsernameModelOpen && <UsernameInput handleClose={toggleModel} />}
-      </AnimatePresence>
+      </AnimatedComponent>
 
-      <AnimatePresence initial={false} exitBeforeEnter={true}>
+      <AnimatedComponent>
         {isImageUploadModel && <Upload handleClose={toggleImageModel} />}
-      </AnimatePresence>
+      </AnimatedComponent>
 
       <FAB />
 

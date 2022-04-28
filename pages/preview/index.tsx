@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import Head from "next/head";
-import { AnimatePresence, useCycle } from "framer-motion";
+import { useCycle } from "framer-motion";
 
 // styles
 import styles from "../../styles/pages/preview.module.css";
@@ -10,6 +10,7 @@ import styles from "../../styles/pages/preview.module.css";
 import Navbar from "../../components/navbar";
 import UsernameInput from "../../components/modal/usernameInput";
 import Footer from "../../components/footer";
+import { AnimatedComponent } from "../../components/AnimatedComponent";
 
 const Preview: NextPage = () => {
   const [isModelOpen, toggleOpen] = useCycle(false, true);
@@ -21,6 +22,7 @@ const Preview: NextPage = () => {
       <Head>
         <title>isave - plan out your instagram</title>
       </Head>
+
       <Navbar />
 
       <main className={styles.main}>
@@ -49,9 +51,9 @@ const Preview: NextPage = () => {
           Get Started.
         </button>
 
-        <AnimatePresence initial={false} exitBeforeEnter={true}>
+        <AnimatedComponent>
           {isModelOpen && <UsernameInput handleClose={toggleModel} />}
-        </AnimatePresence>
+        </AnimatedComponent>
       </main>
 
       <Footer />
