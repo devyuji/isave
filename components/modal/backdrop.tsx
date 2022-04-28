@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { FC, useEffect } from "react";
+import { FC, ReactElement, useEffect } from "react";
 import styles from "../../styles/components/modal/backdrop.module.css";
 
 interface BackdropProp {
   onClick: () => void;
+  children: ReactElement;
 }
 
 const Backdrop: FC<BackdropProp> = ({ children, onClick }) => {
@@ -23,7 +24,7 @@ const Backdrop: FC<BackdropProp> = ({ children, onClick }) => {
     };
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
-  }, []);
+  }, [onClick]);
 
   return (
     <motion.div
