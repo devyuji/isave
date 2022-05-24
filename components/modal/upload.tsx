@@ -31,7 +31,10 @@ const Upload: FC<Props> = ({ handleClose }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: "image/jpeg, image/png",
+    accept: {
+      "image/png": [".png"],
+      "image/jpeg": [".jpg", ".jpeg"],
+    },
     multiple: true,
   });
 
