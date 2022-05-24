@@ -1,6 +1,6 @@
 import { AnimatePresence, useCycle } from "framer-motion";
-import { GetServerSideProps, NextPage } from "next";
-import { useEffect, useState } from "react";
+import type { GetServerSideProps } from "next";
+import { FC, useEffect, useState } from "react";
 import axios from "axios";
 import Head from "next/head";
 
@@ -18,14 +18,13 @@ import FAB from "../../components/fab";
 //redux
 import { useAppDispatch } from "../../redux/hooks";
 import { RESET, SET_DATA } from "../../redux/reducers/previewData";
-import { AnimatedComponent } from "../../components/AnimatedComponent";
 
-interface MainPreviewProps {
+interface Props {
   data: any;
   error: boolean;
 }
 
-const MainPreview: NextPage<MainPreviewProps> = ({ data, error }) => {
+const MainPreview: FC<Props> = ({ data, error }) => {
   const [isUsernameModelOpen, toggleOpen] = useCycle(false, true);
   const [isImageUploadModel, toggleImageModelOpen] = useCycle(false, true);
   const [loading, setLoading] = useState(true);
@@ -57,7 +56,7 @@ const MainPreview: NextPage<MainPreviewProps> = ({ data, error }) => {
   return (
     <>
       <Head>
-        <title>isave - plan out your instagram</title>
+        <title>isave - plan out your instagram feed</title>
       </Head>
 
       <Navbar sticky={false} />
@@ -78,13 +77,13 @@ const MainPreview: NextPage<MainPreviewProps> = ({ data, error }) => {
         <ProfilePost />
       </main>
 
-      <AnimatedComponent>
+      <AnimatePresence>
         {isUsernameModelOpen && <UsernameInput handleClose={toggleModel} />}
-      </AnimatedComponent>
+      </AnimatePresence>
 
-      <AnimatedComponent>
+      <AnimatePresence>
         {isImageUploadModel && <Upload handleClose={toggleImageModel} />}
-      </AnimatedComponent>
+      </AnimatePresence>
 
       <FAB />
 

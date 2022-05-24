@@ -1,17 +1,16 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, useCycle, Variants } from "framer-motion";
+import { AnimatePresence, motion, useCycle, Variants } from "framer-motion";
 import router from "next/router";
-import { AnimatedComponent } from "./AnimatedComponent";
 
 // styles
 import styles from "../styles/components/navbar.module.css";
 
-interface NavbarProps {
+interface Props {
   sticky?: boolean;
 }
 
-const Navbar: FC<NavbarProps> = ({ sticky = true }) => {
+const Navbar: FC<Props> = ({ sticky = true }) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [backgroundColor, setBackgroundColor] = useState("#ffffff");
 
@@ -75,7 +74,7 @@ const Navbar: FC<NavbarProps> = ({ sticky = true }) => {
         <NavLink />
       </ul>
 
-      <AnimatedComponent>
+      <AnimatePresence>
         {isOpen && (
           <motion.ul
             variants={popup}
@@ -87,7 +86,7 @@ const Navbar: FC<NavbarProps> = ({ sticky = true }) => {
             <NavLink />
           </motion.ul>
         )}
-      </AnimatedComponent>
+      </AnimatePresence>
     </header>
   );
 };
@@ -103,13 +102,7 @@ const NavLink: FC = () => {
 
       <li>
         <Link href="/preview">
-          <a>preview(beta)</a>
-        </Link>
-      </li>
-
-      <li>
-        <Link href="/how-to-use">
-          <a>how-to-use</a>
+          <a>preview</a>
         </Link>
       </li>
 

@@ -9,14 +9,13 @@ import {
 import styles from "../../styles/components/modal/usernameInput.module.css";
 import router from "next/router";
 import Modal from ".";
-import { motion, Variants } from "framer-motion";
-import { AnimatedComponent } from "../AnimatedComponent";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
-interface UsernameInputProps {
+interface Props {
   handleClose: () => void;
 }
 
-const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
+const UsernameInput: FC<Props> = ({ handleClose }) => {
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [isReset, toggleReset] = useState<boolean>(false);
@@ -95,7 +94,7 @@ const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
               required
               placeholder="e.g. devyuji"
             />
-            <AnimatedComponent>
+            <AnimatePresence>
               {isReset && (
                 <motion.button
                   variants={slitePopup}
@@ -119,7 +118,7 @@ const UsernameInput: FC<UsernameInputProps> = ({ handleClose }) => {
                   </svg>
                 </motion.button>
               )}
-            </AnimatedComponent>
+            </AnimatePresence>
           </div>
           <div className={styles.note}>
             <svg

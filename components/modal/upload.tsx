@@ -9,11 +9,11 @@ import styles from "../../styles/components/modal/upload.module.css";
 import { useAppDispatch } from "../../redux/hooks";
 import { ADD } from "../../redux/reducers/previewData";
 
-interface UploadProps {
+interface Props {
   handleClose: () => void;
 }
 
-const Upload: FC<UploadProps> = ({ handleClose }) => {
+const Upload: FC<Props> = ({ handleClose }) => {
   const dispatch = useAppDispatch();
 
   const onDrop = useCallback(

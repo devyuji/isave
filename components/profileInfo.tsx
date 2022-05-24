@@ -8,9 +8,9 @@ import { downloadManager } from "../lib/download";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { UPDATE_PROFILE } from "../redux/reducers/previewData";
 
-interface ProfileInfoProps {}
+interface Props {}
 
-const ProfileInfo: FC<ProfileInfoProps> = () => {
+const ProfileInfo: FC<Props> = () => {
   const data: any = useAppSelector((state) => state.PREVIEW_DATA.profile);
   const isEdit = useAppSelector((state) => state.PREVIEW_EDITTING);
 

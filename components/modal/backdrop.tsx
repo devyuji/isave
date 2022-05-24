@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { FC, ReactElement, useEffect } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import styles from "../../styles/components/modal/backdrop.module.css";
 
 interface BackdropProp {
   onClick: () => void;
-  children: ReactElement;
+  children: ReactNode;
 }
 
 const Backdrop: FC<BackdropProp> = ({ children, onClick }) => {

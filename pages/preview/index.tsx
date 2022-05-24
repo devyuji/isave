@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import Head from "next/head";
-import { useCycle } from "framer-motion";
+import { AnimatePresence, useCycle } from "framer-motion";
 
 // styles
 import styles from "../../styles/pages/preview.module.css";
@@ -10,9 +10,10 @@ import styles from "../../styles/pages/preview.module.css";
 import Navbar from "../../components/navbar";
 import UsernameInput from "../../components/modal/usernameInput";
 import Footer from "../../components/footer";
-import { AnimatedComponent } from "../../components/AnimatedComponent";
 
-const Preview: NextPage = () => {
+interface Props {}
+
+const Preview: NextPage<Props> = () => {
   const [isModelOpen, toggleOpen] = useCycle(false, true);
 
   const toggleModel = () => toggleOpen();
@@ -20,7 +21,7 @@ const Preview: NextPage = () => {
   return (
     <>
       <Head>
-        <title>isave - plan out your instagram</title>
+        <title>isave - plan out your instagram feed</title>
       </Head>
 
       <Navbar />
@@ -31,7 +32,7 @@ const Preview: NextPage = () => {
         </div>
         <h1 className={styles.tagline}>Introducing Preview (beta).</h1>
         <p className={styles.tagline_description}>
-          Plan your instagram profile before posting online.
+          Plan your instagram feed before posting them.
         </p>
         <button className={styles.action_btn} onClick={toggleModel}>
           <svg
@@ -51,9 +52,9 @@ const Preview: NextPage = () => {
           Get Started.
         </button>
 
-        <AnimatedComponent>
+        <AnimatePresence>
           {isModelOpen && <UsernameInput handleClose={toggleModel} />}
-        </AnimatedComponent>
+        </AnimatePresence>
       </main>
 
       <Footer />

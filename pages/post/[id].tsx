@@ -1,21 +1,22 @@
 import {
   ChangeEventHandler,
+  FC,
   FormEventHandler,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 // components
 import Navbar from "../../components/navbar";
 import Card from "../../components/card";
 import Footer from "../../components/footer";
 import Error from "../../components/modal/error";
-import { AnimatedComponent } from "../../components/AnimatedComponent";
 
 // lib
 import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
@@ -27,12 +28,12 @@ import styles from "../../styles/pages/post.module.css";
 import { DataProps, RESET, SET_DATA } from "../../redux/reducers/postData";
 import { useAppDispatch } from "../../redux/hooks";
 
-interface PostProps {
+interface Props {
   data: DataProps[];
   error: boolean;
 }
 
-const Post: NextPage<PostProps> = ({ data, error }) => {
+const Post: FC<Props> = ({ data, error }) => {
   const router = useRouter();
   const [value, setValue] = useState("");
   const [isReset, toggleReset] = useState(false);
@@ -117,7 +118,7 @@ const Post: NextPage<PostProps> = ({ data, error }) => {
                 value={value}
                 autoComplete="off"
               />
-              <AnimatedComponent>
+              <AnimatePresence>
                 {isReset && (
                   <motion.button
                     variants={slitePopup}
@@ -141,7 +142,7 @@ const Post: NextPage<PostProps> = ({ data, error }) => {
                     </svg>
                   </motion.button>
                 )}
-              </AnimatedComponent>
+              </AnimatePresence>
             </div>
           </form>
 

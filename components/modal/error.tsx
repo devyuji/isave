@@ -3,12 +3,12 @@ import Modal from ".";
 import styles from "../../styles/components/modal/error.module.css";
 import Link from "next/link";
 
-interface ErrorProps {
+interface Props {
   handleClose: () => void;
   redirectTo: string;
 }
 
-const Error: FC<ErrorProps> = ({ handleClose, redirectTo }) => {
+const Error: FC<Props> = ({ handleClose, redirectTo }) => {
   return (
     <Modal handleClose={handleClose}>
       <div className={styles.container}>

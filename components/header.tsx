@@ -1,12 +1,12 @@
 import { FC } from "react";
 import styles from "../styles/components/header.module.css";
 
-interface HeaderProps {
+interface Props {
   handleOpenUsername: () => void;
   handleOpenImage: () => void;
 }
 
-const Header: FC<HeaderProps> = ({ handleOpenUsername, handleOpenImage }) => {
+const Header: FC<Props> = ({ handleOpenUsername, handleOpenImage }) => {
   return (
     <section className={styles.header_container}>
       <button className={styles.btn} onClick={handleOpenImage}>

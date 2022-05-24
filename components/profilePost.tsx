@@ -1,7 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
-import { AnimatedComponent } from "./AnimatedComponent";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 // css
 import styles from "../styles/components/profilePost.module.css";
@@ -41,7 +40,7 @@ const ProfilePost: FC<Props> = () => {
 
   return (
     <section className={styles.container}>
-      <AnimatedComponent>
+      <AnimatePresence>
         {data.map((d: any, index: number) => (
           <motion.div
             initial={{ opacity: 0 }}
@@ -62,7 +61,7 @@ const ProfilePost: FC<Props> = () => {
               layout="responsive"
               quality="100"
             />
-            <AnimatedComponent>
+            <AnimatePresence>
               {isEdit && (
                 <motion.button
                   whileTap={{ scale: 0.9 }}
@@ -87,10 +86,10 @@ const ProfilePost: FC<Props> = () => {
                   </svg>
                 </motion.button>
               )}
-            </AnimatedComponent>
+            </AnimatePresence>
           </motion.div>
         ))}
-      </AnimatedComponent>
+      </AnimatePresence>
     </section>
   );
 };
