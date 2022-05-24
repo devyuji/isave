@@ -11,7 +11,7 @@ import Modal from ".";
 import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import styles from "../../styles/components/modal/UrlInput.module.css";
+import styles from "../../styles/components/modal/urlInput.module.css";
 
 const slitePopup: Variants = {
   end: {
