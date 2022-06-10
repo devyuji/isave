@@ -86,8 +86,6 @@ const MainPreview: FC<Props> = ({ data, error }) => {
       </AnimatePresence>
 
       <FAB />
-
-      <Footer />
     </>
   );
 };

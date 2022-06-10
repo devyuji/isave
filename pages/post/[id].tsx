@@ -156,8 +156,6 @@ const Post: FC<Props> = ({ data, error }) => {
           </div>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 };

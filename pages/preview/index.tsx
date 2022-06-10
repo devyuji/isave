@@ -21,7 +21,7 @@ const Preview: NextPage<Props> = () => {
   return (
     <>
       <Head>
-        <title>isave - plan out your instagram feed</title>
+        <title>isave - plan your instagram feed</title>
       </Head>
 
       <Navbar />
@@ -56,8 +56,6 @@ const Preview: NextPage<Props> = () => {
           {isModelOpen && <UsernameInput handleClose={toggleModel} />}
         </AnimatePresence>
       </main>
-
-      <Footer />
     </>
   );
 };

@@ -57,7 +57,6 @@ const Home: NextPage<Props> = () => {
         </section>
       </main>
 
-      <Footer />
       <AnimatePresence>
         {isMOdalOpen && <UrlInput handleClose={() => toggleModal()} />}
       </AnimatePresence>
