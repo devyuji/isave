@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
@@ -19,11 +19,14 @@ import "../styles/globals.css";
 // components
 import Loading from "../components/modal/loading";
 import Footer from "../components/footer";
+import IsaveDown from "../components/isDown";
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+
+  const isDown = useMemo(() => process.env.NEXT_PUBLIC_IS_DOWN, []);
 
   const startUp = useCallback(async () => {
     await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/startup`);
@@ -69,6 +72,7 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
       </AnimatePresence>
 
       <Provider store={store}>
+        {isDown === "true" && <IsaveDown />}
         <Component {...pageProps} />
 
         <Footer />
