@@ -13,7 +13,6 @@ import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import styles from "../../styles/components/modal/urlInput.module.css";
-import ReCAPTCHA from "react-google-recaptcha";
 
 const slitePopup: Variants = {
   end: {
@@ -38,8 +37,6 @@ const UrlInput: FC<Props> = ({ handleClose }) => {
   const router = useRouter();
   const [isReset, toggleReset] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const recaptchaRef = useRef<ReCAPTCHA>();
 
   useEffect(() => {
     inputRef.current?.focus();
