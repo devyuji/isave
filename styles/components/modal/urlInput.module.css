@@ -1,3 +1,36 @@
+.close_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close_container button {
+  padding: 1em;
+  border-radius: 100%;
+
+  transition: background-color 250ms;
+}
+
+.close_container button:hover,
+.close_container button:focus {
+  background-color: var(--primary-clr-200);
+}
+
+.close {
+  border: none;
+  background-color: transparent;
+  align-items: flex-end;
+  cursor: pointer;
+  display: grid;
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+
+.close svg {
+  width: 20px;
+  height: 20px;
+}
+
 .form {
   display: flex;
   flex-direction: column;

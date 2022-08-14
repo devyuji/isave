@@ -1,0 +1,28 @@
+.container {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container li {
+  text-align: center;
+  padding: 1rem;
+
+  background-color: var(--primary-clr-100);
+  border-radius: 30px;
+}
+
+.container button {
+  border: none;
+  background-color: transparent;
+
+  font-size: 1rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}

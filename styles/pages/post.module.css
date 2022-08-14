@@ -6,60 +6,34 @@
 }
 
 .container {
-  width: 50rem;
   overflow: hidden;
 }
 
-.form {
-  display: grid;
+.another {
+  display: flex;
+  justify-content: flex-end;
   gap: 1rem;
 
-  width: 100%;
+  flex-wrap: wrap;
 }
 
-.form label {
-  font-weight: var(--ft-bold);
-  font-size: 1.5rem;
-}
+.another button {
+  background-color: #eceff1;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
 
-.form div {
   display: flex;
-  gap: 0.5rem;
-  background-color: #eceff1;
-  padding: 1em;
-  border-radius: 50px;
-  border: 3px solid transparent;
+  align-items: center;
+  gap: 1rem;
 
-  transition: border-radius 250ms, border 250ms;
+  font-weight: var(--ft-semi-bold);
+  font-size: 1rem;
 }
 
-.form div:focus-within {
-  border-radius: 20px;
-  border-color: black;
-}
-
-.form input {
-  border: none;
-  background-color: transparent;
-
-  font-family: var(--ft);
-  font-size: 0.8rem;
-  width: 100%;
-  outline: none;
-
-  padding: 1em;
-}
-
-.form button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.info {
-  background-color: #eceff1;
-  padding: 2rem;
-  border-radius: 20px;
+.another button div {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
 }
 
 .info p {
@@ -67,4 +41,13 @@
   line-height: 1.6;
   opacity: 0.85;
   font-weight: var(--ft-semi-bold);
+
+  text-align: center;
+}
+
+.card_container {
+  margin: 2rem 0;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }

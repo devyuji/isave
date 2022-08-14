@@ -1,15 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
-
 import type { NextPage } from "next";
 import { AnimatePresence, useCycle } from "framer-motion";
 
 // components
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
 import UrlInput from "../components/modal/urlInput";
 
 // css
 import styles from "../styles/pages/Home.module.css";
+import Image from "../components/image";
 
 interface Props {}
 
@@ -27,7 +25,7 @@ const Home: NextPage<Props> = () => {
       <main className={styles.main}>
         <section className={styles.sections}>
           <div className={styles.logo_container}>
-            <img src="images/logo.svg" alt="logo" />
+            <Image src="images/logo.svg" alt="logo" />
           </div>
           <h1 className={styles.tagline}>Download all the things.</h1>
           <p className={styles.tagline_description}>

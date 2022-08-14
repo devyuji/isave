@@ -1,19 +1,27 @@
 .container {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+
   padding: 2rem;
   width: 50rem;
-  gap: 2rem;
-  align-items: center;
   border-bottom: 1px solid grey;
 }
 
 .image {
   position: relative;
   border-radius: 100%;
-  width: 200px;
+  width: 12rem;
+  height: 100%;
   overflow: hidden;
   cursor: pointer;
+}
+
+.image img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .icon {
@@ -41,6 +49,10 @@
   gap: 2rem;
 }
 
+.info_container h2 {
+  font-weight: var(--ft-medium);
+}
+
 .foll {
   display: flex;
   gap: 2rem;
@@ -50,7 +62,7 @@
   line-height: 1.6;
   margin-top: 1rem;
 
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 @media (max-width: 850px) {

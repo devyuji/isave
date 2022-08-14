@@ -11,10 +11,13 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({ handleClose, children }) => {
   const scaleUp: Variants = {
     hidden: {
-      y: "-100vh",
+      scale: 2,
     },
     visible: {
-      y: 0,
+      scale: 1,
+    },
+    exit: {
+      scale: 0,
     },
   };
 
@@ -24,7 +27,7 @@ const Modal: FC<ModalProps> = ({ handleClose, children }) => {
         variants={scaleUp}
         initial="hidden"
         animate="visible"
-        exit="hidden"
+        exit="exit"
         onClick={(e) => e.stopPropagation()}
         className={styles.container}
       >

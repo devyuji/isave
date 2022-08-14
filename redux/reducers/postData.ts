@@ -4,6 +4,8 @@ export interface DataProps {
   preview: string;
   downloadLink: string;
   isDownloading: boolean;
+  username: string;
+  type: string;
 }
 
 const initialState: DataProps[] = [];

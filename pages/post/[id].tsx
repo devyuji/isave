@@ -1,103 +1,86 @@
-import {
-  ChangeEventHandler,
-  FC,
-  FormEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { GetServerSideProps } from "next";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
 import axios from "axios";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { AnimatePresence, useCycle } from "framer-motion";
 
 // components
 import Navbar from "../../components/navbar";
 import Card from "../../components/card";
-import Footer from "../../components/footer";
 import Error from "../../components/modal/error";
+import UrlInput from "../../components/modal/urlInput";
 
 // lib
-import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
+import { downloadManager } from "../../lib/download";
 
 // styles
 import styles from "../../styles/pages/post.module.css";
 
 //redux
-import { DataProps, RESET, SET_DATA } from "../../redux/reducers/postData";
-import { useAppDispatch } from "../../redux/hooks";
+import {
+  DataProps,
+  IS_DOWNLOADING,
+  RESET,
+  SET_DATA,
+} from "../../redux/reducers/postData";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 interface Props {
   data: DataProps[];
   error: boolean;
 }
 
-const Post: FC<Props> = ({ data, error }) => {
-  const router = useRouter();
-  const [value, setValue] = useState("");
-  const [isReset, toggleReset] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+const Post: NextPage<Props> = ({ data, error }) => {
+  const [loading, setLoading] = useState(true);
+  const isDownloadingAll = useRef<boolean>(false);
+
+  const [isMOdalOpen, toggleModal] = useCycle(false, true);
+
+  const postData = useAppSelector((data) => data.POST_DATA);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!error) dispatch(SET_DATA(data));
+    if (!error) {
+      dispatch(SET_DATA(data));
+
+      setLoading(false);
+    }
 
     return () => {
       dispatch(RESET());
     };
   }, [data, error, dispatch]);
 
-  const submit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
+  const downloadAll = () => {
+    if (isDownloadingAll.current) return;
 
-    const isInstagramUrl = instagramUrlChecker(value);
+    isDownloadingAll.current = true;
 
-    if (isInstagramUrl) {
-      const postId = instagramUrlParser(value);
+    postData.forEach((element, index) => {
+      setTimeout(async () => {
+        try {
+          if (element.type === "image") {
+            dispatch(IS_DOWNLOADING({ index: index, isDownloading: true }));
+            await downloadManager(element.preview, true);
+            dispatch(IS_DOWNLOADING({ index: index, isDownloading: false }));
+          } else {
+            dispatch(IS_DOWNLOADING({ index: index, isDownloading: true }));
+            await downloadManager(element.downloadLink);
+            dispatch(IS_DOWNLOADING({ index: index, isDownloading: false }));
+          }
+        } catch (err) {
+          console.error("error downloading");
+        }
 
-      const { id } = router.query;
-
-      if (postId == id) return;
-
-      router.replace(`/post/${postId}`);
-    }
+        if (postData.length == index + 1) isDownloadingAll.current = false;
+      }, 0);
+    });
   };
 
-  const slitePopup: Variants = {
-    end: {
-      y: 15,
-      opacity: 0,
-    },
-    start: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        ease: "linear",
-      },
-    },
-  };
+  if (error) return <Error handleClose={() => null} redirectTo="/" />;
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const text = e.target.value;
-    if (text.length > 0) {
-      toggleReset! && toggleReset(true);
-    } else {
-      toggleReset(false);
-    }
-    setValue(text);
-  };
-
-  const onReset = () => {
-    setValue("");
-    toggleReset(false);
-    inputRef.current?.focus();
-  };
-
-  if (error) {
-    return <Error handleClose={() => null} redirectTo="/" />;
-  }
+  if (loading) return null;
 
   return (
     <>
@@ -105,48 +88,57 @@ const Post: FC<Props> = ({ data, error }) => {
 
       <main className={styles.main}>
         <div className={styles.container}>
-          <form onSubmit={submit} className={styles.form} onReset={onReset}>
-            <label htmlFor="url">Paste instagram url</label>
-            <div>
-              <input
-                id="url"
-                ref={inputRef}
-                type="url"
-                placeholder="e.g. https://www.instagram.com/p/CNIKAmJAiLa/"
-                onChange={onChange}
-                required={true}
-                value={value}
-                autoComplete="off"
-              />
-              <AnimatePresence>
-                {isReset && (
-                  <motion.button
-                    variants={slitePopup}
-                    initial="end"
-                    animate="start"
-                    exit="end"
-                    type="reset"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="24"
-                      height="24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                  </motion.button>
-                )}
-              </AnimatePresence>
-            </div>
-          </form>
+          <div className={styles.another}>
+            <button
+              type="button"
+              className={styles.action_btn}
+              onClick={() => toggleModal()}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              Another one
+            </button>
+            <button
+              type="button"
+              onClick={downloadAll}
+              className={styles.action_btn}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
 
-          <Card />
+              <span>Download all</span>
+            </button>
+          </div>
+
+          <div className={styles.card_container}>
+            {postData.map((d, indx) => (
+              <Card key={`${indx}`} index={indx} data={d} />
+            ))}
+          </div>
 
           <div className={styles.info}>
             <p>
@@ -156,12 +148,17 @@ const Post: FC<Props> = ({ data, error }) => {
           </div>
         </div>
       </main>
+
+      <AnimatePresence>
+        {isMOdalOpen && <UrlInput handleClose={toggleModal} />}
+      </AnimatePresence>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const id = params!.id;
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const id = query.id;
+
   const DATA: DataProps[] = [];
   try {
     const { data } = await axios.post(`${process.env.API_URL}/post`, {
@@ -175,12 +172,16 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             downloadLink: element.image_url,
             preview: element.image_src,
             isDownloading: false,
+            username: data.username,
+            type: "image",
           });
         } else {
           DATA.push({
             downloadLink: element.video,
             preview: element.image_src,
             isDownloading: false,
+            username: data.username,
+            type: "video",
           });
         }
       });
@@ -189,12 +190,16 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         downloadLink: data.image_url,
         preview: data.image_src,
         isDownloading: false,
+        username: data.username,
+        type: "image",
       });
     } else {
       DATA.push({
         downloadLink: data.video,
         preview: data.image_src,
         isDownloading: false,
+        username: data.username,
+        type: "video",
       });
     }
 

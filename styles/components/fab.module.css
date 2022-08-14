@@ -16,3 +16,8 @@
 
   box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.2);
 }
+
+.container svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}

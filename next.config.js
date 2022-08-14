@@ -1,8 +1,10 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
-  async redirects() {
+  redirects() {
     return [
       {
         source: "/post",
@@ -11,4 +13,24 @@ module.exports = {
       },
     ];
   },
+
+  async headers() {
+    return [
+      {
+        source: "/post/:id",
+        headers: [
+          {
+            key: "Cross-Origin-Embedder-Policy",
+            value: "require-corp",
+          },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
+          },
+        ],
+      },
+    ];
+  },
 };
+
+module.exports = nextConfig;

@@ -1,22 +1,24 @@
 import axios from "axios";
 import { toastMessage } from "./toast";
 
-export const downloadManager = async (url: string) => {
+export const downloadManager = async (url: string, isBase64 = false) => {
   let fileName = "";
+  let blobUrl: string;
 
   try {
-    const { data } = await axios.get(url, {
-      responseType: "blob",
-    });
+    if (!isBase64) {
+      const { data } = await axios.get(url, {
+        responseType: "blob",
+      });
 
-    if (data.type == "image/jpeg") fileName = `isave-${random()}.jpg`;
-    else fileName = `isave-${random()}.mp4`;
+      if (data.type == "image/jpeg") fileName = `isave-${random()}.jpg`;
+      else fileName = `isave-${random()}.mp4`;
 
-    const blobUrl = window.URL.createObjectURL(new Blob([data]));
-
+      blobUrl = window.URL.createObjectURL(new Blob([data]));
+    }
     const link = document.createElement("a");
-    link.href = blobUrl;
-    link.download = fileName;
+    link.href = isBase64 ? `data:image/png;base64,${url}` : blobUrl!;
+    link.download = isBase64 ? `isave-${random()}.png` : fileName;
     document.body.appendChild(link);
 
     link.dispatchEvent(

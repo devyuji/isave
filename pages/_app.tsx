@@ -20,6 +20,7 @@ import "../styles/globals.css";
 import Loading from "../components/modal/loading";
 import Footer from "../components/footer";
 import IsaveDown from "../components/isDown";
+import Navbar from "../components/navbar";
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();

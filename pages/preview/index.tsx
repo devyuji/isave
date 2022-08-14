@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import Head from "next/head";
 import { AnimatePresence, useCycle } from "framer-motion";
@@ -9,7 +8,7 @@ import styles from "../../styles/pages/preview.module.css";
 // components
 import Navbar from "../../components/navbar";
 import UsernameInput from "../../components/modal/usernameInput";
-import Footer from "../../components/footer";
+import Image from "../../components/image";
 
 interface Props {}
 
@@ -28,7 +27,7 @@ const Preview: NextPage<Props> = () => {
 
       <main className={styles.main}>
         <div className={styles.image_container}>
-          <img src="images/logo.svg" alt="logo" />
+          <Image src="images/logo.svg" alt="logo" />
         </div>
         <h1 className={styles.tagline}>Introducing Preview (beta).</h1>
         <p className={styles.tagline_description}>

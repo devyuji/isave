@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styles from "../styles/components/profileInfo.module.css";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { downloadManager } from "../lib/download";
+import Image from "./image";
 
 // redux
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -50,16 +50,14 @@ const ProfileInfo: FC<Props> = () => {
       reader.onerror = (error) => reject(error);
     });
 
+  const numberWithCommas = (x: any) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.image}>
-        <Image
-          src={`data:image/png;base64,${data.image_url}`}
-          alt=""
-          width="200"
-          height="200"
-          layout="responsive"
-        />
+        <Image src={`data:image/png;base64,${data.image_url}`} alt="" />
 
         {!isEdit ? (
           <motion.div
@@ -67,7 +65,7 @@ const ProfileInfo: FC<Props> = () => {
             whileHover={{
               opacity: 1,
             }}
-            onClick={() => downloadManager(data.profile_image)}
+            onClick={() => downloadManager(data.image_url, true)}
           >
             <svg
               viewBox="0 0 24 24"
@@ -112,9 +110,9 @@ const ProfileInfo: FC<Props> = () => {
         <h2>{data.username}</h2>
 
         <div className={styles.foll}>
-          <p>{data.post} post</p>
-          <p>{data.followers} followers</p>
-          <p>{data.following} following</p>
+          <p>{numberWithCommas(data.post)} post</p>
+          <p>{numberWithCommas(data.followers)} followers</p>
+          <p>{numberWithCommas(data.following)} following</p>
         </div>
 
         {/* bio  */}
