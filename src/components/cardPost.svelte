@@ -10,7 +10,12 @@
     if (isDownloading) return;
 
     isDownloading = true;
-    await downloadManager(data.download_url);
+
+    if (data.type == "image") {
+      await downloadManager(data.image_src, true);
+    } else {
+      await downloadManager(`${data.download_url}?isVideo=true`);
+    }
 
     isDownloading = false;
   };
@@ -20,7 +25,7 @@
   <div class="card-header">
     <p>{username}</p>
 
-    <button>
+    {#if data.type == "image"}
       <svg
         viewBox="0 0 24 24"
         width="24"
@@ -31,13 +36,33 @@
         stroke-linecap="round"
         stroke-linejoin="round"
         class="css-i6dzq1"
-        ><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle
-          cx="5"
-          cy="12"
-          r="1"
+        ><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle
+          cx="8.5"
+          cy="8.5"
+          r="1.5"
+        /><polyline points="21 15 16 10 5 21" /></svg
+      >
+    {:else}
+      <svg
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        stroke="currentColor"
+        stroke-width="2"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="css-i6dzq1"
+        ><polygon points="23 7 16 12 23 17 23 7" /><rect
+          x="1"
+          y="5"
+          width="15"
+          height="14"
+          rx="2"
+          ry="2"
         /></svg
       >
-    </button>
+    {/if}
   </div>
 
   <div class="card-content">
@@ -46,7 +71,7 @@
     </div>
 
     <div class="download-btn">
-      <button type="button" on:click={download}>
+      <button type="button" on:click={download} aria-label="download button">
         {#if isDownloading}
           <Spinner />
         {:else}
@@ -91,10 +116,10 @@
     overflow: hidden;
   }
 
-  .card-header button {
+  /* .card-header button {
     border: none;
     background-color: transparent;
-  }
+  } */
 
   .card-content {
     position: relative;

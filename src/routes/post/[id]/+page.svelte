@@ -1,14 +1,9 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import Card from "../../../components/card-post.svelte";
+  import Card from "../../../components/cardPost.svelte";
   import { isModalOpen } from "../../../stores/modal";
   import UrlInput from "../../../components/modal/urlInput.svelte";
 
-  let showModal: boolean;
-
-  isModalOpen.subscribe((value) => {
-    showModal = value;
-  });
   export let data: PageData;
   const username: string = data.username;
 </script>
@@ -76,7 +71,7 @@
   </p>
 </main>
 
-{#if showModal}
+{#if $isModalOpen}
   <UrlInput />
 {/if}
 

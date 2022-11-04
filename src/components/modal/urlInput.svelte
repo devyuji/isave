@@ -23,7 +23,6 @@
 
     const id = instagramUrlParser(url);
 
-    console.log(id);
     window.location.href = `/post/${id}`;
   };
 
@@ -70,6 +69,7 @@
           type="url"
           placeholder="https://instagram.com/p/NSNDFsN-W"
           required={true}
+          autocomplete="off"
         />
         <button type="submit">
           {#if loading}
@@ -125,7 +125,9 @@
 
   .input {
     width: 100%;
+    height: 4rem;
     display: flex;
+
     background-color: var(--primary-clr-100);
     border-radius: 30px;
   }

@@ -6,6 +6,10 @@
       url: "/",
     },
     {
+      label: "profile",
+      url: "/profile",
+    },
+    {
       label: "preview",
       url: "/preview",
     },
@@ -157,6 +161,10 @@
     .mobile,
     .menu {
       display: block;
+    }
+
+    .container {
+      padding: 1rem;
     }
 
     .nav-list {

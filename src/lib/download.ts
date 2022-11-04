@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import axios from "axios";
 
 export const downloadManager = async (url: string, isBase64 = false) => {
   let fileName = "";
   let blobUrl: string | undefined;
 
-  const downloadUrl = "";
+  const downloadUrl = "http://localhost:5002/download";
 
   try {
     if (!isBase64) {

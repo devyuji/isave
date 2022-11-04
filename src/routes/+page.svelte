@@ -7,13 +7,9 @@
   import Spinner from "../components/spinner.svelte";
 
   let url = "";
-  let showModal: boolean;
   let inputFocus: HTMLInputElement;
   let loading = false;
-
-  isModalOpen.subscribe((value) => {
-    showModal = value;
-  });
+  let tab = "web";
 
   onMount(() => {
     inputFocus.focus();
@@ -162,7 +158,7 @@
   </section>
 </main>
 
-{#if showModal}
+{#if $isModalOpen}
   <Backdrop>
     <div class="modal-header">
       <button type="button" on:click={() => isModalOpen.update((_) => false)}>
@@ -192,7 +188,38 @@
       on:click|stopPropagation
       transition:fly={{ y: 100, duration: 250 }}
     >
-      <h1>domo</h1>
+      <div class="modal-tab">
+        <button
+          type="button"
+          class:active={tab === "web"}
+          on:click={() => (tab = "web")}>Web</button
+        >
+        <button
+          type="button"
+          class:active={tab === "app"}
+          on:click={() => (tab = "app")}>App</button
+        >
+      </div>
+
+      <ul>
+        <li>
+          Open the instagram post you want to download.
+          <picture>
+            <img src={`/images/how-to-get-url/image-${tab}-1.png`} alt="" />
+          </picture>
+        </li>
+        <li>
+          Copy the link of the post.
+
+          <img src={`/images/how-to-get-url/image-${tab}-2.png`} alt="" />
+        </li>
+        <li>
+          On isave downloader page paste a link to a field next to the Download
+          button.
+
+          <img src={`/images/how-to-get-url/image-${tab}-3.png`} alt="" />
+        </li>
+      </ul>
     </div>
   </Backdrop>
 {/if}
@@ -319,6 +346,35 @@
     border-radius: 30px 30px 0 0;
 
     overflow: auto;
+  }
+
+  .modal-content ul {
+    list-style-position: inside;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal-content li img {
+    margin-top: 1rem;
+  }
+
+  .modal-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-tab button {
+    border: none;
+    background-color: transparent;
+  }
+
+  .modal-tab .active {
+    border-bottom: 2px solid black;
   }
 
   @media (max-width: 400px) {
