@@ -24,7 +24,9 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
       throw error(res.status, "something went wrong");
     }
 
-    return res.json();
+    const data = await res.json();
+
+    return data;
   } catch (err) {
     console.log(err);
     throw error(500, "Something went wrong");

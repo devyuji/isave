@@ -11,6 +11,7 @@ const config = {
     adapter: adapter(),
     files: {
       lib: "./src/lib/",
+      assets: "static",
     },
     env: {
       dir: "./",
