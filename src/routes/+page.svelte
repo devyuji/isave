@@ -336,6 +336,7 @@
   .modal-header button {
     border: none;
     background-color: transparent;
+    color: white;
   }
 
   .modal-content {
