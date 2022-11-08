@@ -1,0 +1,48 @@
+.container {
+  padding: 1rem;
+  border-radius: 0 50px 0 50px;
+  overflow: hidden;
+  background-color: #eceff1;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+}
+
+.info p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.main {
+  position: relative;
+}
+
+.image_container {
+  border-radius: 0 50px 0 50px;
+  overflow: hidden;
+}
+
+.image_container img {
+  object-fit: cover;
+}
+
+.main button {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+
+  border: none;
+  height: 3rem;
+  width: 3rem;
+  padding: 0.8rem;
+  background-color: #607d8b;
+  border-radius: 10px;
+
+  box-shadow: -7px 4px 35px -6px rgba(0, 0, 0, 0.3);
+}

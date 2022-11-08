@@ -11,7 +11,7 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({ handleClose, children }) => {
   const scaleUp: Variants = {
     hidden: {
-      scale: 2,
+      scale: 0,
     },
     visible: {
       scale: 1,

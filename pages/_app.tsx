@@ -2,25 +2,22 @@ import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
-import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
 
 // firebase
 import { app } from "../firebase/index";
 import { getAnalytics } from "firebase/analytics";
 
-import "react-toastify/dist/ReactToastify.css";
-import "../styles/globals.css";
-
 // components
 import Loading from "../components/modal/loading";
 import Footer from "../components/footer";
 import IsaveDown from "../components/isDown";
-import Navbar from "../components/navbar";
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -29,15 +26,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
 
   const isDown = useMemo(() => process.env.NEXT_PUBLIC_IS_DOWN, []);
 
-  const startUp = useCallback(async () => {
-    await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/startup`);
-  }, []);
-
   useEffect(() => {
     getAnalytics(app);
-
-    startUp();
-  }, [startUp]);
+  }, []);
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -68,7 +59,7 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AnimatePresence initial={false} exitBeforeEnter={true}>
+      <AnimatePresence initial={false}>
         {loading && <Loading />}
       </AnimatePresence>
 
