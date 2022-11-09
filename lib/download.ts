@@ -1,21 +1,30 @@
-import axios from "axios";
-import { toastMessage } from "./toast";
+import axios, { type AxiosRequestConfig } from "axios";
+
+const downloadUrl = "https://download-script.herokuapp.com/download/instagram";
 
 export const downloadManager = async (url: string, isBase64 = false) => {
   let fileName = "";
-  let blobUrl: string;
+  let blobUrl: string | undefined;
 
   try {
     if (!isBase64) {
-      const { data } = await axios.get(url, {
+      const config: AxiosRequestConfig = {
         responseType: "blob",
-      });
+        method: "get",
+        headers: {
+          "x-url": url,
+        },
+        url: `${downloadUrl}?url=${encodeURIComponent(url)}&isVideo=true`,
+      };
+
+      const { data } = await axios(config);
 
       if (data.type == "image/jpeg") fileName = `isave-${random()}.jpg`;
       else fileName = `isave-${random()}.mp4`;
 
       blobUrl = window.URL.createObjectURL(new Blob([data]));
     }
+
     const link = document.createElement("a");
     link.href = isBase64 ? `data:image/png;base64,${url}` : blobUrl!;
     link.download = isBase64 ? `isave-${random()}.png` : fileName;
@@ -32,12 +41,12 @@ export const downloadManager = async (url: string, isBase64 = false) => {
     document.body.removeChild(link);
   } catch (err) {
     console.error(err);
-    toastMessage("Failed to download!");
   }
 };
 
 const random = () => {
-  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   let str = "";
   for (let i = 0; i < 5; i++) {

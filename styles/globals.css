@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap");
 
 * {
   padding: 0;
@@ -7,10 +7,11 @@
 }
 
 :root {
-  --primary-clr: #fff;
+  --background-clr: #ffffff;
   --text-clr: #1f1f1f;
 
-  --ft: "Montserrat", sans-serif;
+  --ft: "Poppins", sans-serif;
+
   --ft-medium: 500;
   --ft-semi-bold: 600;
   --ft-bold: 700;
@@ -26,13 +27,15 @@ body {
   font-family: var(--ft);
   color: var(--text-clr);
   scroll-behavior: smooth;
-  background-color: white;
+  background-color: var(--background-clr);
 }
 
-#__next {
+#__next,
+body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
 }
 
 a {
@@ -51,6 +54,39 @@ button {
   cursor: pointer;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 input {
   font-family: var(--ft);
+  font-weight: var(--ft-medium);
+}
+
+@media (min-width: 1400px) {
+  #__next,
+  div[data-nextjs-scroll-focus-boundary] {
+    width: 80rem;
+  }
+
+  body {
+    align-items: center;
+  }
 }

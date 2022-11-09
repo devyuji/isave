@@ -1,29 +1,30 @@
-.main {
-  padding: 2rem;
+.container {
+  padding: 1rem;
 }
 
-.header {
+.option {
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: flex-end;
-  gap: 1rem;
 }
 
-.header button {
+.option button {
   border: none;
   background-color: var(--primary-clr-100);
-
+  padding: 1rem 2rem;
+  height: 4rem;
   display: flex;
-  align-items: center;
   gap: 0.5rem;
-  padding: 0.7rem;
-  border-radius: 10px;
+  align-items: center;
+  border-radius: 20px;
+
   font-size: 1rem;
 }
 
 .card_container {
-  margin: 2rem 0;
+  margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }

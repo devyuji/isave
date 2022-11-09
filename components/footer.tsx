@@ -12,9 +12,7 @@ const Footer: FC = () => {
       <p>Copyright © {date.getFullYear()} - isave.cc</p>
       <p>
         <span>
-          <Link href="/privacy-policy">
-            <a>Privacy Policy</a>
-          </Link>
+          <Link href="/privacy-policy">Privacy policy</Link>
         </span>{" "}
         |{" "}
         <span>

@@ -94,7 +94,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const username = params!.username;
 
   try {
-    const { data } = await axios.post(`${process.env.API_URL}/api/preview`, {
+    const { data } = await axios.post(`${process.env.API_URL}/preview`, {
       username,
     });
 

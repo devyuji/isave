@@ -1,0 +1,61 @@
+.close {
+  height: 3rem;
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 2rem;
+}
+
+.close button {
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+
+.container {
+  height: calc(100vh - 3rem);
+  width: 100%;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 30px 30px 0 0;
+}
+
+.modal_content {
+  height: calc(100vh - 3rem);
+  width: 100%;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 30px 30px 0 0;
+
+  overflow: auto;
+}
+
+.modal_content ul {
+  list-style-position: inside;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal_content li img {
+  margin-top: 1rem;
+}
+
+.modal_tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal_tab button {
+  border: none;
+  background-color: transparent;
+}
+
+.modal_tab .active {
+  border-bottom: 2px solid black;
+}

@@ -9,3 +9,7 @@
 
   line-height: 1.6;
 }
+
+.container ul {
+  list-style-position: inside;
+}
