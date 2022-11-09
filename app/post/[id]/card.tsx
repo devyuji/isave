@@ -20,6 +20,7 @@ function Card({ data, username }: Props) {
     if (data.type === "image") {
       await downloadManager(data.image_src, true);
     } else {
+      await downloadManager(data.download_url);
     }
 
     setDownloading(false);

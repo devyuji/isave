@@ -13,7 +13,7 @@ function Footer() {
         </span>{" "}
         |{" "}
         <span>
-          <Link href="/contact-us">Contact us</Link>
+          <Link href="https://instagram.com/devyuji">Contact us</Link>
         </span>
       </p>
     </footer>

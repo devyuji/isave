@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 
-const downloadUrl = "http://localhost:5002/download";
+const downloadUrl = "https://download-script.herokuapp.com/download/instagram";
 
 export const downloadManager = async (url: string, isBase64 = false) => {
   let fileName = "";
@@ -8,12 +8,16 @@ export const downloadManager = async (url: string, isBase64 = false) => {
 
   try {
     if (!isBase64) {
-      const { data } = await axios.get(downloadUrl, {
+      const config: AxiosRequestConfig = {
         responseType: "blob",
+        method: "get",
         headers: {
           "x-url": url,
         },
-      });
+        url: `${downloadUrl}?url=${encodeURIComponent(url)}&isVideo=true`,
+      };
+
+      const { data } = await axios(config);
 
       if (data.type == "image/jpeg") fileName = `isave-${random()}.jpg`;
       else fileName = `isave-${random()}.mp4`;

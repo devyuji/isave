@@ -13,9 +13,9 @@ function Error({ error, reset }: Props) {
   }, [error]);
 
   return (
-    <div>
-      <p>Something went wrong!</p>
-      <button onClick={() => reset()}>Reset error boundary</button>
+    <div style={{ textAlign: "center" }}>
+      <h1>Something went wrong! 💀</h1>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 }

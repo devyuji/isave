@@ -2,19 +2,27 @@
 
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler, type FieldValues } from "react-hook-form";
 import Image from "../components/image";
 import HowToGetUrl from "../components/modal/howToGetUrl";
 import { instagramUrlChecker, instagramUrlParser } from "../lib/instagram";
 import styles from "./intro.module.css";
 
+type formValue = {
+  url: string;
+};
+
 function Intro() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setFocus } = useForm<formValue>();
   const [isModalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 
-  const submit: SubmitHandler<FieldValues> = (value) => {
+  useEffect(() => {
+    setFocus("url");
+  }, [setFocus]);
+
+  const submit = (value: formValue) => {
     if (!instagramUrlChecker(value.url)) return;
 
     const id = instagramUrlParser(value.url);

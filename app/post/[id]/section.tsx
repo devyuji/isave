@@ -25,7 +25,8 @@ function Section({ data }: Props) {
     setDownloading(true);
 
     const downloadPromises = data.data.map((d: any) => {
-      if (d.type === "image") downloadManager(d.image_src, true);
+      if (d.type === "image") return downloadManager(d.image_src, true);
+      return downloadManager(d.download_url);
     });
 
     await Promise.resolve(downloadPromises);

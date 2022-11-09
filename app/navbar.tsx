@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./navbar.module.css";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
@@ -41,6 +41,14 @@ const slideUp: Variants = {
 
 function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [isModalOpen]);
 
   const open = () => setModalOpen(true);
   const close = () => setModalOpen(false);

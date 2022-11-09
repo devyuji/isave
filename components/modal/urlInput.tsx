@@ -1,19 +1,27 @@
 import { useRouter } from "next/navigation";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Modal from ".";
 import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
 import styles from "../../styles/components/modal/urlInput.module.css";
-import { useForm, type SubmitHandler, type FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 interface Props {
   handleClose: () => void;
 }
 
+type formValue = {
+  url: string;
+};
+
 const UrlInput: FC<Props> = ({ handleClose }) => {
   const router = useRouter();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, setFocus } = useForm<formValue>();
 
-  const submit: SubmitHandler<FieldValues> = (value) => {
+  useEffect(() => {
+    setFocus("url");
+  }, [setFocus]);
+
+  const submit = (value: formValue) => {
     if (!instagramUrlChecker(value.url)) return;
 
     const id = instagramUrlParser(value.url);
