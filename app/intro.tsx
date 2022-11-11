@@ -16,6 +16,7 @@ type formValue = {
 function Intro() {
   const { register, handleSubmit, setFocus } = useForm<formValue>();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -23,7 +24,9 @@ function Intro() {
   }, [setFocus]);
 
   const submit = (value: formValue) => {
-    if (!instagramUrlChecker(value.url)) return;
+    if (!instagramUrlChecker(value.url) || clicked) return;
+
+    setClicked(true);
 
     const id = instagramUrlParser(value.url);
 

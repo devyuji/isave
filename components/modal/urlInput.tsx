@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import Modal from ".";
 import { instagramUrlChecker, instagramUrlParser } from "../../lib/instagram";
 import styles from "../../styles/components/modal/urlInput.module.css";
@@ -16,14 +16,16 @@ type formValue = {
 const UrlInput: FC<Props> = ({ handleClose }) => {
   const router = useRouter();
   const { register, handleSubmit, setFocus } = useForm<formValue>();
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     setFocus("url");
   }, [setFocus]);
 
   const submit = (value: formValue) => {
-    if (!instagramUrlChecker(value.url)) return;
+    if (!instagramUrlChecker(value.url) || clicked) return;
 
+    setClicked(true);
     const id = instagramUrlParser(value.url);
 
     router.replace(`post/${id}`);

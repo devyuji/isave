@@ -79,21 +79,31 @@ const HowToGetUrl: FC<Props> = ({ onClick }) => {
           <ul>
             <li>
               Open the instagram post you want to download.
-              <picture>
+              <div>
                 <Image
                   src={`/images/how-to-get-url/image-${tab}-1.png`}
                   alt=""
                 />
-              </picture>
+              </div>
             </li>
             <li>
               Copy the link of the post.
-              <Image src={`/images/how-to-get-url/image-${tab}-2.png`} alt="" />
+              <div>
+                <Image
+                  src={`/images/how-to-get-url/image-${tab}-2.png`}
+                  alt=""
+                />
+              </div>
             </li>
             <li>
               On isave downloader page paste a link to a field next to the
               Download button.
-              <Image src={`/images/how-to-get-url/image-${tab}-3.png`} alt="" />
+              <div>
+                <Image
+                  src={`/images/how-to-get-url/image-${tab}-3.png`}
+                  alt=""
+                />
+              </div>
             </li>
           </ul>
         </div>

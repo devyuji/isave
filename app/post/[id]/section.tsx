@@ -29,7 +29,7 @@ function Section({ data }: Props) {
       return downloadManager(d.download_url);
     });
 
-    await Promise.resolve(downloadPromises);
+    await Promise.all(downloadPromises);
 
     setDownloading(false);
   };

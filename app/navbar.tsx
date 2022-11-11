@@ -114,7 +114,9 @@ function Navbar() {
             <ul className={styles.nav_list}>
               {links.map((link, index) => (
                 <li key={`${index}-${link.label}`}>
-                  <Link href={link.url}>{link.label}</Link>
+                  <Link href={link.url} onClick={close}>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
