@@ -13,6 +13,11 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/preview/:username*",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 
