@@ -12,8 +12,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <head>
-        <title>Media downloader - isave</title>
-        {/* <meta name="viewport" content="width=device-width" /> */}
+        <title>Instagram Downloader | Fast, Free, Anonymous - isave</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>

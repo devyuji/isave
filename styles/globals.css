@@ -20,6 +20,8 @@
   --primary-clr-100: #cfd8dc;
   --primary-clr-200: #b0bec5;
   --primary-clr-light: #eceff1;
+
+  --navbar-height: 5rem;
 }
 
 html,
