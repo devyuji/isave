@@ -3,24 +3,26 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./navbar.module.css";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const slide: Variants = {
   initial: {
-    x: "100%",
-    opacity: 0,
+    scale: 0,
+    opacity: 0.5,
   },
   animate: {
-    x: 0,
+    scale: 1,
     opacity: 1,
     transition: {
-      ease: "easeInOut",
-      duaration: 250,
+      type: "spring",
+      duration: 0.7,
     },
   },
 };
 
 function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (isModalOpen) {
@@ -34,7 +36,7 @@ function Navbar() {
 
   return (
     <header className={styles.container}>
-      <div className={styles.title}>
+      <div className={styles.title} onClick={() => router.push("/")}>
         <h1>isave</h1>
       </div>
 

@@ -18,6 +18,11 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/app",
+        destination: "/app/api",
+        permanent: true,
+      },
     ];
   },
 
