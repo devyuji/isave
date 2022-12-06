@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
-const downloadUrl = "https://download-script.herokuapp.com/download/instagram";
+const downloadUrl = process.env.NEXT_PUBLIC_PROXY;
 
 export const downloadManager = async (url: string, isBase64 = false) => {
   let fileName = "";
