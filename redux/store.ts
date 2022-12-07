@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postData from "./reducers/postData";
-import previewData from "./reducers/previewData";
-import previewEditing from "./reducers/previewEditing";
+import errorState from "./reducers/error";
 
 export const store = configureStore({
   reducer: {
     POST_DATA: postData,
-    PREVIEW_DATA: previewData,
-    PREVIEW_EDITTING: previewEditing,
+    ERROR_STATE: errorState,
   },
   devTools: process.env.NODE_ENV === "production" ? false : true,
 });

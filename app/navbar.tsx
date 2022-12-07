@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./navbar.module.css";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const slide: Variants = {
   initial: {
@@ -22,7 +22,6 @@ const slide: Variants = {
 
 function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (isModalOpen) {
@@ -36,8 +35,8 @@ function Navbar() {
 
   return (
     <header className={styles.container}>
-      <div className={styles.title} onClick={() => router.push("/")}>
-        <h1>isave</h1>
+      <div className={styles.title}>
+        <Link href="/">isave</Link>
       </div>
 
       <button type="button" className={styles.menu} onClick={toggle}>

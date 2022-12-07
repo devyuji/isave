@@ -26,23 +26,74 @@
 .image_container {
   border-radius: 0 50px 0 50px;
   overflow: hidden;
+
+  position: relative;
 }
 
 .image_container img {
   object-fit: cover;
 }
 
-.main button {
-  position: absolute;
-  bottom: 0;
-  right: 10px;
+.action_btn {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
 
-  border: none;
+.main button:nth-child(2) {
+  flex: 2;
+}
+
+.action_btn button:nth-child(1) {
+  border-radius: 30px 30px 0;
+}
+
+.action_btn button:nth-child(1) span {
+  font-weight: var(--ft-semi-bold);
+}
+
+.main button {
+  width: 100%;
   height: 3rem;
-  width: 3rem;
+  border: none;
   padding: 0.8rem;
   background-color: #607d8b;
   border-radius: 10px;
 
   box-shadow: -7px 4px 35px -6px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.shimmer {
+  background-image: linear-gradient(
+    to right,
+    #ebebeb calc(50% - 100px),
+    #c5c5c5 50%,
+    #ebebeb calc(50% + 100px)
+  );
+  background-size: 0;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(200% + 200px);
+  bottom: 0;
+  background-image: inherit;
+  animation: move 2s linear infinite;
+}
+@keyframes move {
+  to {
+    transform: translateX(calc(50% + 100px));
+  }
 }

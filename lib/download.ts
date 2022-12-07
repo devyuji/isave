@@ -1,20 +1,19 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
-const downloadUrl = "https://download-script.herokuapp.com/download/instagram";
-
 export const downloadManager = async (url: string, isBase64 = false) => {
   let fileName = "";
   let blobUrl: string | undefined;
 
   try {
     if (!isBase64) {
+      const link = `${process.env.NEXT_PUBLIC_PROXY}?url=${encodeURIComponent(
+        url
+      )}`;
+
       const config: AxiosRequestConfig = {
         responseType: "blob",
         method: "get",
-        headers: {
-          "x-url": url,
-        },
-        url: `${downloadUrl}?url=${encodeURIComponent(url)}&isVideo=true`,
+        url: link,
       };
 
       const { data } = await axios(config);

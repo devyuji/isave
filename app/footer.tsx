@@ -11,10 +11,6 @@ function Footer() {
         <span>
           <Link href="/privacy-policy">Privacy policy</Link>
         </span>{" "}
-        {/* |{" "}
-        <span>
-          <Link href="/app/api">API</Link>
-        </span> */}
       </p>
     </footer>
   );

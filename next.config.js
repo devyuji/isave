@@ -18,30 +18,16 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
-      {
-        source: "/app",
-        destination: "/app/api",
-        permanent: true,
-      },
     ];
   },
-
-  async headers() {
-    return [
+  images: {
+    remotePatterns: [
       {
-        source: "/post/:id",
-        headers: [
-          {
-            key: "Cross-Origin-Embedder-Policy",
-            value: "require-corp",
-          },
-          {
-            key: "Cross-Origin-Opener-Policy",
-            value: "same-origin",
-          },
-        ],
+        protocol: "http",
+        hostname: "localhost",
+        port: "",
       },
-    ];
+    ],
   },
 };
 

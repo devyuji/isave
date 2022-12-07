@@ -8,15 +8,27 @@
 
 .container li {
   text-align: center;
-  padding: 1rem;
-
-  background-color: var(--primary-clr-100);
+  position: relative;
+  overflow: hidden;
   border-radius: 30px;
+}
+
+.loading {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 2px;
+  background-color: var(--primary-clr);
 }
 
 .container button {
   border: none;
+
   background-color: transparent;
+  padding: 1rem;
+
+  background-color: var(--primary-clr-100);
 
   font-size: 1rem;
   width: 100%;
@@ -24,5 +36,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.7rem;
 }

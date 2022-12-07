@@ -20,6 +20,11 @@
   font-size: 2.5rem;
 }
 
+.action {
+  display: flex;
+  gap: 1rem;
+}
+
 .action_button {
   border: none;
   background-color: var(--primary-clr);
@@ -28,7 +33,12 @@
   border-radius: 30px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+
+  font-weight: var(--ft-medium);
+  font-size: 1.2rem;
+
+  width: 100%;
 }

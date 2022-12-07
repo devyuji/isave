@@ -4,6 +4,18 @@ interface Props {
   params: { id: string };
 }
 
+export type Data = {
+  image_src: string;
+  download_url: string;
+  preview: string;
+  type: string;
+};
+
+export type DataProps = {
+  data: Data[];
+  username: string;
+};
+
 async function getData(id: string) {
   const url = `${process.env.API_URL}/post`;
   const config: RequestInit = {
@@ -28,7 +40,7 @@ async function getData(id: string) {
 }
 
 async function PostPage({ params }: Props) {
-  const data = await getData(params.id);
+  const data: DataProps = await getData(params.id);
 
   return (
     <main>

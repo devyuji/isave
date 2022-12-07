@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import Backdrop from "./backdrop";
 import styles from "../../styles/components/modal/view.module.css";
 import Image from "../image";
@@ -10,22 +10,23 @@ interface Props {
 }
 
 const View: FC<Props> = ({ handleClose, url, isVideo }) => {
+  const source = useMemo(
+    () => `${process.env.NEXT_PUBLIC_PROXY}?url=${encodeURIComponent(url)}`,
+    [url]
+  );
+
   return (
     <Backdrop onClick={handleClose}>
       <div onClick={(e) => e.stopPropagation()} className={styles.container}>
         {isVideo ? (
           <video
             className={styles.video}
-            src={url}
+            src={source}
             autoPlay={true}
             controls={true}
           />
         ) : (
-          <Image
-            src={`data:image/png;base64,${url}`}
-            alt=""
-            className={styles.image}
-          />
+          <Image src={source} alt="" className={styles.image} />
         )}
 
         <button className={styles.close} type="button" onClick={handleClose}>
