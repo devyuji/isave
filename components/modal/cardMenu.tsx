@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import Modal from ".";
 import { Data } from "../../app/post/[id]/page";
 import { downloadManager } from "../../lib/download";
-import styles from "../../styles/components/modal/cardmenu.module.css";
+import styles from "../../styles/components/modal/cardMenu.module.css";
 import View from "./view";
 
 interface Props {
