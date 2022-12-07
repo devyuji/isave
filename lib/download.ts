@@ -11,9 +11,6 @@ export const downloadManager = async (url: string, isBase64 = false) => {
       const config: AxiosRequestConfig = {
         responseType: "blob",
         method: "get",
-        headers: {
-          "x-url": url,
-        },
         url: `${downloadUrl}?url=${encodeURIComponent(url)}&isVideo=true`,
       };
 
