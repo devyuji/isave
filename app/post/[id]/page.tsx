@@ -5,7 +5,6 @@ interface Props {
 }
 
 export type Data = {
-  image_src: string;
   download_url: string;
   preview: string;
   type: string;

@@ -20,6 +20,20 @@ const slide: Variants = {
   },
 };
 
+const hamburgerAnimation: Variants = {
+  initial: {
+    strokeDasharray: "60 31 60 300",
+    strokeDashoffset: 0,
+  },
+  animate: {
+    strokeDasharray: "60 105 60 300",
+    strokeDashoffset: -90,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -39,21 +53,37 @@ function Navbar() {
         <Link href="/">isave</Link>
       </div>
 
-      <button type="button" className={styles.menu} onClick={toggle}>
-        <svg
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-          stroke="currentColor"
-          strokeWidth="2"
+      <button
+        type="button"
+        aria-label="hamburger menu"
+        className={styles.menu}
+        onClick={toggle}
+      >
+        <motion.svg
+          animate={
+            isModalOpen
+              ? {
+                  rotate: "0.125turn",
+                }
+              : {
+                  rotate: 0,
+                }
+          }
+          stroke="black"
           fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          viewBox="-10 -10 120 120"
+          width="40"
         >
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+          <motion.path
+            variants={hamburgerAnimation}
+            initial="initial"
+            animate={isModalOpen ? "animate" : "initial"}
+            strokeWidth="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70"
+          ></motion.path>
+        </motion.svg>
       </button>
 
       <nav className={styles.desktop}>

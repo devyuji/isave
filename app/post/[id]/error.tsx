@@ -14,6 +14,7 @@ function Error({ error, reset }: Props) {
   }, [error]);
 
   const reload = () => {
+    reset();
     window.location.reload();
   };
 

@@ -19,7 +19,7 @@
   font-size: clamp(2.5rem, 10vw, 1.5rem);
 }
 
-.box h3 {
+.box h2 {
   font-weight: var(--ft-medium);
   color: #717171;
   font-size: 1rem;

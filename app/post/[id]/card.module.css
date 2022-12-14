@@ -47,6 +47,7 @@
 
 .action_btn button:nth-child(1) {
   border-radius: 30px 30px 0;
+  text-transform: capitalize;
 }
 
 .action_btn button:nth-child(1) span {

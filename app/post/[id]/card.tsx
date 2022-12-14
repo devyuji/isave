@@ -16,6 +16,7 @@ function Card({ data, username }: Props) {
   const [isDownloading, setDownloading] = useState(false);
   const [imageLoad, setImageLoad] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [downloadState, setDownloadState] = useState<string>("download");
 
   const preview = useMemo(
     () =>
@@ -28,7 +29,13 @@ function Card({ data, username }: Props) {
   const download = async () => {
     setDownloading(true);
 
-    await downloadManager(data.download_url);
+    try {
+      await downloadManager(data.download_url);
+      downloadState !== "download" && setDownloadState("download");
+    } catch (err) {
+      console.error(err);
+      setDownloadState("Failed to download");
+    }
 
     setDownloading(false);
   };
@@ -106,7 +113,7 @@ function Card({ data, username }: Props) {
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
-                  <span>Download</span>
+                  <span>{downloadState}</span>
                 </>
               )}
             </button>

@@ -2,12 +2,13 @@
 
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useForm, type SubmitHandler, type FieldValues } from "react-hook-form";
+import { lazy, useEffect, useState, Suspense } from "react";
+import { useForm } from "react-hook-form";
 import Image from "../components/image";
-import HowToGetUrl from "../components/modal/howToGetUrl";
 import { instagramUrlChecker, instagramUrlParser } from "../lib/instagram";
 import styles from "./intro.module.css";
+
+const HowToGetUrl = lazy(() => import("../components/modal/howToGetUrl"));
 
 type formValue = {
   url: string;
@@ -42,10 +43,10 @@ function Intro() {
         <div className={styles.box}>
           <h1>Instagram media downloader! 🤩</h1>
 
-          <h3>
+          <h2>
             Copy and paste the URL of the Instagram videos, photos, reels, or
             IGTV link you wish to download.
-          </h3>
+          </h2>
 
           <form onSubmit={handleSubmit(submit)} className={styles.form}>
             <svg
@@ -68,7 +69,7 @@ function Intro() {
               type="url"
               {...register("url", { required: true })}
             />
-            <button type="submit">
+            <button type="submit" aria-label="download">
               <span className={styles.mobile}>
                 <svg
                   viewBox="0 0 24 24"
@@ -97,12 +98,14 @@ function Intro() {
         </div>
 
         <div className="cover">
-          <Image src="/images/landing_page_cover.png" alt="" />
+          <Image src="/images/landing_page_cover.webp" alt="" />
         </div>
       </section>
 
       <AnimatePresence>
-        {isModalOpen && <HowToGetUrl onClick={close} />}
+        <Suspense fallback={<p>loading...</p>}>
+          {isModalOpen && <HowToGetUrl onClick={close} />}
+        </Suspense>
       </AnimatePresence>
     </>
   );

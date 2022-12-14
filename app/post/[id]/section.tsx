@@ -40,12 +40,15 @@ function Section({ data }: Props) {
     if (isDownloading) return;
 
     setDownloading(true);
+    try {
+      const downloadPromises = data.data.map((d) => {
+        return downloadManager(d.download_url);
+      });
 
-    const downloadPromises = data.data.map((d) => {
-      return downloadManager(d.download_url);
-    });
-
-    await Promise.all(downloadPromises);
+      await Promise.all(downloadPromises);
+    } catch (err) {
+      console.error(err);
+    }
 
     setDownloading(false);
   };

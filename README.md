@@ -1,19 +1,16 @@
 # ISAVE
 
-Instagram tool to download images, videos, reels in one place
+Isave allows you to save any media from Instagram, including reels, posts, videos, IGTV, and images.
 
 # SCREENSHOTS
 
-<img src='public/images/screenshot-1.jpeg' alt='Screenshot 1' width='100%' />
-<img src='public/images/screenshot-2.jpeg' alt='Screenshot 2' width='100%' />
-<img src='public/images/screenshot-4.jpeg' alt='Screenshot 3' width='100%' />
-<img src='public/images/screenshot-3.jpeg' alt='Screenshot 2' width='100%' />
+<img src='public/images/screenshot-1.jpg' alt='Screenshot 1' width='100%' />
+
+<img src='public/images/screenshot-2.jpg' alt='Screenshot 2' width='100%' />
 
 # DEMO
 
-[Web App](https://isave.cc/)
-
-[Android app](https://github.com/devyuji/isave_flutter)
+[Web-app](https://isave.cc/)
 
 ## Installation
 

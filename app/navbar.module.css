@@ -41,10 +41,15 @@
   background-color: transparent;
 }
 
+.menu svg {
+  display: grid;
+  place-items: center;
+}
+
 .mobile {
   position: absolute;
   background-color: white;
-  top: var(--navbar-height);
+  top: 4rem;
   right: 1rem;
 
   display: grid;
