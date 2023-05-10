@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Spinner: FC = () => {
   return (
-    <div style={{ height: "1rem", width: "1rem" }}>
+    <div className="w-4 h-4">
       <motion.span
         animate={{ rotate: 360 }}
         transition={{

@@ -34,3 +34,9 @@ yarn-error.log*
 .vercel
 
 .vscode
+
+sw.js
+sw.js.map
+**/workbox-*.js.map
+**/workbox-*.js
+**/worker-*.js.map

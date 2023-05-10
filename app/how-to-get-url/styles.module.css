@@ -1,0 +1,28 @@
+.modal_content ul {
+  list-style-position: inside;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal_content li img {
+  margin-top: 1rem;
+}
+
+.modal_tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal_tab button {
+  border: none;
+  background-color: transparent;
+}
+
+.modal_tab .active {
+  border-bottom: 2px solid black;
+}

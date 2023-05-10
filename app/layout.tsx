@@ -4,40 +4,37 @@ import { ReactNode } from "react";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import FirebaseInit from "./firebaseinit";
+import ReduxInit from "./redux";
 
 interface Props {
   children: ReactNode;
 }
 
+export const metadata = {
+  title: "Instagram Downloader | Fast, Free, Anonymous - isave",
+  description:
+    "Isave allows you to save any media from Instagram, including reels, posts, videos, IGTV, and images.",
+  icons: [
+    {
+      rel: "icon",
+      url: "/favicon.ico",
+      type: "image/x-icon",
+    },
+  ],
+  manifest: "/manifest.json",
+};
+
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <head>
-        <title>Instagram Downloader | Fast, Free, Anonymous - isave</title>
-        <meta
-          name="description"
-          content="Isave allows you to save any media from Instagram, including reels, posts, videos, IGTV, and images.
-"
-        />
-        <meta
-          name="theme-color"
-          media="(prefers-color-scheme: light)"
-          content="white"
-        />
-        <meta
-          name="theme-color"
-          media="(prefers-color-scheme: dark)"
-          content="white"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      </head>
       <body>
         <FirebaseInit />
 
-        <Navbar />
-        {children}
-        <Footer />
+        <ReduxInit>
+          <Navbar />
+          {children}
+          <Footer />
+        </ReduxInit>
       </body>
     </html>
   );

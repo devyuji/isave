@@ -1,60 +1,27 @@
-import { FC, useState } from "react";
-import styles from "../../styles/components/modal/howToGetUrl.module.css";
-import Backdrop from "./backdrop";
-import { motion, Variants } from "framer-motion";
-import Image from "../image";
+"use client";
 
-interface Props {
-  onClick: () => void;
-}
+import { useState } from "react";
+import Image from "../../components/image";
+import styles from "./styles.module.css";
+import Container from "../../components/container";
 
-const slideUp: Variants = {
-  initial: {
-    y: "100%",
-  },
-  animate: {
-    y: 0,
-    transition: {
-      ease: "easeInOut",
-    },
-  },
-};
-
-const HowToGetUrl: FC<Props> = ({ onClick }) => {
+function HowToGetUrlPage() {
   const [tab, setTab] = useState("web");
 
   return (
-    <Backdrop onClick={onClick}>
-      <div className={styles.close}>
-        <button type="button" onClick={onClick}>
-          <svg
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-      <motion.div
-        variants={slideUp}
-        initial="initial"
-        animate="animate"
-        exit="initial"
-        className={styles.container}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* main content goes here */}
+    <main
+      className="grid place-items-center"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* main content goes here */}
+      <Container className="p-4">
         <div
           className={styles.modal_content}
           onClick={(e) => e.stopPropagation()}
         >
+          <h1 className="text-3xl font-bold text-center mb-4">
+            How to get instagram link?
+          </h1>
           <div className={styles.modal_tab}>
             <button
               type="button"
@@ -76,7 +43,7 @@ const HowToGetUrl: FC<Props> = ({ onClick }) => {
             </button>
           </div>
 
-          <ul>
+          <ul className="list-disc	">
             <li>
               Open the instagram post you want to download.
               <div>
@@ -107,9 +74,9 @@ const HowToGetUrl: FC<Props> = ({ onClick }) => {
             </li>
           </ul>
         </div>
-      </motion.div>
-    </Backdrop>
+      </Container>
+    </main>
   );
-};
+}
 
-export default HowToGetUrl;
+export default HowToGetUrlPage;

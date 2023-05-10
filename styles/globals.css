@@ -1,27 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap");
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background-clr: #ffffff;
-  --text-clr: #1f1f1f;
-
   --ft: "Poppins", sans-serif;
-
-  --ft-medium: 500;
-  --ft-semi-bold: 600;
-  --ft-bold: 700;
-
-  --primary-clr: #37474f;
-  --primary-clr-100: #cfd8dc;
-  --primary-clr-200: #b0bec5;
-  --primary-clr-light: #eceff1;
-
-  --navbar-height: 5rem;
 }
 
 html,
@@ -38,22 +22,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-}
-
-button {
-  font-family: var(--ft);
-
-  cursor: pointer;
 }
 
 /* width */
@@ -80,15 +48,4 @@ button {
 input {
   font-family: var(--ft);
   font-weight: var(--ft-medium);
-}
-
-@media (min-width: 1400px) {
-  #__next,
-  div[data-nextjs-scroll-focus-boundary] {
-    width: 80rem;
-  }
-
-  body {
-    align-items: center;
-  }
 }

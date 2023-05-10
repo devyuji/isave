@@ -1,3 +1,4 @@
+import Container from "../../../components/container";
 import Section from "./section";
 
 interface Props {
@@ -18,14 +19,11 @@ export type DataProps = {
 async function getData(id: string) {
   const url = `${process.env.API_URL}/post`;
   const config: RequestInit = {
-    method: "post",
+    method: "POST",
     body: JSON.stringify({ id }),
     headers: {
       "content-type": "application/json",
       "user-agent": process.env.USER_AGENT!,
-    },
-    next: {
-      revalidate: 60,
     },
   };
 
@@ -38,14 +36,16 @@ async function getData(id: string) {
   return res.json();
 }
 
-async function PostPage({ params }: Props) {
+async function MediaPage({ params }: Props) {
   const data: DataProps = await getData(params.id);
 
   return (
-    <main>
-      <Section data={data} />
+    <main className="flex justify-center">
+      <Container>
+        <Section data={data} />
+      </Container>
     </main>
   );
 }
 
-export default PostPage;
+export default MediaPage;

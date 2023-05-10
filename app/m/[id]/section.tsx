@@ -1,53 +1,52 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { instagramUrlParser } from "../lib/instagram";
-import styles from "./intro.module.css";
+import { Data, DataProps } from "./page";
+import styles from "./section.module.css";
+import Card from "./card";
+import { instagramUrlParser } from "../../../lib/instagram";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "../../../redux/hooks";
+import { init } from "../../../redux/reducer/media";
+
+interface Props {
+  data: DataProps;
+}
 
 type formValue = {
   url: string;
 };
 
-function Intro() {
+const Section: FC<Props> = ({ data }) => {
   const {
     register,
     handleSubmit,
-    setFocus,
-    formState: { isValid, errors },
+
+    formState: { errors, isValid },
   } = useForm<formValue>();
-  const clicked = useRef<boolean>(false);
+
   const router = useRouter();
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    setFocus("url");
-  }, [setFocus]);
+    dispatch(init(data.data));
+  }, [data.data, dispatch]);
 
-  const onSubmit = (value: formValue) => {
-    if (clicked.current) return;
+  const onSubmit = ({ url }: formValue) => {
+    const parsedId = instagramUrlParser(url);
 
-    clicked.current = true;
-
-    const id = instagramUrlParser(value.url);
-
-    router.push(`/m/${id}`);
+    router.replace(`/m/${parsedId}`);
   };
 
   return (
-    <section className="flex flex-col gap-6 justify-center">
-      <h1 className="md:text-5xl text-4xl  font-bold">
-        <span className={styles.instagram_like}>instagram</span> media
-        downloader!
-      </h1>
-
-      <h2>
-        Copy and paste the URL of the Instagram videos, photos, reels, or IGTV
-        link you wish to download.
-      </h2>
-
+    <div className="p-4 w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+        <label htmlFor="url" className="text-xl">
+          Enter instagram url
+        </label>
         <div className="flex items-center bg-zinc-100 p-2 gap-4 mt-2 h-14 border-b-2 border-black">
           <div>
             <svg
@@ -103,8 +102,19 @@ function Intro() {
           <p className="text-red-500 text-sm">Enter valid url</p>
         )}
       </form>
-    </section>
-  );
-}
 
-export default Intro;
+      <div className={styles.card_container}>
+        {data.data.map((d: Data, index) => (
+          <Card
+            key={`${index}`}
+            index={index}
+            data={d}
+            username={data.username}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Section;
