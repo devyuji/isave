@@ -1,7 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { FC, ReactNode } from "react";
 import Backdrop from "./backdrop";
-import styles from "../../styles/components/modal/index.module.css";
 
 interface ModalProps {
   handleClose: () => void;
@@ -29,7 +28,7 @@ const Modal: FC<ModalProps> = ({ handleClose, children }) => {
         animate="visible"
         exit="exit"
         onClick={(e) => e.stopPropagation()}
-        className={styles.container}
+        className="bg-gray-200 p-4 rounded-lg w-1/2 lg:w-96"
       >
         {children}
       </motion.div>

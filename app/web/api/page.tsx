@@ -1,6 +1,12 @@
 import Container from "../../../components/container";
 import Section from "./section";
 
+export const metadata = {
+  title: "Api for developer - isave",
+  description:
+    "isave api is available for other people to use if they needed in their project.",
+};
+
 function ApiPage() {
   return (
     <main className="grid place-items-center p-4">

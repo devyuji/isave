@@ -4,7 +4,7 @@ import Spinner from "../../../components/spinner";
 function Loading() {
   return (
     <main className="grid place-items-center">
-      <Container className="p-4 flex items-center justify-center gap-1">
+      <Container className="p-4 flex items-center justify-center gap-2">
         <Spinner />
         <p>Loading...</p>
       </Container>

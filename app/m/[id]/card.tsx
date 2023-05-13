@@ -166,11 +166,12 @@ const Card: FC<Props> = ({ data, username, index }) => {
               {username}
             </a>
           </div>
-          <div className="flex gap-2 ">
+
+          <div className="flex gap-2">
             <button
               type="button"
               onClick={() => !isDownloading && download(data.download_url)}
-              className={`flex gap-2 items-center  border-b-2 border-transparent ${
+              className={`flex gap-2 items-center border-b-2 border-transparent ${
                 downloadError
                   ? "text-red-500 hover:border-red-500"
                   : "text-black hover:border-black"

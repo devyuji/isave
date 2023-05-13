@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import mediaReducer from "./reducer/media";
+import tokenReducer from "./reducer/token";
 
 export const store = configureStore({
   reducer: {
     media: mediaReducer,
+    token: tokenReducer,
   },
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

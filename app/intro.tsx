@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 
 import { instagramUrlParser } from "../lib/instagram";
 import styles from "./intro.module.css";
+import useTokenBucket from "../lib/useTokenBucket";
+import { useAppDispatch } from "../redux/hooks";
+import { TOGGLE } from "../redux/reducer/token";
 
 type formValue = {
   url: string;
@@ -20,6 +23,8 @@ function Intro() {
   } = useForm<formValue>();
   const clicked = useRef<boolean>(false);
   const router = useRouter();
+  const consumeToken = useTokenBucket();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setFocus("url");
@@ -28,11 +33,15 @@ function Intro() {
   const onSubmit = (value: formValue) => {
     if (clicked.current) return;
 
-    clicked.current = true;
+    if (consumeToken()) {
+      clicked.current = true;
 
-    const id = instagramUrlParser(value.url);
+      const id = instagramUrlParser(value.url);
 
-    router.push(`/m/${id}`);
+      router.push(`/m/${id}`);
+    } else {
+      dispatch(TOGGLE());
+    }
   };
 
   return (

@@ -9,4 +9,17 @@
   );
   background-clip: text;
   color: transparent;
+
+  background-size: 300% 100%;
+
+  animation: animate 10s ease-in infinite alternate-reverse;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 300%;
+  }
 }

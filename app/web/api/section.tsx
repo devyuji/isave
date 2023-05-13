@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 type formValue = {
@@ -9,7 +8,7 @@ type formValue = {
 };
 
 function Section() {
-  const { handleSubmit, register, setFocus } = useForm<formValue>({
+  const { handleSubmit, register } = useForm<formValue>({
     defaultValues: { subject: "I want to use isave api" },
   });
 
@@ -19,10 +18,6 @@ function Section() {
 
     window.location.href = mail;
   };
-
-  useEffect(() => {
-    setFocus("message");
-  }, [setFocus]);
 
   return (
     <form

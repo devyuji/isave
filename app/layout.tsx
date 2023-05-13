@@ -5,6 +5,7 @@ import Navbar from "./navbar";
 import Footer from "./footer";
 import FirebaseInit from "./firebaseinit";
 import ReduxInit from "./redux";
+import ShowLimitError from "./showLimitError";
 
 interface Props {
   children: ReactNode;
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: Props) {
           <Navbar />
           {children}
           <Footer />
+          <ShowLimitError />
         </ReduxInit>
       </body>
     </html>
