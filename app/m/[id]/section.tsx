@@ -16,13 +16,14 @@ import { TOGGLE } from "../../../redux/reducer/token";
 
 interface Props {
   data: DataProps;
+  id: string;
 }
 
 type formValue = {
   url: string;
 };
 
-const Section: FC<Props> = ({ data }) => {
+const Section: FC<Props> = ({ data, id }) => {
   const {
     register,
     handleSubmit,
@@ -36,12 +37,11 @@ const Section: FC<Props> = ({ data }) => {
   const [showTop, setTop] = useState(false);
 
   useEffect(() => {
-    dispatch(init(data.data));
-  }, [data.data, dispatch]);
+    dispatch(init({ data: data.data, id: id, username: data.username }));
+  }, [data, dispatch, id]);
 
   useEffect(() => {
     const scrollDown = () => {
-      console.log(window.scrollY);
       if (window.scrollY > 30) {
         setTop(true);
       } else {

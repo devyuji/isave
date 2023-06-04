@@ -6,7 +6,7 @@ type State = {
 };
 
 const initialValue: State = {
-  tokenAvailable: 2,
+  tokenAvailable: 3,
   showMenu: false,
 };
 

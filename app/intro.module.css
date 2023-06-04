@@ -15,6 +15,13 @@
   animation: animate 10s ease-in infinite alternate-reverse;
 }
 
+.card_container {
+  margin: 2rem 0;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
 @keyframes animate {
   0% {
     background-position: 0% 0%;

@@ -8,10 +8,14 @@ export type Data = {
 };
 
 interface State {
+  id: string;
+  username: string;
   data: Data[];
 }
 
 const initialState: State = {
+  id: "",
+  username: "",
   data: [],
 };
 
@@ -19,8 +23,8 @@ export const counterSlice = createSlice({
   name: "mediaData",
   initialState,
   reducers: {
-    init: (state, action: PayloadAction<Data[]>) => {
-      state.data = action.payload;
+    init: (state, action: PayloadAction<State>) => {
+      state = action.payload;
 
       return state;
     },

@@ -18,12 +18,16 @@ export type DataProps = {
 
 async function getData(id: string) {
   const url = `${process.env.API_URL}/post`;
+  console.log(url);
   const config: RequestInit = {
     method: "POST",
     body: JSON.stringify({ id }),
     headers: {
       "content-type": "application/json",
-      "user-agent": process.env.USER_AGENT!,
+      "User-Agent": process.env.USER_AGENT!,
+    },
+    next: {
+      revalidate: 3600,
     },
   };
 
@@ -37,12 +41,12 @@ async function getData(id: string) {
 }
 
 async function MediaPage({ params }: Props) {
-  const data: DataProps = await getData(params.id);
+  const data: any = await getData(params.id);
 
   return (
     <main className="flex justify-center">
       <Container>
-        <Section data={data} />
+        <Section data={data} id={params.id} />
       </Container>
     </main>
   );
