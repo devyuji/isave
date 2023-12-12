@@ -13,7 +13,7 @@ const useTokenBucket = () => {
   const token = useAppSelector((state) => state.token.tokenAvailable);
 
   useEffect(() => {
-    let timer: NodeJS.Timer;
+    let timer: NodeJS.Timeout;
 
     const refill = () => {
       dispatch(UPDATE_TOKEN(Math.min(token + refillAmount, maxTokens)));
