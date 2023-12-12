@@ -149,7 +149,7 @@ const Section: FC<Props> = ({ data, id }) => {
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
-            className="sticky bottom-4"
+            className="sticky bottom-4 flex"
           >
             <button
               type="button"
