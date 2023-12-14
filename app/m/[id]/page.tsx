@@ -18,7 +18,7 @@ export type DataProps = {
 
 async function getData(id: string) {
   const url = `${process.env.API_URL}/post`;
-  console.log(url);
+  
   const config: RequestInit = {
     method: "POST",
     body: JSON.stringify({ id }),
@@ -42,7 +42,7 @@ async function getData(id: string) {
 
 async function MediaPage({ params }: Props) {
   const data: any = await getData(params.id);
-
+  
   return (
     <main className="flex justify-center">
       <Container>

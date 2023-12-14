@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 import Backdrop from "./backdrop";
@@ -52,6 +52,38 @@ const View: FC<Props> = ({ handleClose, index }) => {
     setIndex((prev) => prev + 1);
   }, [idx, totalLength]);
 
+  const handleTouchStart = useCallback((evt: any) => {
+    const firstTouch = getTouches(evt)[0];
+    xDown.current = firstTouch.clientX;
+    yDown.current = firstTouch.clientY;
+  }, []);
+
+  const handleTouchMove = useCallback(
+    (evt: any) => {
+      if (!xDown.current || !yDown.current) {
+        return;
+      }
+
+      var xUp = evt.touches[0].clientX;
+      var yUp = evt.touches[0].clientY;
+
+      var xDiff = xDown.current - xUp;
+      var yDiff = yDown.current - yUp;
+
+      if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+          moveNext();
+        } else {
+          movePrev();
+        }
+      }
+
+      xDown.current = null;
+      yDown.current = null;
+    },
+    [moveNext, movePrev]
+  );
+
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
@@ -61,8 +93,15 @@ const View: FC<Props> = ({ handleClose, index }) => {
       }
     };
     window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
-  }, [moveNext, movePrev]);
+    document.addEventListener("touchstart", handleTouchStart, false);
+    document.addEventListener("touchmove", handleTouchMove, false);
+
+    return () => {
+      window.removeEventListener("keydown", close);
+      document.removeEventListener("touchstart", handleTouchStart, false);
+      document.removeEventListener("touchmove", handleTouchMove, false);
+    };
+  }, [handleTouchMove, handleTouchStart, moveNext, movePrev]);
 
   const source = useMemo(
     () =>
@@ -72,10 +111,21 @@ const View: FC<Props> = ({ handleClose, index }) => {
     [data.download_url]
   );
 
+  let xDown = useRef(null);
+  let yDown = useRef(null);
+
+  function getTouches(evt: any) {
+    return (
+      evt.touches || // browser API
+      evt.originalEvent.touches
+    ); // jQuery
+  }
+
   return (
     <Backdrop onClick={handleClose}>
       <AnimatePresence custom={direction}>
         <motion.div
+          layoutId={`${index}`}
           key={idx}
           variants={slide}
           initial="initial"

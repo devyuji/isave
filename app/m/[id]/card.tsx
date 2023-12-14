@@ -83,9 +83,10 @@ const Card: FC<Props> = ({ data, username, index }) => {
             style={{ display: imageLoad ? "block" : "none" }}
             src={image}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover cursor-pointer"
             onLoad={() => setImageLoad(true)}
             onError={() => console.log("error")}
+            onClick={() => setShowPreview(true)}
           />
 
           <AnimatePresence>
@@ -99,58 +100,33 @@ const Card: FC<Props> = ({ data, username, index }) => {
               >
                 <motion.li variants={item}>
                   <button
-                    className="flex items-center gap-2"
-                    onClick={() => setShowPreview(true)}
+                    className="flex gap-2 items-center"
+                    onClick={() => download(data.preview)}
                   >
                     <svg
                       viewBox="0 0 24 24"
-                      width="20"
-                      height="20"
+                      width="24"
+                      height="24"
                       stroke="currentColor"
                       strokeWidth="2"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <polyline points="9 21 3 21 3 15"></polyline>
-                      <line x1="21" y1="3" x2="14" y2="10"></line>
-                      <line x1="3" y1="21" x2="10" y2="14"></line>
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
                     </svg>
-                    Preview
+                    Download Thumnail
                   </button>
                 </motion.li>
-                {data.type === "video" && (
-                  <motion.li variants={item}>
-                    <button
-                      className="flex gap-2 items-center"
-                      onClick={() => download(data.preview)}
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="24"
-                        height="24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <rect
-                          x="3"
-                          y="3"
-                          width="18"
-                          height="18"
-                          rx="2"
-                          ry="2"
-                        ></rect>
-                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                        <polyline points="21 15 16 10 5 21"></polyline>
-                      </svg>
-                      Download Thumnail
-                    </button>
-                  </motion.li>
-                )}
               </motion.ul>
             )}
           </AnimatePresence>
@@ -211,26 +187,28 @@ const Card: FC<Props> = ({ data, username, index }) => {
               )}
               {downloadError ? "Failed to download" : "download"}
             </button>
-            <button
-              type="button"
-              onClick={toggleMenu}
-              className="hover:border-black border-2 border-transparent rounded-lg"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            {data.type == "video" && (
+              <button
+                type="button"
+                onClick={toggleMenu}
+                className="hover:border-black border-2 border-transparent rounded-lg"
               >
-                <circle cx="12" cy="12" r="1"></circle>
-                <circle cx="19" cy="12" r="1"></circle>
-                <circle cx="5" cy="12" r="1"></circle>
-              </svg>
-            </button>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="19" cy="12" r="1"></circle>
+                  <circle cx="5" cy="12" r="1"></circle>
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </div>

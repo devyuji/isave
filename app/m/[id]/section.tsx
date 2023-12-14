@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect,  useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -131,6 +131,7 @@ const Section: FC<Props> = ({ data, id }) => {
           )}
         </form>
 
+        {/* post  */}
         <div className={styles.card_container}>
           {data.data.map((d: Data, index) => (
             <Card
@@ -143,13 +144,14 @@ const Section: FC<Props> = ({ data, id }) => {
         </div>
       </div>
 
+      {/* scroll to top */}
       <AnimatePresence>
         {showTop && (
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
-            className="sticky bottom-4 flex"
+            className="sticky bottom-4 flex mb-2 sm:mr-0 mr-2"
           >
             <button
               type="button"
