@@ -11,7 +11,7 @@ function ApiPage() {
   return (
     <main className="grid place-items-center p-4">
       <Container>
-        <p className="text-center leading-7">
+        <p className="text-center leading-7 text-lg">
           If you are interested in using our API, I would be happy to discuss
           the details with you. Please send us an email with the subject &quot;I
           want to use isave api&quot; and include information about your monthly

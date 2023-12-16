@@ -132,7 +132,7 @@ const View: FC<Props> = ({ handleClose, index }) => {
           animate="animate"
           exit="exit"
           custom={direction}
-          className="w-10/12 2xl:w-[90rem] h-full overflow-hidden p-2 absolute"
+          className="w-full sm:w-10/12 2xl:w-[90rem] h-full overflow-hidden p-2 absolute"
         >
           {data.type == "image" ? (
             <Image
@@ -172,7 +172,7 @@ const View: FC<Props> = ({ handleClose, index }) => {
       </div>
 
       <div
-        className="absolute top-1/2 flex justify-between w-full px-4 text-white"
+        className="absolute top-1/2 justify-between w-full px-4 text-white hidden sm:flex"
         onClick={(e) => e.stopPropagation()}
       >
         <button
