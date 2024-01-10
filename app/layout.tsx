@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-head-element */
 import "../styles/globals.css";
 import { ReactNode } from "react";
 import Navbar from "./navbar";
@@ -6,12 +5,13 @@ import Footer from "./footer";
 import FirebaseInit from "./firebaseinit";
 import ReduxInit from "./redux";
 import ShowLimitError from "./showLimitError";
+import type { Metadata } from "next";
 
 interface Props {
   children: ReactNode;
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Instagram Downloader | Fast, Free, Anonymous - isave",
   description:
     "Isave allows you to save any media from Instagram, including reels, posts, videos, IGTV, and images.",
