@@ -17,14 +17,14 @@ export type DataProps = {
 };
 
 async function getData(id: string) {
-  const url = `${process.env.API_URL}/post`;
-  
-  const config: RequestInit = {
+  const url = process.env.API_URL!;
+
+  const config = {
     method: "POST",
     body: JSON.stringify({ id }),
     headers: {
       "content-type": "application/json",
-      "User-Agent": process.env.USER_AGENT!,
+      "x-api-key": process.env.KEY!,
     },
     next: {
       revalidate: 3600,
@@ -41,8 +41,8 @@ async function getData(id: string) {
 }
 
 async function MediaPage({ params }: Props) {
-  const data: any = await getData(params.id);
-  
+  const data: DataProps = await getData(params.id);
+
   return (
     <main className="flex justify-center">
       <Container>

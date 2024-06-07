@@ -145,7 +145,7 @@ function PrivacyPolicyPage() {
           If you have any questions or suggestions about my Privacy Policy, do
           not hesitate to contact me you can get my contact information from{" "}
           <span className="border-b-2 border-black">
-            <a href="https://devyuji.com#contact">here.</a>
+            <a href="https://rraghavan.com#contact">here.</a>
           </span>
         </p>{" "}
       </Container>

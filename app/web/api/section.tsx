@@ -12,7 +12,6 @@ function Section() {
   const { handleSubmit, register, setValue } = useForm<formValue>({
     defaultValues: {
       subject: "I want to use isave api",
-      message: "Price - $18 \n\nMonthly Request - 2000 \n\nReason - ",
     },
   });
 
@@ -36,10 +35,6 @@ function Section() {
           <button
             onClick={() => {
               setPricingOption("default");
-              setValue(
-                "message",
-                "Price - $18 \n\nMonthly Request - 2000 \n\nReason - "
-              );
             }}
             className={`${
               pricingOption == "default"
@@ -59,10 +54,6 @@ function Section() {
           <button
             onClick={() => {
               setPricingOption("custom");
-              setValue(
-                "message",
-                "Price - Let discuss about it. \n\nMonthly Request - \n\nReason - "
-              );
             }}
             className={`${
               pricingOption == "custom" ? "bg-black text-white" : "border-black"
@@ -88,7 +79,7 @@ function Section() {
 
         <label htmlFor="body">Body</label>
         <textarea
-          placeholder="Write message"
+          placeholder="For what purpose are you going to use this API?"
           {...register("message")}
           id="body"
           className="p-2 border-2 outline-none border-black rounded-lg resize-none h-56"

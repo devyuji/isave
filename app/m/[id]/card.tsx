@@ -41,7 +41,6 @@ const Card: FC<Props> = ({ data, username, index }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [downloadError, setDownloadError] = useState(false);
-
   const image = useMemo(
     () =>
       `${process.env.NEXT_PUBLIC_PROXY}?url=${encodeURIComponent(
@@ -49,7 +48,6 @@ const Card: FC<Props> = ({ data, username, index }) => {
       )}`,
     [data]
   );
-
   const download = async (url: string) => {
     downloadError && setDownloadError(false);
     setIsDownloading(true);
@@ -70,7 +68,7 @@ const Card: FC<Props> = ({ data, username, index }) => {
 
   return (
     <>
-      <div className="p-2 overflow-hidden rounded-lg relative hover:bg-zinc-100 transition-colors duration-500">
+      <div className="overflow-hidden rounded-lg relative">
         {/* image  */}
         <div className=" w-full aspect-square h-96 overflow-hidden relative rounded-lg">
           {!imageLoad && (
@@ -85,7 +83,7 @@ const Card: FC<Props> = ({ data, username, index }) => {
             alt=""
             className="w-full h-full object-cover cursor-pointer"
             onLoad={() => setImageLoad(true)}
-            onError={() => console.log("error")}
+            onError={() => console.log("unable to load an image")}
             onClick={() => setShowPreview(true)}
           />
 

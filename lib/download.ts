@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
-export const downloadManager = async (url: string) => {
+export async function downloadManager(url: string) {
   let fileName = "";
   let blobUrl: string | undefined;
 
@@ -35,9 +35,9 @@ export const downloadManager = async (url: string) => {
   );
 
   document.body.removeChild(anchorTag);
-};
+}
 
-const random = () => {
+function random() {
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -47,4 +47,4 @@ const random = () => {
   }
 
   return str;
-};
+}
