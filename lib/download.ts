@@ -4,9 +4,7 @@ export async function downloadManager(url: string) {
   let fileName = "";
   let blobUrl: string | undefined;
 
-  const link = `${process.env.NEXT_PUBLIC_PROXY}?url=${encodeURIComponent(
-    url
-  )}`;
+  const link = `/proxy?url=${encodeURIComponent(url)}`;
 
   const config: AxiosRequestConfig = {
     responseType: "blob",

@@ -43,7 +43,7 @@ const Card: FC<Props> = ({ data, username, index }) => {
   const [downloadError, setDownloadError] = useState(false);
   const image = useMemo(
     () =>
-      `${process.env.NEXT_PUBLIC_PROXY}?url=${encodeURIComponent(
+      `/proxy?url=${encodeURIComponent(
         data.preview
       )}`,
     [data]
