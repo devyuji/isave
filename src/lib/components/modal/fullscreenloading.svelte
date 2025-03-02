@@ -8,7 +8,7 @@
 			<div role="status">
 				<svg
 					aria-hidden="true"
-					class="animate-spin-fast h-8 w-8 fill-stone-900 text-gray-200 dark:text-gray-600"
+					class="h-8 w-8 animate-spin fill-stone-900 text-gray-200 dark:text-gray-600"
 					viewBox="0 0 100 101"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"

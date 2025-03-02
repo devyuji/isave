@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import Container from '$lib/components/container.svelte';
 	import { fly } from 'svelte/transition';
 
 	let inputValues = $state({
@@ -48,11 +49,11 @@
 </script>
 
 <svelte:head>
-	<title>isave</title>
+	<title>isave - instagram media downloader</title>
 </svelte:head>
 
 <main class="grid h-full grow place-items-center">
-	<div class="w-full space-y-6 p-6 md:w-150">
+	<Container class="space-y-6">
 		<section class="space-y-4">
 			<div class="grid place-items-center">
 				<svg
@@ -82,7 +83,7 @@
 
 		<section>
 			<form onsubmit={submit} class="flex flex-col gap-2">
-				<div class="flex h-15 w-full gap-2 rounded-lg bg-stone-300 px-4">
+				<div class="h-15 flex w-full gap-2 rounded-lg bg-stone-300 px-4">
 					<input
 						type="url"
 						bind:value={inputValues.url}
@@ -136,5 +137,5 @@
 				</div>
 			</form>
 		</section>
-	</div>
+	</Container>
 </main>
