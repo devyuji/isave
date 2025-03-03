@@ -13,7 +13,7 @@
 
 <div class="size-full">
 	{#if loading}
-		<div transition:fade class="size-full animate-pulse bg-stone-100"></div>
+		<div transition:fade class="size-full animate-pulse bg-white"></div>
 	{/if}
 	<img
 		class={`${rest.class} transition-transform ${loading && 'hidden'} ${selected && 'scale-95'}`}

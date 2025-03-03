@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-	--color-primary: #c9c7ba;
+	--color-primary: oklch(0.97 0.001 106.424);
 	--color-primary-text: #29292b;
 
 	--animate-spin-fast: spin 0.25s infinite;
