@@ -72,7 +72,7 @@
 </script>
 
 <svelte:head>
-	<title>isave - instagram media downloader</title>
+	<title>Instagram Downloader | Fast, Free, Anonymous - isave</title>
 </svelte:head>
 
 <main class="grid h-full place-items-center">

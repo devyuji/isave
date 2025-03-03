@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>isave - privacy-policy</title>
+	<title>privacy-policy - isave</title>
 </svelte:head>
 
 <main class="flex justify-center leading-7">
