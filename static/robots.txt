@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: 
+Crawl-delay: 5
+Disallow: /cgi-bin/
+Disallow: /m/*
+Disallow: /m
+Sitemap: https://isave.cc/sitemap.xml
