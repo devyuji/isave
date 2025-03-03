@@ -1,6 +1,7 @@
-import { API_URI } from '$env/static/private';
+import { API_KEY, API_URI } from '$env/static/private';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import type { Post } from '$lib/types/post';
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
 	try {
@@ -8,7 +9,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 
 		const config: RequestInit = {
 			headers: {
-				'x-api-key': 'devyuji',
+				'x-api-key': API_KEY,
 				'content-type': 'application/json'
 			},
 			body: JSON.stringify({ id }),
@@ -22,7 +23,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 			throw new Error('api.error');
 		}
 
-		const data = await response.json();
+		const data: Post = await response.json();
 
 		return {
 			response: data

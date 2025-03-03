@@ -16,7 +16,7 @@
 		<div transition:fade class="size-full animate-pulse bg-stone-100"></div>
 	{/if}
 	<img
-		class={`${rest.class} transition-transform ${loading ? 'hidden' : ''} ${selected ? 'scale-95' : ''}`}
+		class={`${rest.class} transition-transform ${loading && 'hidden'} ${selected && 'scale-95'}`}
 		src={rest.src}
 		alt={rest.alt}
 		onload={() => (loading = false)}
