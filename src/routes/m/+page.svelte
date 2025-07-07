@@ -76,7 +76,7 @@
 </svelte:head>
 
 <main class="grid h-full place-items-center">
-	<div class="lg:w-200 relative w-full space-y-6 p-6">
+	<div class="relative w-full space-y-6 p-6 lg:w-200">
 		<section class="h-full space-y-6">
 			<!-- back button  -->
 			<div>
@@ -101,7 +101,7 @@
 				{#each data.response.data as d, index}
 					<button
 						type="button"
-						class={`border-3 relative aspect-square size-full overflow-hidden rounded-lg ${selected.has(index) ? 'border-black' : 'border-transparent'} `}
+						class={`relative aspect-square size-full overflow-hidden rounded-lg border-3 ${selected.has(index) ? 'border-black' : 'border-transparent'} `}
 						onclick={() => toggleSelection(index)}
 					>
 						<Image
@@ -112,7 +112,7 @@
 							loading="lazy"
 						/>
 
-						<span class="absolute left-2 top-2 size-fit rounded-md bg-black p-1">
+						<span class="absolute top-2 left-2 size-fit rounded-md bg-black p-1">
 							{#if d.type === 'image'}
 								<svg
 									viewBox="0 0 24 24"
@@ -170,7 +170,7 @@
 			</div>
 		</section>
 
-		<div class="pointer-events-none sticky bottom-5 right-0 h-10">
+		<div class="pointer-events-none sticky right-0 bottom-5 h-10">
 			{#if isSelectedAny || downloading}
 				<div
 					transition:fly={{ x: '10', duration: 250, easing: circOut }}
@@ -179,7 +179,7 @@
 					<button
 						type="button"
 						onclick={downloading ? null : download}
-						class="bg-primary-text transition-discrete rounded-lg px-4 py-2 text-sm text-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all"
+						class="bg-primary-text rounded-lg px-4 py-2 text-sm text-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all transition-discrete"
 					>
 						{#if downloading}
 							<div>

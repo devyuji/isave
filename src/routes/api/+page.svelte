@@ -30,13 +30,19 @@
 				<h1 class="text-3xl font-semibold">Interested in using our API?</h1>
 
 				<p class="text-lg">
-					Email us at <span class="border-b border-black"
-						><a href="mailto:connect@rraghavan.com?subject=I want to use isave api"
-							>connect@rraghavan.com</a
-						></span
-					> with the subject “I want to use isave API” and your estimated monthly server requests. We’ll
-					review your needs to ensure compatibility and collaborate on achieving your goals.
+					Email us with the subject “I want to use isave API” and your estimated monthly server
+					requests. We’ll review your needs to ensure compatibility and collaborate on achieving
+					your goals.
 				</p>
+
+				<a
+					href="https://rraghavan.com/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="border-b border-black after:content-['_↗']"
+				>
+					Contact me
+				</a>
 			</div>
 		</section>
 	</Container>

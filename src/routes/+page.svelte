@@ -27,24 +27,7 @@
 	function submit(e: SubmitEvent) {
 		e.preventDefault();
 
-		const id = instagramUrlParser(inputValues.url);
-
-		if (id === '') {
-			return;
-		}
-
-		goto(`/m/${id}`);
-	}
-
-	function instagramUrlParser(url: string) {
-		const urlSplit = url.split('/');
-		const length = urlSplit.length;
-
-		const last = urlSplit[length - 1];
-
-		if (last[0] === '?' || last == '') return urlSplit[length - 2];
-
-		return urlSplit[length - 1];
+		goto(`/m/?url=${encodeURIComponent(inputValues.url)}`);
 	}
 </script>
 
@@ -84,7 +67,7 @@
 
 		<section>
 			<form onsubmit={submit} class="flex flex-col gap-2">
-				<div class="h-15 flex w-full gap-2 rounded-lg bg-stone-300 px-4">
+				<div class="flex h-15 w-full gap-2 rounded-lg bg-stone-300 px-4">
 					<input
 						type="url"
 						bind:value={inputValues.url}

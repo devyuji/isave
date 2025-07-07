@@ -1,23 +1,23 @@
-import { API_KEY, API_URI } from '$env/static/private';
+import { API_URI, USER_AGENT } from '$env/static/private';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Post } from '$lib/types/post';
 
-export const load: PageServerLoad = async ({ params, fetch }) => {
+export const load: PageServerLoad = async ({ url, fetch }) => {
 	try {
-		const id = params.id;
+		const instagramUrl = url.searchParams.get('url');
 
 		const config: RequestInit = {
 			headers: {
-				'x-api-key': API_KEY,
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				'user-agent': USER_AGENT
 			},
-			body: JSON.stringify({ id }),
+			body: JSON.stringify({ url: instagramUrl }),
 			method: 'POST'
 		};
 
-		const url = new URL(API_URI);
-		const response = await fetch(url, config);
+		const apiUrl = new URL(API_URI);
+		const response = await fetch(apiUrl, config);
 
 		if (!response.ok) {
 			throw new Error('api.error');
