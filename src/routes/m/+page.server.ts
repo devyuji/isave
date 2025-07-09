@@ -7,6 +7,10 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
 	try {
 		const instagramUrl = url.searchParams.get('url');
 
+		if (!instagramUrl) {
+			return error(400, 'Invalid URL');
+		}
+
 		const config: RequestInit = {
 			headers: {
 				'content-type': 'application/json',
