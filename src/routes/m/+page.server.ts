@@ -1,4 +1,4 @@
-import { API_URI, USER_AGENT } from '$env/static/private';
+import { API_KEY, API_URI, USER_AGENT } from '$env/static/private';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Post } from '$lib/types/post';
@@ -14,7 +14,8 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
 		const config: RequestInit = {
 			headers: {
 				'content-type': 'application/json',
-				'user-agent': USER_AGENT
+				'user-agent': USER_AGENT,
+				'x-api-key': API_KEY
 			},
 			body: JSON.stringify({ url: instagramUrl }),
 			method: 'POST'
