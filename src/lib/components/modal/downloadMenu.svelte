@@ -1,4 +1,6 @@
 <script lang="ts">
+	/* eslint-disable @typescript-eslint/no-explicit-any */
+
 	import { fly } from 'svelte/transition';
 	import Backdrop from './backdrop.svelte';
 	import { getContext } from 'svelte';
