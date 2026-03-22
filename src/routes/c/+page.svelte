@@ -2,25 +2,21 @@
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 
 	import { fly } from 'svelte/transition';
-	import type { PageServerData } from './$types';
 	import { circOut } from 'svelte/easing';
 	import Image from '$lib/components/image.svelte';
 	import pLimit from 'p-limit';
 	import DownloadMenu from '$lib/components/modal/downloadMenu.svelte';
 	import { setContext } from 'svelte';
 	import { downloadManager } from '$lib/utils/downloadManager';
-	import indexDb from "$lib/database/indexDb.svelte";
-	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
+	import type { PageData } from '../$types';
 
 	interface Props {
-		data: PageServerData;
+		data: PageData;
 	}
 
 	let { data }: Props = $props();
 
-	// svelte-ignore state_referenced_locally
-		setContext('data', data.response);
+	setContext('data', data.response);
 
 	const selectedImage = $state<number[]>([]);
 	setContext('selectedPost', selectedImage);
@@ -38,29 +34,6 @@
 			});
 		}
 	});
-
-	// Add data to local DB
-	$effect(() => {
-		if (!indexDb.loading) {
-			const uri = page.url.searchParams;
-
-			 indexDb.check(uri.get("url") ?? "").then(value => {
-				if (value) {
-					goto(`/c/?url=${encodeURIComponent(uri.get('url') ?? "")}`, {
-						replaceState:true,
-					})
-				}
-			});
-
-			indexDb.add({
-				data: data.response.data,
-				id: data.response.id,
-				url: uri.get("url") ?? "",
-				username: data.response.username,
-				cover: data.response.data[0].preview,
-			}).catch(err => console.error(err))
-		}
-	})
 
 	function toggleDownloadMenu() {
 		showDownloadMenu = !showDownloadMenu;

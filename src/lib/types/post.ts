@@ -2,6 +2,7 @@ export interface Post {
 	data: Data[];
 	username: string;
 	status: string;
+	id: string;
 }
 
 interface Data {

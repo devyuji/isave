@@ -3,6 +3,8 @@
 	import Footer from '$lib/components/footer.svelte';
 	import { navigating, page } from '$app/state';
 	import Fullscreenloading from '$lib/components/modal/fullscreenloading.svelte';
+	import indexDb from "$lib/database/indexDb.svelte"
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
@@ -17,7 +19,16 @@
 			visible = false;
 		}
 	});
+
+	onMount(() => {
+			indexDb.init().catch(err => console.log(err));
+	})
 </script>
+
+<svelte:head>
+	<title>Instagram Downloader | Fast, Free, Anonymous - isave</title>
+	<meta name="title" content="Instagram Downloader | Fast, Free, Anonymous - isave" />
+</svelte:head>
 
 {#if visible}
 	<Fullscreenloading />

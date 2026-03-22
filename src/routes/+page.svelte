@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Container from '$lib/components/container.svelte';
 	import { fly } from 'svelte/transition';
+	import indexDb from "$lib/database/indexDb.svelte"
 
 	let inputValues = $state({
 		url: ''
@@ -24,16 +25,24 @@
 		}
 	}
 
-	function submit(e: SubmitEvent) {
+	async function submit(e: SubmitEvent) {
 		e.preventDefault();
 
-		goto(`/m/?url=${encodeURIComponent(inputValues.url)}`);
+		// check if it present in local DB
+		const isPresent = await indexDb.check(inputValues.url)
+
+		const uri = encodeURIComponent(inputValues.url)
+
+		if (isPresent) {
+			goto(`/c/?url=${uri}`)
+		}else {
+			goto(`/m/?url=${uri}`);
+		}
 	}
 </script>
 
 <svelte:head>
 	<title>Instagram Downloader | Fast, Free, Anonymous - isave</title>
-	<meta name="title" content="Instagram Downloader | Fast, Free, Anonymous - isave" />
 </svelte:head>
 
 <main class="grid h-full grow place-items-center">
