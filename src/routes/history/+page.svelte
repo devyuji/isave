@@ -18,7 +18,7 @@
 				{/if}
 			</div>
 
-			<div class="grid grid-cols-3 gap-4">
+			<div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
 				{#each data.response as history (history.id)}
 					<a
 						href={`/c/?url=${encodeURIComponent(history.url)}&back=${page.route.id}`}
