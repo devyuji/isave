@@ -9,23 +9,6 @@
 <main class="grid place-items-center">
 	<Container>
 		<section class="space-y-4">
-			<div>
-				<a href="/" class="flex w-fit items-center gap-2" aria-label="goback">
-					<svg
-						viewBox="0 0 24 24"
-						width="20"
-						height="20"
-						stroke="currentColor"
-						stroke-width="2"
-						fill="none"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"
-						></polyline></svg
-					>
-				</a>
-			</div>
-
 			<div class="space-y-4">
 				<h1 class="text-3xl font-semibold">Interested in using our API?</h1>
 

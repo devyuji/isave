@@ -8,14 +8,12 @@
 	import DownloadMenu from '$lib/components/modal/downloadMenu.svelte';
 	import { setContext } from 'svelte';
 	import { downloadManager } from '$lib/utils/downloadManager';
-	import type { PageData } from '../$types';
+	import type { PageProps } from './$types';
+	import Container from '$lib/components/container.svelte';
 
-	interface Props {
-		data: PageData;
-	}
+	let { data }: PageProps = $props();
 
-	let { data }: Props = $props();
-
+	// svelte-ignore state_referenced_locally
 	setContext('data', data.response);
 
 	const selectedImage = $state<number[]>([]);
@@ -78,26 +76,8 @@
 </svelte:head>
 
 <main class="grid h-full place-items-center">
-	<div class="relative w-full space-y-6 p-6 lg:w-200">
+	<Container class="relative w-full space-y-6">
 		<section class="h-full space-y-6">
-			<!-- back button  -->
-			<div>
-				<a href="/" aria-label="back">
-					<svg
-						viewBox="0 0 24 24"
-						width="24"
-						height="24"
-						stroke="currentColor"
-						stroke-width="2"
-						fill="none"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"
-						></polyline></svg
-					></a
-				>
-			</div>
-
 			<!-- post card  -->
 			<div class="grid grid-cols-2 gap-4 lg:grid-cols-3">
 				{#each data.response.data as d, index}
@@ -235,7 +215,7 @@
 				</div>
 			{/if}
 		</div>
-	</div>
+	</Container>
 </main>
 
 {#if showDownloadMenu}

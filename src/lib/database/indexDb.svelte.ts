@@ -2,7 +2,7 @@
 import { extractIDFromInstagramURL } from '$lib/utils/extractIdFromInstagramUrl';
 import { openDB, type IDBPDatabase } from 'idb';
 
-interface SavedToDB {
+export interface SavedToDB {
 	id: string;
 	username: string;
 	data: any;
@@ -76,6 +76,23 @@ class IndexDB {
 
 		if (value) return;
 
+		// check if the trusthold exceded
+		const total = await this.db.getAll('cache-list');
+
+		if (total.length > 9) {
+			const cctx = this.db.transaction(['cache', 'cache-list'], 'readwrite');
+			const store = cctx.objectStore('cache');
+			const store2 = cctx.objectStore('cache-list');
+
+			const c1 = await store.openCursor();
+			const c2 = await store2.openCursor();
+
+			if (c1) await c1.delete();
+			if (c2) await c2.delete();
+
+			await cctx.done;
+		}
+
 		const ccList = {
 			id: data.id
 		};
@@ -115,6 +132,16 @@ class IndexDB {
 		const value = await this.db.get('cache', id);
 
 		if (!value) throw new Error('no.data.found');
+
+		return value;
+	}
+
+	async getAll(): Promise<SavedToDB[]> {
+		if (!this.db) throw new Error('no.db.found');
+
+		const value: SavedToDB[] = await this.db.getAll('cache');
+
+		if (value.length < 1) return [];
 
 		return value;
 	}

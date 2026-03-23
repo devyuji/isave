@@ -7,24 +7,7 @@
 </svelte:head>
 
 <main class="flex justify-center leading-7">
-	<Container class="grid gap-4 p-4">
-		<div>
-			<a aria-label="goback" href="/" class="flex w-fit items-center gap-2">
-				<svg
-					viewBox="0 0 24 24"
-					width="20"
-					height="20"
-					stroke="currentColor"
-					stroke-width="2"
-					fill="none"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"
-					></polyline></svg
-				>
-			</a>
-		</div>
-
+	<Container class="grid gap-4">
 		<h1 class="text-4xl font-semibold">Privacy Policy</h1>
 		{' '}
 		<p>

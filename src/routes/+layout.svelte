@@ -5,6 +5,7 @@
 	import Fullscreenloading from '$lib/components/modal/fullscreenloading.svelte';
 	import indexDb from "$lib/database/indexDb.svelte"
 	import { onMount } from 'svelte';
+	import Navbar from '$lib/components/navbar.svelte';
 
 	let { children } = $props();
 
@@ -33,6 +34,8 @@
 {#if visible}
 	<Fullscreenloading />
 {/if}
+
+<Navbar />
 
 {@render children()}
 

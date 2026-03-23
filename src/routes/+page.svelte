@@ -2,11 +2,12 @@
 	import { goto } from '$app/navigation';
 	import Container from '$lib/components/container.svelte';
 	import { fly } from 'svelte/transition';
-	import indexDb from "$lib/database/indexDb.svelte"
+	import indexDb from '$lib/database/indexDb.svelte';
 
 	let inputValues = $state({
 		url: ''
 	});
+	let inputRef: HTMLInputElement;
 
 	const isInputEmpty = $derived(inputValues.url.trim() === '');
 	let isValidUrl = $state(false);
@@ -29,15 +30,19 @@
 		e.preventDefault();
 
 		// check if it present in local DB
-		const isPresent = await indexDb.check(inputValues.url)
+		const isPresent = await indexDb.check(inputValues.url);
 
-		const uri = encodeURIComponent(inputValues.url)
+		const uri = encodeURIComponent(inputValues.url);
 
 		if (isPresent) {
-			goto(`/c/?url=${uri}`)
-		}else {
+			goto(`/c/?url=${uri}`);
+		} else {
 			goto(`/m/?url=${uri}`);
 		}
+	}
+
+	function reset() {
+		inputRef.focus();
 	}
 </script>
 
@@ -46,7 +51,7 @@
 </svelte:head>
 
 <main class="grid h-full grow place-items-center">
-	<Container class="space-y-6">
+	<Container class="space-y-6 md:w-150">
 		<section class="space-y-4">
 			<div class="grid place-items-center">
 				<svg
@@ -75,9 +80,10 @@
 		</section>
 
 		<section>
-			<form onsubmit={submit} class="flex flex-col gap-2">
+			<form onsubmit={submit} onreset={reset} class="flex flex-col gap-2">
 				<div class="flex h-15 w-full gap-2 rounded-lg bg-stone-300 px-4">
 					<input
+						bind:this={inputRef}
 						type="url"
 						bind:value={inputValues.url}
 						autocapitalize="off"
