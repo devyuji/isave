@@ -6,7 +6,7 @@
 			<a href="https://github.com/devyuji/isave">Github</a>
 		</div>
 
-		<p>isave - 2025</p>
+		<p>isave - 2026</p>
 		<a href="https://rraghavan.com/" class="text-xs hover:text-yellow-500">Crafted by r-r</a>
 	</div>
 </footer>

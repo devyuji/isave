@@ -8,11 +8,12 @@ export interface SavedToDB {
 	data: any;
 	url: string;
 	cover: string;
+	timestamp: number;
 }
 
 class IndexDB {
 	dbName = 'isave-cache';
-	dbVersion = 1;
+	dbVersion = 2;
 	loading = $state(true);
 
 	db: IDBPDatabase | null = null;
@@ -29,22 +30,9 @@ class IndexDB {
 
 		try {
 			this.db = await openDB(this.dbName, this.dbVersion, {
-				upgrade: (db, oldVersion) => {
+				upgrade: (db, oldVersion, newVersion, transaction) => {
 					switch (oldVersion) {
-						case 1:
-							if (!db.objectStoreNames.contains('cache')) {
-								const objectStore = db.createObjectStore('cache', { keyPath: 'id' });
-								objectStore.createIndex('username', 'username', { unique: false });
-								objectStore.createIndex('data', 'data', { unique: false, multiEntry: true });
-								objectStore.createIndex('cover', 'cover', { unique: false });
-							}
-
-							if (!db.objectStoreNames.contains('cache-list')) {
-								db.createObjectStore('cache-list', { keyPath: 'id' });
-							}
-							break;
-
-						default:
+						case 0:
 							if (!db.objectStoreNames.contains('cache')) {
 								const objectStore = db.createObjectStore('cache', { keyPath: 'id' });
 								objectStore.createIndex('username', 'username', { unique: false });
@@ -53,9 +41,16 @@ class IndexDB {
 								objectStore.createIndex('cover', 'cover', { unique: false });
 							}
 
-							if (!db.objectStoreNames.contains('cache-list')) {
-								db.createObjectStore('cache-list', { keyPath: 'id' });
+						// eslint-disable-next-line no-fallthrough
+						case 1: {
+							const objectStore = transaction.objectStore('cache');
+
+							if (!objectStore.indexNames.contains('timestamp')) {
+								objectStore.createIndex('timestamp', 'timestamp', { unique: true });
 							}
+
+							console.log('upgraded to version 2');
+						}
 					}
 
 					console.log('database created');
@@ -69,35 +64,7 @@ class IndexDB {
 	}
 
 	async add(data: SavedToDB) {
-		if (!this.db) throw new Error('db not found');
-
-		// check if it is already present or not
-		const value = await this.db.get('cache-list', data.id);
-
-		if (value) return;
-
-		// check if the trusthold exceded
-		const total = await this.db.getAll('cache-list');
-
-		if (total.length > 9) {
-			const cctx = this.db.transaction(['cache', 'cache-list'], 'readwrite');
-			const store = cctx.objectStore('cache');
-			const store2 = cctx.objectStore('cache-list');
-
-			const c1 = await store.openCursor();
-			const c2 = await store2.openCursor();
-
-			if (c1) await c1.delete();
-			if (c2) await c2.delete();
-
-			await cctx.done;
-		}
-
-		const ccList = {
-			id: data.id
-		};
-
-		await this.db.add('cache-list', ccList);
+		if (!this.db) throw new Error('db.not.found');
 
 		const tx = this.db.transaction('cache', 'readwrite');
 
@@ -114,6 +81,18 @@ class IndexDB {
 			}),
 			tx.done
 		]);
+
+		// trim the data
+		const allData = await this.getAll();
+
+		const lengthOfAllData = allData.length;
+
+		if (lengthOfAllData <= 10) return;
+
+		// Descending Order
+		allData.sort((a, b) => a.timestamp - b.timestamp);
+
+		await this.db.delete('cache', allData[0].id);
 	}
 
 	async check(url: string): Promise<boolean> {
@@ -121,7 +100,7 @@ class IndexDB {
 
 		const id = extractIDFromInstagramURL(url);
 
-		const value = await this.db.get('cache-list', id);
+		const value = await this.db.get('cache', id);
 
 		return value ? true : false;
 	}
@@ -137,7 +116,7 @@ class IndexDB {
 	}
 
 	async getAll(): Promise<SavedToDB[]> {
-		if (!this.db) throw new Error('no.db.found');
+		if (!this.db) return [];
 
 		const value: SavedToDB[] = await this.db.getAll('cache');
 

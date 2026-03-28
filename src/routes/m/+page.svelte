@@ -9,7 +9,7 @@
 	import DownloadMenu from '$lib/components/modal/downloadMenu.svelte';
 	import { setContext } from 'svelte';
 	import { downloadManager } from '$lib/utils/downloadManager';
-	import indexDb from "$lib/database/indexDb.svelte";
+	import indexDb from '$lib/database/indexDb.svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import Container from '$lib/components/container.svelte';
@@ -21,7 +21,7 @@
 	let { data }: Props = $props();
 
 	// svelte-ignore state_referenced_locally
-		setContext('data', data.response);
+	setContext('data', data.response);
 
 	const selectedImage = $state<number[]>([]);
 	setContext('selectedPost', selectedImage);
@@ -45,23 +45,26 @@
 		if (!indexDb.loading) {
 			const uri = page.url.searchParams;
 
-			 indexDb.check(uri.get("url") ?? "").then(value => {
+			indexDb.check(uri.get('url') ?? '').then((value) => {
 				if (value) {
-					goto(`/c/?url=${encodeURIComponent(uri.get('url') ?? "")}`, {
-						replaceState:true,
-					})
+					goto(`/c/?url=${encodeURIComponent(uri.get('url') ?? '')}`, {
+						replaceState: true
+					});
 				}
 			});
 
-			indexDb.add({
-				data: data.response.data,
-				id: data.response.id,
-				url: uri.get("url") ?? "",
-				username: data.response.username,
-				cover: data.response.data[0].preview,
-			}).catch(err => console.error(err))
+			indexDb
+				.add({
+					data: data.response.data,
+					id: data.response.id,
+					url: uri.get('url') ?? '',
+					username: data.response.username,
+					cover: data.response.data[0].preview,
+					timestamp: Date.now()
+				})
+				.catch((err) => console.error(err));
 		}
-	})
+	});
 
 	function toggleDownloadMenu() {
 		showDownloadMenu = !showDownloadMenu;

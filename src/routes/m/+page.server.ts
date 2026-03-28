@@ -30,6 +30,10 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
 
 		const data: Post = await response.json();
 
+		if (data.status !== 'ok') {
+			throw new Error('status.failed');
+		}
+
 		return {
 			response: data
 		};

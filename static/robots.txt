@@ -4,4 +4,6 @@ Crawl-delay: 5
 Disallow: /cgi-bin/
 Disallow: /m/*
 Disallow: /m
+Disallow: /c
+Disallow: /c/*
 Sitemap: https://isave.cc/sitemap.xml
