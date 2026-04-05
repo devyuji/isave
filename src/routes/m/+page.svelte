@@ -11,7 +11,6 @@
 	import { downloadManager } from '$lib/utils/downloadManager';
 	import indexDb from '$lib/database/indexDb.svelte';
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
 	import Container from '$lib/components/container.svelte';
 
 	interface Props {
@@ -49,24 +48,20 @@
 		if (!indexDb.loading) {
 			const uri = page.url.searchParams;
 
-			// indexDb.check(uri.get('url') ?? '').then((value) => {
-			// 	if (value) {
-			// 		goto(`/c/?url=${encodeURIComponent(uri.get('url') ?? '')}`, {
-			// 			replaceState: true
-			// 		});
-			// 	}
-			// });
-
-			indexDb
-				.add({
-					data: data.response.data,
-					id: data.response.id,
-					url: uri.get('url') ?? '',
-					username: data.response.username,
-					cover: data.response.data[0].preview,
-					timestamp: Date.now()
-				})
-				.catch((err) => console.error(err));
+			indexDb.check(uri.get('url') ?? '').then((e) => {
+				if (!e) {
+					indexDb
+						.add({
+							data: data.response.data,
+							id: data.response.id,
+							url: uri.get('url') ?? '',
+							username: data.response.username,
+							cover: data.response.data[0].preview,
+							timestamp: Date.now()
+						})
+						.catch((err) => console.error(err));
+				}
+			});
 		}
 	});
 

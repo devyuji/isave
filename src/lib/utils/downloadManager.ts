@@ -23,7 +23,7 @@ export async function downloadManager(url: string) {
 			break;
 
 		default:
-			fileName = `unable.to.find.type`;
+			fileName = '';
 	}
 
 	const blobUrl = window.URL.createObjectURL(new Blob([data]));

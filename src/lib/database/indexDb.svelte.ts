@@ -122,6 +122,8 @@ class IndexDB {
 
 		if (value.length < 1) return [];
 
+		value.sort((a, b) => a.timestamp - b.timestamp);
+
 		return value;
 	}
 

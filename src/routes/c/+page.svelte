@@ -16,14 +16,18 @@
 	// svelte-ignore state_referenced_locally
 	setContext('data', data.response);
 
-	const selectedImage = $state<number[]>([]);
-	setContext('selectedPost', selectedImage);
+	let selectedImage = $state<number[]>([]);
 
 	const isSelectedAny = $derived(selectedImage.length !== 0);
 	const selected = $derived(new Set(selectedImage));
+	const isAllSelected = $derived(selectedImage.length === data.response.data.length);
 
 	let downloading = $state(false);
 	let showDownloadMenu = $state(false);
+
+	$effect(() => {
+		setContext('selectedPost', selectedImage);
+	});
 
 	$effect(() => {
 		if (data.response.data.length === 1) {
@@ -46,6 +50,21 @@
 		}
 
 		selectedImage.push(index);
+	}
+
+	function selectAll() {
+		if (isAllSelected) {
+			selectedImage = [];
+
+			return;
+		}
+
+		let a = [];
+		for (let i = 0; i < data.response.data.length; i++) {
+			a.push(i);
+		}
+
+		selectedImage = a;
 	}
 
 	async function download() {
@@ -78,6 +97,20 @@
 <main class="grid h-full place-items-center">
 	<Container class="relative w-full space-y-6">
 		<section class="h-full space-y-6">
+			<!-- select all btn  -->
+			<div class="flex justify-end">
+				<button
+					type="button"
+					onclick={selectAll}
+					class="flex gap-2 items-center"
+					aria-label="select all button"
+				>
+					<span
+						class={`w-3 h-3 ${isAllSelected ? 'bg-yellow-500' : ''} rounded-full border-2 border-black block`}
+					></span>
+					<span>Select all</span>
+				</button>
+			</div>
 			<!-- post card  -->
 			<div class="grid grid-cols-2 gap-4 lg:grid-cols-3">
 				{#each data.response.data as d, index}
