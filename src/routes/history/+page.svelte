@@ -9,6 +9,10 @@
 	let isDataEmpty = $derived(data.response.length < 1);
 </script>
 
+<svelte:head>
+	<title>History - isave</title>
+</svelte:head>
+
 <main class="grid place-items-center">
 	<Container>
 		<section class="space-y-4">
