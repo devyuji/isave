@@ -66,6 +66,10 @@ class IndexDB {
 	async add(data: SavedToDB) {
 		if (!this.db) throw new Error('db.not.found');
 
+		if (await this.check(data.url)) {
+			return;
+		}
+
 		const tx = this.db.transaction('cache', 'readwrite');
 
 		tx.onabort = function (event: any) {
@@ -89,7 +93,7 @@ class IndexDB {
 
 		if (lengthOfAllData <= 10) return;
 
-		// Descending Order
+		// Ascending Order
 		allData.sort((a, b) => a.timestamp - b.timestamp);
 
 		await this.db.delete('cache', allData[0].id);
@@ -122,7 +126,8 @@ class IndexDB {
 
 		if (value.length < 1) return [];
 
-		value.sort((a, b) => a.timestamp - b.timestamp);
+		// Desending order
+		value.sort((a, b) => b.timestamp - a.timestamp);
 
 		return value;
 	}
