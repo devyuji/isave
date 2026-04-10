@@ -48,6 +48,9 @@
 		if (!indexDb.loading) {
 			const uri = page.url.searchParams;
 
+			const currentDate = new Date();
+			const expireAt = currentDate.setHours(currentDate.getHours() + 48);
+
 			indexDb
 				.add({
 					data: data.response.data,
@@ -55,7 +58,8 @@
 					url: uri.get('url') ?? '',
 					username: data.response.username,
 					cover: data.response.data[0].preview,
-					timestamp: Date.now()
+					timestamp: Date.now(),
+					expireAt
 				})
 				.catch((err) => console.error(err));
 		}

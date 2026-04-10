@@ -10,20 +10,16 @@
 	let inputRef: HTMLInputElement;
 
 	const isInputEmpty = $derived(inputValues.url.trim() === '');
-	let isValidUrl = $state(false);
+	let isValidUrl = $derived(checkURL(inputValues.url));
 
-	$effect(() => {
-		checkURL(inputValues.url);
-	});
-
-	function checkURL(value: string) {
+	function checkURL(value: string): boolean {
 		const p = new RegExp('(https?://(?:www.)?instagram.com/([^/?#&]+)).*');
 
 		if (value.match(p)) {
-			isValidUrl = true;
-		} else {
-			isValidUrl = false;
+			return true;
 		}
+
+		return false;
 	}
 
 	async function submit(e: SubmitEvent) {

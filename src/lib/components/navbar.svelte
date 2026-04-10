@@ -29,9 +29,9 @@
 					</li>
 				{/if}
 
-				<li class="ml-auto">
+				<!-- <li class="ml-auto">
 					<a href="/history">history</a>
-				</li>
+				</li> -->
 			</ul>
 		</nav>
 	</Container>

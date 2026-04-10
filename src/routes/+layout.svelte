@@ -3,7 +3,7 @@
 	import Footer from '$lib/components/footer.svelte';
 	import { navigating, page } from '$app/state';
 	import Fullscreenloading from '$lib/components/modal/fullscreenloading.svelte';
-	import indexDb from "$lib/database/indexDb.svelte"
+	import indexDb from '$lib/database/indexDb.svelte';
 	import { onMount } from 'svelte';
 	import Navbar from '$lib/components/navbar.svelte';
 
@@ -22,8 +22,8 @@
 	});
 
 	onMount(() => {
-			indexDb.init().catch(err => console.log(err));
-	})
+		indexDb.init().catch((err) => console.log(err));
+	});
 </script>
 
 <svelte:head>

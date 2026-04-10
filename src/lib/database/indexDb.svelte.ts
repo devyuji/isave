@@ -9,11 +9,12 @@ export interface SavedToDB {
 	url: string;
 	cover: string;
 	timestamp: number;
+	expireAt?: number;
 }
 
 class IndexDB {
 	dbName = 'isave-cache';
-	dbVersion = 2;
+	dbVersion = 3;
 	loading = $state(true);
 
 	db: IDBPDatabase | null = null;
@@ -51,6 +52,17 @@ class IndexDB {
 
 							console.log('upgraded to version 2');
 						}
+
+						// eslint-disable-next-line no-fallthrough
+						case 2: {
+							const store = transaction.objectStore('cache');
+
+							if (!store.indexNames.contains('expireAt')) {
+								store.createIndex('expireAt', 'expireAt', { unique: true });
+							}
+
+							console.log('upgraded to version 3');
+						}
 					}
 
 					console.log('database created');
@@ -85,18 +97,6 @@ class IndexDB {
 			}),
 			tx.done
 		]);
-
-		// trim the data
-		const allData = await this.getAll();
-
-		const lengthOfAllData = allData.length;
-
-		if (lengthOfAllData <= 10) return;
-
-		// Ascending Order
-		allData.sort((a, b) => a.timestamp - b.timestamp);
-
-		await this.db.delete('cache', allData[0].id);
 	}
 
 	async check(url: string): Promise<boolean> {
@@ -106,7 +106,16 @@ class IndexDB {
 
 		const value = await this.db.get('cache', id);
 
-		return value ? true : false;
+		if (!value) return false;
+
+		// check if date is expired
+		if (this.checkExpiry(value.expireAt)) {
+			await this.db.delete('cache', id);
+
+			return false;
+		}
+
+		return true;
 	}
 
 	async get(id: string): Promise<SavedToDB> {
@@ -115,6 +124,12 @@ class IndexDB {
 		const value = await this.db.get('cache', id);
 
 		if (!value) throw new Error('no.data.found');
+
+		if (this.checkExpiry(value.expireAt)) {
+			await this.db.delete('cache', id);
+
+			throw new Error('data.expired');
+		}
 
 		return value;
 	}
@@ -134,6 +149,15 @@ class IndexDB {
 
 	private cleanData<T>(data: T) {
 		return JSON.parse(JSON.stringify(data));
+	}
+
+	private checkExpiry(expireAt: number | undefined): boolean {
+		if (!expireAt) return true;
+
+		const currentDate = new Date();
+		const e = new Date(expireAt);
+
+		return currentDate > e;
 	}
 }
 
