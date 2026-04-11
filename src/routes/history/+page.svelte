@@ -37,12 +37,6 @@
 					</a>
 				{/each}
 			</div>
-
-			{#if !isDataEmpty}
-				<div>
-					<p class="text-gray-500 text-sm">We only show up to 10 history.</p>
-				</div>
-			{/if}
 		</section>
 	</Container>
 </main>
