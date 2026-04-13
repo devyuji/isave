@@ -48,22 +48,48 @@
 		if (!indexDb.loading) {
 			const uri = page.url.searchParams;
 
-			const currentDate = new Date();
-			const expireAt = currentDate.setHours(currentDate.getHours() + 48);
+			getImageAtBase64(data.response.data[0].preview)
+				.then((e) => {
+					if (!e) return;
 
-			indexDb
-				.add({
-					data: data.response.data,
-					id: data.response.id,
-					url: uri.get('url') ?? '',
-					username: data.response.username,
-					cover: data.response.data[0].preview,
-					timestamp: Date.now(),
-					expireAt
+					const currentDate = new Date();
+					const expireAt = currentDate.setHours(currentDate.getHours() + 48);
+
+					indexDb
+						.add({
+							data: data.response.data,
+							id: data.response.id,
+							url: uri.get('url') ?? '',
+							username: data.response.username,
+							cover: e as string,
+							timestamp: Date.now(),
+							expireAt
+						})
+						.catch((err) => console.error(err));
 				})
 				.catch((err) => console.error(err));
 		}
 	});
+
+	async function getImageAtBase64(url: string): Promise<string | ArrayBuffer | null> {
+		try {
+			const response = await fetch(`/proxy?url=${encodeURIComponent(url)}`);
+			const image = await response.blob();
+
+			return new Promise((resolve, reject) => {
+				const fileReader = new FileReader();
+
+				fileReader.onloadend = () => resolve(fileReader.result);
+				fileReader.onerror = () => reject(fileReader.error);
+
+				fileReader.readAsDataURL(image);
+			});
+		} catch (err) {
+			console.log(err);
+
+			throw new Error('unable.to.convert.into.base64');
+		}
+	}
 
 	function toggleDownloadMenu() {
 		showDownloadMenu = !showDownloadMenu;

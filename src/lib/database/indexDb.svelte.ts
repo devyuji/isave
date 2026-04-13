@@ -82,6 +82,17 @@ class IndexDB {
 			return;
 		}
 
+		const quota = await navigator.storage.estimate();
+		console.log('Approx total allocated space:', quota.quota);
+		console.log('Approx used space:', quota.usage);
+
+		const remainingStorage = quota.quota! - quota.usage!;
+		console.log('Approx remaining storage:', remainingStorage);
+
+		if (remainingStorage < 800000) {
+			throw new Error('db.storage.full');
+		}
+
 		const tx = this.db.transaction('cache', 'readwrite');
 
 		tx.onabort = function (event: any) {

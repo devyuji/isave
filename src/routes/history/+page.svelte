@@ -18,7 +18,7 @@
 		<section class="space-y-4">
 			<div>
 				{#if isDataEmpty}
-					<p class="text-center text-lg">No data found.</p>
+					<p class="text-center text-lg">No history found.</p>
 				{/if}
 			</div>
 
