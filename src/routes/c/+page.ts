@@ -8,6 +8,7 @@ import { redirect } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ url }) => {
 	const uri = url.searchParams.get('url');
+	const timestamp = url.searchParams.get('timestamp');
 
 	try {
 		await indexDb.init();
@@ -22,6 +23,6 @@ export const load: PageLoad = async ({ url }) => {
 	} catch (err) {
 		console.log(err);
 
-		redirect(307, `/m/?url=${uri}`);
+		redirect(307, `/m/?url=${uri}&timestamp=${timestamp}`);
 	}
 };

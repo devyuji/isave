@@ -25,7 +25,7 @@
 			<div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
 				{#each data.response as history (history.id)}
 					<a
-						href={`/c/?url=${encodeURIComponent(history.url)}&back=${page.route.id}`}
+						href={`/c/?url=${encodeURIComponent(history.url)}&timestamp=${history.timestamp}&back=${page.route.id}`}
 						class="relative aspect-square size-full overflow-hidden cursor-pointer"
 					>
 						<Image

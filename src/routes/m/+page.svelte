@@ -53,7 +53,14 @@
 					if (!e) return;
 
 					const currentDate = new Date();
-					const expireAt = currentDate.setHours(currentDate.getHours() + 48);
+					const expireAt = currentDate.setHours(currentDate.getHours() + 72);
+
+					let timestamp: any = uri.get('timestamp');
+
+					if (!timestamp) timestamp = Date.now();
+					else {
+						timestamp = parseInt(timestamp);
+					}
 
 					indexDb
 						.add({
@@ -62,7 +69,7 @@
 							url: uri.get('url') ?? '',
 							username: data.response.username,
 							cover: e as string,
-							timestamp: Date.now(),
+							timestamp: timestamp as number,
 							expireAt
 						})
 						.catch((err) => console.error(err));
