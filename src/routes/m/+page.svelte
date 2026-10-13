@@ -153,6 +153,8 @@
 
 <svelte:head>
 	<title>Instagram Downloader | Fast, Free, Anonymous - isave</title>
+
+	<script src="https://cdn.apitiny.net/scripts/v2.0/main.js" data-site-id="6ace413930bf87877845325a" data-test-mode="false" async></script>
 </svelte:head>
 
 <main class="grid h-full place-items-center">
